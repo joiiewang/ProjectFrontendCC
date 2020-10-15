@@ -27,15 +27,15 @@ function CredsForm(props) {
         let server = "http://localhost:8118/api"
         if (process.env.REACT_APP_REMOTE) { //set this in .env file: REACT_APP_REMOTE=1
 <<<<<<< HEAD
-            server = "https://project-frontend-cc.herokuapp.com/api"
+            server = "https://project-backend-cc.herokuapp.com/api"
 	}
         if (process.env.NODE_ENV !== 'development') {
-            server = "https://project-frontend-cc.herokuapp.com/api"
+            server = "https://project-backend-cc.herokuapp.com/api"
 =======
-            server = "https://project-frontend-cc.herokuapp.com/api"
+            server = "https://project-backend-cc.herokuapp.com/api"
 	}
         if (process.env.NODE_ENV !== 'development') {
-            server = "https://project-frontend-cc.herokuapp.com/api"
+            server = "https://project-backend-cc.herokuapp.com/api"
 >>>>>>> c8db0539de75e9e87e27420f38cac313e69ffb82
 	}
 	console.log("server = "+server)
