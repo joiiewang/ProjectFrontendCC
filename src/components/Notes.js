@@ -1,9 +1,9 @@
 import React from 'react';
-function Home() {
+function Notes() {
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>Notes</h1>
     </div>
   );
 };
-export default Home;
+export default Notes;

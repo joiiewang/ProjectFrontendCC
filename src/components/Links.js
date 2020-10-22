@@ -1,9 +1,9 @@
 import React from 'react';
-function Home() {
+function Links() {
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>Links Page</h1>
     </div>
   );
 };
-export default Home;
+export default Links;
