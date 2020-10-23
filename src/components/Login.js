@@ -49,10 +49,19 @@ function Login(props) {
 		}).catch((error) => console.log("SaveCreds saveCreds: Fetch Failure (is server up?): "+ error))
     }
 
+	const styles = {
+		margin: "auto",
+		width: "200px",
+		border: "3px solid green",
+		padding: "10px"
+	}
+	const inputStyle = {
+		width: "90%",
+		margin: "auto"
+	}
+
 	return (
 		<div>
-		{/*print out the NODE_ENV set by the server and our user defined REACT_APP_REMOTE variable value (no value means its undefined) */}
-		<h3>Server: {process.env.NODE_ENV}, REACT_APP_REMOTE = {process.env.REACT_APP_REMOTE} </h3>
 		<form onSubmit={saveCreds}>
 			<label>
 				Username:
