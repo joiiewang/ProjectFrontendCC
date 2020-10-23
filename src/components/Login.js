@@ -90,7 +90,9 @@ function Login(props) {
 					name="seckey" 
 					onChange={handleChange} />
 			</label>
-			<input type="submit" style={loginStyle} value="Let's get planting" />
+			<Link to="/Home">
+				<input type="submit" style={loginStyle} value="Let's get planting" />
+			</Link>
 		</form>
 		</div>
 	)

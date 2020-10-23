@@ -8,14 +8,15 @@ import InfoPage from './components/InfoPage';
 import Links from "./components/Links";
 import Notes from "./components/Notes";
 import ToDoList from "./components/ToDoList";
-// import Login from "./components/Login";
+import Login from "./components/Login";
 import Forest from "./components/Forest";
 
 function App() {
     return (
         <main>
             <Switch>
-		        <Route path="/" component={Home} exact />
+				<Route path="/" component={Login} exact />
+		        <Route path="/Home" component={Home}/>
                 <Route path="/creds" component={CredsForm} />
                 <Route path="/InfoPage" component={InfoPage}/>
                 <Route path="/Links" component={Links}/>
