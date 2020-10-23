@@ -53,34 +53,45 @@ function Login(props) {
 		margin: "auto",
 		width: "200px",
 		border: "3px solid green",
-		padding: "10px"
+		padding: "10px",
+		borderRadius: "25px",
+		backgroundColor: "#76FF5B",
 	}
 	const inputStyle = {
 		width: "90%",
-		margin: "auto"
+		margin: "auto",
+		borderRadius: "7px",
+		padding: "4px",
+		backgroundColor: "#CBFEC0",
 	}
-
+	const loginStyle = {
+		borderRadius: "7px",
+		padding: "4px",
+		marginLeft: "4%",
+		marginTop: "5px",
+		width: "90%",
+	 }
+  
 	return (
 		<div>
-		<form onSubmit={saveCreds}>
+		<form style={styles}>
 			<label>
 				Username:
-				<input 
-					type="text" 
+				<input style={inputStyle} type="text" 
 					value={state.acckey} 
 					name="acckey" 
 					onChange={handleChange} />
 			</label>
 			<label>
 				Password:
-				<input 
+				<input style={inputStyle}
 					type="text" 
 					value={state.seckey} 
 					name="seckey" 
 					onChange={handleChange} />
 			</label>
-			<input type="submit" value="Submit" />
+			<input type="submit" style={loginStyle} value="Let's get planting" />
 		</form>
 		</div>
-    )
+	)
 }
