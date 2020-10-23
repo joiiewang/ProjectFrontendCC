@@ -15,7 +15,7 @@ function Login(props) {
         })
 	}
 	
-
+	// We have to do the hooks and stuff I think to connect to backend
 	// ----------------------------- Honestly Have no idea how this works ------------------------
 	const saveCreds = (evt) => {  //send creds to backend
 	evt.preventDefault();
