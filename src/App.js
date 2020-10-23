@@ -15,7 +15,7 @@ function App() {
     return (
         <main>
             <Switch>
-				<Route path="/" component={Login}/>
+				<Route path="/" component={Login} exact/>
 		        <Route path="/Home" component={Home}/>
                 <Route path="/creds" component={CredsForm} />
                 <Route path="/InfoPage" component={InfoPage}/>
