@@ -1,4 +1,6 @@
 import React from 'react';
+import AddClass from './AddClass'
+import { Link } from 'react-router-dom';
 
 class Dropdown extends React.Component {
     constructor(){ 
@@ -38,7 +40,7 @@ class Dropdown extends React.Component {
                         <button> Class 1 </button>
                         <button> Class 2</button>
                         <button> Class 3</button>
-                        <button> Add Class </button>
+                        <Link to="/AddClass">Add Class</Link>
                     </div>
                 ) : null}
 
