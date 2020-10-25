@@ -9,8 +9,8 @@ import InfoPage from './components/InfoPage';
 import Links from "./components/Links";
 import Notes from "./components/Notes";
 import ToDoList from "./components/ToDoList";
-import Forest from "./components/Forest";
-import Dropdown from "./components/Dropdown";
+import Forest from "./components/Forest"
+import AddClass from "./components/AddClass"
 
 function App() {
     return (
@@ -24,6 +24,7 @@ function App() {
                 <Route path="/Notes" component={Notes}/>
                 <Route path="/ToDoList" component={ToDoList}/>
                 <Route path="/Forest" component={Forest}/>
+                <Route path="/AddClass" component={AddClass}/>
 	            <Route component={Error} />
             </Switch>
 	    <Navbar />

@@ -30,7 +30,8 @@ class Dropdown extends React.Component {
                     Classes
                 </button>
 
-                {/*Need to import list of classes from backend and use here */}
+                {/*Need to import list of classes from backend and use here 
+                Also need to link add class button to form*/}
     
                 {this.state.showMenu ? (
                     <div className = "menu">

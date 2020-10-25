@@ -1,10 +1,12 @@
 import React from "react"
 
+// Need to make a pop-up window and pass to backend
+// Also need to make a submit button
 class AddClass extends React.Component {
     constructor () {
         super()
         this.state = {
-            className = "",
+            className : "",
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -28,6 +30,7 @@ class AddClass extends React.Component {
                     onChange = {this.handleChange}
                 />
                 <br/>
+                <button>Submit</button>
             </form>
         )
     }
