@@ -74,7 +74,8 @@ function Login(props) {
 		width: "90%",
 	 }
 	 const title = {
-		fontSize: "20px",
+		text-align: "center",
+		fontSize: "25px",
 		fontWeight: "bold"
 	 }
   
