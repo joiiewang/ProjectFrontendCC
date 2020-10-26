@@ -1,5 +1,4 @@
 import React from 'react'
-import '../css/LinkList.css'
 
 class LinkList extends React.Component {
     // We can pass in an array to populate this component
@@ -24,7 +23,7 @@ class LinkList extends React.Component {
     render() {
       return(
         
-          <div className='card frame'>
+          <div>
             <Header/>
             <LinkElements links={this.state.links} onDelete= {this.handleDelete} />
             <SubmitForm onFormSubmit={this.handleSubmit} />
@@ -52,19 +51,17 @@ class LinkList extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input 
             type='text'
-            className='input'
             placeholder='Enter Name'
             value={this.state.name}
             onChange={(e) => this.setState({name: e.target.value})}
           />
           <input 
             type='text'
-            className='input'
             placeholder='Enter URL'
             value={this.state.url}
             onChange={(r) => this.setState({url: r.target.value})}
           />
-          <button className='button'>Add</button>
+          <button>Add</button>
         </form>
       );
     }
@@ -73,8 +70,8 @@ class LinkList extends React.Component {
   
   const Header = () => {
     return(
-      <div className='card-header'>
-        <h1 className='card-header-title header'>
+      <div>
+        <h1>
           Links
         </h1>
       </div>
@@ -86,7 +83,7 @@ class LinkList extends React.Component {
       return <Elem name={link[0]} url={link[1]} key={index} id={index} onDelete={props.onDelete} />
     })
     return( 
-      <div className='list-wrapper'>
+      <div>
         {todos}
       </div>
     );
@@ -94,9 +91,9 @@ class LinkList extends React.Component {
   
   const Elem = (props) => {
     return(
-      <div className='list-item'>
+      <div>
         <a href={props.url} target="_blank"> {props.name}</a> 
-        <button class="delete is-pulled-right" onClick={() => {props.onDelete(props.id)}}></button>
+        <button onClick={() => {props.onDelete(props.id)}}></button>
       </div>
     );
   }
