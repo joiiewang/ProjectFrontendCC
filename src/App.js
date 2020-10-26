@@ -15,6 +15,7 @@ import AddClass from "./components/AddClass"
 function App() {
     return (
         <main>
+            <Navbar />
             <Switch>
 				<Route path="/" component={Login} exact/>
 		        <Route path="/Home" component={Home}/>
@@ -27,7 +28,6 @@ function App() {
                 <Route path="/AddClass" component={AddClass}/>
 	            <Route component={Error} />
             </Switch>
-	    <Navbar />
         </main>
     );
 };

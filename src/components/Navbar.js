@@ -5,7 +5,7 @@ import '../css/NavBar.css';
 
 function Navbar() {
   return (
-    <div>
+    <nav>
       <ul class = "menu">
         <li class = "item"><a href="/Home">Home</a></li>
         <li class = "item"><a href="/Links">Links</a></li>
@@ -18,7 +18,7 @@ function Navbar() {
       <Link to="/creds">Save Creds</Link>
       <Dropdown/>*/}
       </ul>
-    </div>
+    </nav>
   );
 };
 export default Navbar;
