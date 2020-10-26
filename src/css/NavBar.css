@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+nav {
+    background: #FFF0F5;
+    padding: 0 15px;
+    border-bottom: 1px #222 solid;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
+}
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item {
+    padding: 10px;
+}
+
+.item a:hover,
+.item a:hover::after {
+    color: #D3D3D3;
+}
+
+.menu li a {
+/* menu, li, a in NavBar.js*/
+    padding: 15px 5px;
+}
+
+.item {
+    width: 100%;
+    text-align: center;
+}
+
