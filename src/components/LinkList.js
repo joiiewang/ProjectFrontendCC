@@ -92,8 +92,8 @@ class LinkList extends React.Component {
   const Elem = (props) => {
     return(
       <div>
-        <a href={props.url} target="_blank"> {props.name}</a> 
-        <button style="color: #333FFF" onClick={() => {props.onDelete(props.id)}}>Remove</button>
+        <a href={props.url} target="_blank" style="color: #333FFF"> {props.name}</a> 
+        <button onClick={() => {props.onDelete(props.id)}}>Remove</button>
       </div>
     );
   }
