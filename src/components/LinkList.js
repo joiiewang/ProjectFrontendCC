@@ -1,5 +1,5 @@
 import React from 'react'
-import '../LinkList.css'
+import '../css/LinkList.css'
 
 class LinkList extends React.Component {
     // We can pass in an array to populate this component
