@@ -16,6 +16,7 @@ function App() {
     return (
         <main>
             <Navbar />
+            <br/>
             <Switch>
 				<Route path="/" component={Login} exact/>
 		        <Route path="/Home" component={Home}/>
