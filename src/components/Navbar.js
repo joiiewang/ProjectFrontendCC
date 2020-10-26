@@ -12,7 +12,7 @@ function Navbar() {
         <li class = "item"><a href="/ToDoList">To-Do List</a></li>
         <li class = "item"><a href="/InfoPage">Info</a></li>
         <li class = "item"><a href="/Forest">Forest</a></li>
-        <li class = "item"><a href="/Login">Logout</a></li>
+        <li class = "item"><a href="/">Logout</a></li>
 
       {/*<Link to="/">Home</Link>{" "}
       <Link to="/creds">Save Creds</Link>
