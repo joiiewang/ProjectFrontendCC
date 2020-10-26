@@ -74,14 +74,14 @@ function Login(props) {
 		width: "90%",
 	 }
 	 const title = {
-		fontSize: "15px",
+		fontSize: "20px",
 		fontWeight: "bold"
 	 }
   
 	return (
 		<div>
 		<form style={styles}>
-			<b style={title}>Register</b>
+			<p style={title}>Register</p>
 			<label>
 				Username:
 				<input style={inputStyle} type="text" 
