@@ -76,7 +76,7 @@ function Login(props) {
   
 	return (
 		<div>
-		<b>Sign In</b>
+		<b>Register</b>
 		<form style={styles}>
 			<label>
 				Username:
@@ -93,8 +93,16 @@ function Login(props) {
 					name="seckey" 
 					onChange={handleChange} />
 			</label>
+			<label>
+				Confirm Password:
+				<input style={inputStyle}
+					type="text" 
+					value={state.seckey} 
+					name="seckey" 
+					onChange={handleChange} />
+			</label>
 			<Link to="/Home">
-				<input type="submit" style={loginStyle} value="Let's get planting" />
+				<input type="submit" style={loginStyle} value="Let's start planning" />
 			</Link>
 		</form>
 		</div>
