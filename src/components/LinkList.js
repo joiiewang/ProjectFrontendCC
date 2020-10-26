@@ -98,4 +98,4 @@ class LinkList extends React.Component {
     );
   }
 
-export default LinkList
+  export { LinkList, SubmitForm };
