@@ -1,4 +1,6 @@
 import React from 'react';
+import LinkList from './LinkList'
+
 function Links() {
   return (
     <div>
