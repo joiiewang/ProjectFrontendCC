@@ -74,7 +74,7 @@ function Login(props) {
 		width: "90%",
 	 }
 	 const title = {
-		text-align: "center",
+		textAlign: "center",
 		fontSize: "25px",
 		fontWeight: "bold"
 	 }
@@ -100,6 +100,9 @@ function Login(props) {
 			</label>
 			<Link to="/Home">
 				<input type="submit" style={loginStyle} value="Let's get planting" />
+			</Link>
+			<Link to="/NewUser">
+				<input type="submit" style={loginStyle} value="I'm a new seedling"/>
 			</Link>
 		</form>
 		</div>
