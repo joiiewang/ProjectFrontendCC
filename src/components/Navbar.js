@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
-import '../css/NavBar.css';
+import './css/NavBar.css';
 
 
 
