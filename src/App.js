@@ -11,6 +11,7 @@ import Notes from "./components/Notes";
 import ToDoList from "./components/ToDoList";
 import Forest from "./components/Forest"
 import AddClass from "./components/AddClass"
+import NewUser from "./components/NewUser"
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <br/>
             <Switch>
 				<Route path="/" component={Login} exact/>
+				<Route path="/NewUser" component={NewUser} exact/>
 		        <Route path="/Home" component={Home}/>
                 <Route path="/creds" component={CredsForm} />
                 <Route path="/InfoPage" component={InfoPage}/>

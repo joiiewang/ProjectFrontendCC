@@ -1,54 +1,136 @@
-import React from 'react';
-import AddClass from './AddClass'
+import React, {useState} from 'react';
+import {CSSTransition} from 'react-transition-group';
+import Home from './Home';
+import InfoPage from './InfoPage';
+import Links from "./Links";
+import Notes from "./Notes";
+import ToDoList from "./ToDoList";
+import Forest from "./Forest"
+import AddClass from "./AddClass"
 import { Link } from 'react-router-dom';
 
-class Dropdown extends React.Component {
-    constructor(){ 
-        super ();
-        this.state = {
-            showMenu : false
-        }
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
-    }
+function Dropdown () {
+  return (
+    <Navbar>
+        <li class = "item" className = "linkeditemsnav">
+          <a className = "navbaritems" href = "/Home">Home</a>
+          <a className = "navbaritems" href = "/ToDoList">Todo's</a>
+          <a className = "navbaritems" href = "/Links">Links</a>
+          <a className = "navbaritems" href = "/Notes">Notes</a>
+          <a className = "navbaritems" href = "/Forest">Forest</a>
+        </li>
+      
 
-    showMenu (event) {
-        event.preventDefault();
-        this.setState({showMenu: true}, () => {
-            document.addEventListener('click', this.closeMenu)
-        })
-    }
+      <NavItem icon = "Classes">
+        <DropdownMenu></DropdownMenu>
+      </NavItem>
+      <NavItem icon = "More">
+        <DropdownMenuTwo></DropdownMenuTwo>
+      </NavItem>
+    </Navbar>
+  )
+}
 
-    closeMenu() {
-        this.setState({ showMenu: false}, () => {
-            document.removeEventListener('click', this.closeMenu)
-        })
-    }
+function Navbar (props) {
+  return (
+    <nav className = "navbar">
+      <ul className = "navbar-nav">{props.children}</ul>
+    </nav>
+  )
+}
 
-    render () {
-        return (
-            <div>
-                <button onClick={this.showMenu}>
-                    Classes
-                </button>
+function NavItem (props) {
+  const [open, setOpen] = useState(false);
+  
+  return (
+    <li className="linkeditemsnav">
+      <a href = "#" className = "navbaritems" onClick = {() => setOpen(!open)}>
+        {props.icon}
+      </a>
 
-                {/*Need to import list of classes from backend and use here 
-                Also need to link add class button to form*/}
-    
-                {this.state.showMenu ? (
-                    <div className = "menu">
-                        <button> Class 1 </button>
-                        <button> Class 2</button>
-                        <button> Class 3</button>
-                        <Link to="/AddClass">Add Class</Link>
-                    </div>
-                ) : null}
+      {open && props.children}
+    </li>
+  )
+}
 
+
+function DropdownMenu () {
+  const [activeMenu, setActiveMenu] = useState ('classes');
+  const [menuHeight, setMenuHeight] = useState(null);
+
+  function calcHeight(el) {
+    const height = el.offsetHeight;
+    setMenuHeight(height);
+  }
+  
+  function DropdownItem (props) {
+    return (
+      <a href="#" className = "menu-item" 
+      onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+        <span className = "icon-button">{props.leftIcon}</span>
+        {props.children}
+        <span className = "icon-right">{props.rightIcon}</span>
+    </a>
+    )
+  }
+  
+  return (
+    <div className = "dropdown" style={{height: menuHeight}}>
+
+        <CSSTransition
+          in={activeMenu === 'classes'}
+          timeout = {500}
+          classNames = "menu-primary"
+          unmountOnExit>
+            <div className = "menu">
+              <DropdownItem>Class 1</DropdownItem>
+              <DropdownItem>Class 2</DropdownItem>
+              <DropdownItem>Add Class</DropdownItem>
             </div>
-        )
-    }
+
+        </CSSTransition>
+
+    </div>
+  )
+}
+
+function DropdownMenuTwo () {
+  const [activeMenu, setActiveMenu] = useState ('more');
+  const [menuHeight, setMenuHeight] = useState(null);
+
+  function calcHeight(el) {
+    const height = el.offsetHeight;
+    setMenuHeight(height);
+  }
+  
+  function DropdownItem (props) {
+    return (
+      <a href="#" className = "menu-item" 
+      onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+        <span className = "icon-button">{props.leftIcon}</span>
+        {props.children}
+        <span className = "icon-right">{props.rightIcon}</span>
+    </a>
+    )
+  }
+  
+  return (
+    <div className = "dropdown" style={{height: menuHeight}}>
 
 
+        <CSSTransition
+          in={activeMenu === 'more'}
+          timeout = {500}
+          classNames = "menu-primary"
+          unmountOnExit>
+            <div className = "menu">
+              <DropdownItem><a href = "/InfoPage">Info</a></DropdownItem>
+              <DropdownItem><a href = "/LogIn">Log Out</a></DropdownItem>
+            </div>
+
+        </CSSTransition>
+    </div>
+  )
 }
 
 export default Dropdown;
