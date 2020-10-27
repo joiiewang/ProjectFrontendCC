@@ -90,9 +90,15 @@ class LinkList extends React.Component {
   }
   
   const Elem = (props) => {
+    var url;
+    url = props.url;
+    if (!props.url.includes ("https://")){
+      
+      url = "https://" + url;
+    }
     return(
       <div>
-        <a href={props.url} target="_blank"> {props.name}</a> 
+        <a href={url} target="_blank"> {props.name}</a> 
         <button onClick={() => {props.onDelete(props.id)}}>Remove</button>
       </div>
     );
