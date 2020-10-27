@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
+import '../css/NavBar.css';
 
 
 function theNavbar () {
   return (
     <Navbar>
         <li class = "item" className = "linkeditemsnav">
-          <a className = "navbaritems" href = "/Home">Home</a>
-          <a className = "navbaritems" href = "/ToDoList">Todo's</a>
-          <a className = "navbaritems" href = "/Links">Links</a>
-          <a className = "navbaritems" href = "/Notes">Notes</a>
-          <a className = "navbaritems" href = "/Forest">Forest</a>
+          <a className = "item" href = "/Home">Home</a>
+          <a className = "item" href = "/ToDoList">Todo's</a>
+          <a className = "item" href = "/Links">Links</a>
+          <a className = "item" href = "/Notes">Notes</a>
+          <a className = "item" href = "/Forest">Forest</a>
         </li>
       
 
