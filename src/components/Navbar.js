@@ -1,13 +1,6 @@
 import React, {useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
-import Home from './Home';
-import InfoPage from './InfoPage';
-import Links from "./Links";
-import Notes from "./Notes";
-import ToDoList from "./ToDoList";
-import Forest from "./Forest"
-import AddClass from "./AddClass"
-import { Link } from 'react-router-dom';
+
 
 function theNavbar () {
   return (
