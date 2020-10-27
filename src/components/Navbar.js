@@ -3,6 +3,7 @@ import {CSSTransition} from 'react-transition-group';
 import '../css/NavBar.css';
 
 
+
 function theNavbar () {
   return (
     <Navbar>
