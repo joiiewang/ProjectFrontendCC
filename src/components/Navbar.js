@@ -7,21 +7,22 @@ import './css/NavBar.css';
 function theNavbar () {
   return (
     <Navbar>
-        <li class = "item" className = "linkeditemsnav">
+        <li className = "item" >
           <a className = "item" href = "/Home">Home</a>
           <a className = "item" href = "/ToDoList">Todo's</a>
           <a className = "item" href = "/Links">Links</a>
           <a className = "item" href = "/Notes">Notes</a>
           <a className = "item" href = "/Forest">Forest</a>
+
         </li>
       
-
-      <NavItem icon = "Classes">
-        <DropdownMenu></DropdownMenu>
-      </NavItem>
-      <NavItem icon = "More">
-        <DropdownMenuTwo></DropdownMenuTwo>
-      </NavItem>
+        <NavItem icon = "Classes">
+            <DropdownMenu></DropdownMenu>
+        </NavItem>
+        <NavItem icon = "More">
+            <DropdownMenuTwo></DropdownMenuTwo>
+        </NavItem>
+      
     </Navbar>
   )
 }
@@ -38,7 +39,7 @@ function NavItem (props) {
   const [open, setOpen] = useState(false);
   
   return (
-    <li className="linkeditemsnav">
+    <li className="navbaritems">
       <a href = "#" className = "navbaritems" onClick = {() => setOpen(!open)}>
         {props.icon}
       </a>

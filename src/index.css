@@ -28,15 +28,11 @@ ul {
 }
 
 a {
-  color: var(--text-color);
-  text-decoration: none;;
+  color: #222;
+  text-decoration: none;
 }
 
 .navbaritems {  
-  --button-size: calc(var(--nav-size) * 0.5);
-  width: var(--button-size);
-  height: var(--button-size);
-  background-color: #228B22;
   border-radius: 50%;
   padding: 10px;
   margin: 5px;
@@ -45,9 +41,9 @@ a {
   justify-content: center;
   transition: filter 300ms;
 }
-
-.navbaritems:hover {
-  filter: brightness(1.2);
+.navbaritems a:hover,
+.navbaritems a:hover::after {
+    color: #D3D3D3;
 }
 
 .linkeditemsnav {
