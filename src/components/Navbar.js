@@ -127,7 +127,7 @@ function DropdownMenuTwo () {
           unmountOnExit>
             <div className = "menu">
               <DropdownItem><a href = "/InfoPage">Info</a></DropdownItem>
-              <DropdownItem><a href = "/LogIn">Log Out</a></DropdownItem>
+              <DropdownItem><a href = "/">Log Out</a></DropdownItem>
             </div>
 
         </CSSTransition>
