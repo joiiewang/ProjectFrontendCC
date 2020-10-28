@@ -66,7 +66,7 @@ function DropdownMenu () {
     </a>
     )
   }
-
+  /*
   function arrayLoop () {
     return (
       <DropdownItem>
@@ -78,6 +78,7 @@ function DropdownMenu () {
       </DropdownItem>
     )
   }
+  */
   
   return (
     <div className = "dropdown" style={{height: menuHeight}}>
@@ -88,7 +89,7 @@ function DropdownMenu () {
           classNames = "menu-primary"
           unmountOnExit>
             <div className = "menu">
-              {arrayLoop}
+              <DropdownItem><a href = "/ShowClasses">Show Classes</a></DropdownItem>
               <DropdownItem><a href = "/AddClass">Add Class</a></DropdownItem>
             </div>
 
