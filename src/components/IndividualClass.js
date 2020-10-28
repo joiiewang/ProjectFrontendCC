@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkList, SubmitForm } from './LinkList'
+
 function IndividualClass() {
   return (
     <div>

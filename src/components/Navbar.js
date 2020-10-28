@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {CSSTransition} from 'react-transition-group';
+import classNames from './AddClass'
 import './css/NavBar.css';
-
-
 
 function theNavbar () {
   return (
@@ -63,10 +62,20 @@ function DropdownMenu () {
     return (
       <a href="#" className = "menu-item" 
       onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
-        <span className = "icon-button">{props.leftIcon}</span>
         {props.children}
-        <span className = "icon-right">{props.rightIcon}</span>
     </a>
+    )
+  }
+
+  function arrayLoop () {
+    return (
+      <DropdownItem>
+        {classNames.map(name => (
+          <li>
+            {name}
+          </li>
+        ))}
+      </DropdownItem>
     )
   }
   
@@ -79,9 +88,8 @@ function DropdownMenu () {
           classNames = "menu-primary"
           unmountOnExit>
             <div className = "menu">
-              <DropdownItem>Class 1</DropdownItem>
-              <DropdownItem>Class 2</DropdownItem>
-              <DropdownItem>Add Class</DropdownItem>
+              {arrayLoop}
+              <DropdownItem><a href = "/AddClass">Add Class</a></DropdownItem>
             </div>
 
         </CSSTransition>
@@ -103,9 +111,7 @@ function DropdownMenuTwo () {
     return (
       <a href="#" className = "menu-item" 
       onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
-        <span className = "icon-button">{props.leftIcon}</span>
         {props.children}
-        <span className = "icon-right">{props.rightIcon}</span>
     </a>
     )
   }

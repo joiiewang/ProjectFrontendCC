@@ -1,5 +1,7 @@
 import React from "react"
 
+var classNames = [];
+
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
     constructor () {
@@ -10,6 +12,10 @@ class AddClass extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
     }
+
+    addToArray (className) {
+        classNames.push(this.state.className)
+    } 
 
     // included all input types in case we need it
     handleChange (event) {
@@ -29,7 +35,7 @@ class AddClass extends React.Component {
                     onChange = {this.handleChange}
                 />
                 <br/>
-                <button>Submit</button>
+                <button onClick = {this.addToArray}>Submit</button>
             </form>
         )
     }
