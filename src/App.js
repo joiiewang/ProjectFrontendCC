@@ -12,6 +12,8 @@ import ToDoList from "./components/ToDoList";
 import Forest from "./components/Forest"
 import AddClass from "./components/AddClass"
 import NewUser from "./components/NewUser"
+import ShowClasses from "./components/ShowClasses"
+import IndividualClass from "./components/IndividualClass"
 
 function App() {
     return (
@@ -29,6 +31,8 @@ function App() {
                 <Route path="/ToDoList" component={ToDoList}/>
                 <Route path="/Forest" component={Forest}/>
                 <Route path="/AddClass" component={AddClass}/>
+                <Route path= "/ShowClasses" component={ShowClasses}/>
+                <Route path= "/IndividualClass" component={IndividualClass}/>
 	            <Route component={Error} />
             </Switch>
         </main>
