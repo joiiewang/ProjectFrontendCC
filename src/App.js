@@ -14,6 +14,7 @@ import AddClass from "./components/AddClass"
 import NewUser from "./components/NewUser"
 import ShowClasses from "./components/ShowClasses"
 import IndividualClass from "./components/IndividualClass"
+import Course from "./components/Course"
 
 function App() {
     return (
@@ -33,6 +34,7 @@ function App() {
                 <Route path="/AddClass" component={AddClass}/>
                 <Route path= "/ShowClasses" component={ShowClasses}/>
                 <Route path= "/IndividualClass" component={IndividualClass}/>
+                <Route path = "/Course" component = {Course}/>
 	            <Route component={Error} />
             </Switch>
         </main>

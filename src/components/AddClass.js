@@ -23,31 +23,38 @@ class AddClass extends React.Component {
 
 
     handleSubmit (event){
+        event.preventDefault();
         this.setState({submitted: true})
-        alert ('A class was created' + this.state.className)
+        alert ('A class was created ' + this.state.className)
     }
 
-    rendeerSubmit() {
+    renderSubmit() {
+        this.render (
+            <Course name = {this.state.className}/>
+        )
+    }
+
+    renderForm() {
         return (
-            <Course name = {this.state.className} ></Course>
+        <form onSubmit = {this.handleSubmit.bind(this)}>
+                    <input
+                        type = "text"
+                        value = {this.state.className}
+                        name = "className"
+                        placeholder = "Class Name"
+                        onChange = {this.handleChange}
+                    />
+                    <br/>
+                    <button>Submit</button>
+        </form>
         )
     }
 
     render () {
         return (
             <div>
-            <form onSubmit = {this.handleSubmit}>
-                <input
-                    type = "text"
-                    value = {this.state.className}
-                    name = "className"
-                    placeholder = "Class Name"
-                    onChange = {this.handleChange}
-                />
-                <br/>
-                <button>Submit</button>
-            </form>
-            {this.state.submitted && this.rendeerSubmit()}
+            {!this.state.submitted && this.renderForm()}  
+            {this.state.submitted && <Course name = {this.state.className}/>}
             </div>
         )
     }

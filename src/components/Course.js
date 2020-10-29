@@ -1,10 +1,11 @@
 import React from 'react'
 import { NotesList, SubmitNoteForm } from './NotesList'
 import { LinkList, SubmitLinkForm } from './LinkList'
+import ToDoList from './ToDoList'
 
 class Course extends React.Component {
-    constructor (props) {
-        super (props)
+    constructor () {
+        super ()
         this.state = {
             name: "",
             toDoList: [],
@@ -19,6 +20,7 @@ class Course extends React.Component {
                 {this.props.name}
                 <LinkList/>
                 <NotesList/>
+                <ToDoList/>
             </div>
         )
     }
