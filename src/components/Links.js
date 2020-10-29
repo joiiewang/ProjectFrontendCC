@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkList, SubmitForm } from './LinkList'
+import { LinkList, SubmitLinkForm } from './LinkList'
 
 function Links() {
   return (

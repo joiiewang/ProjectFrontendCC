@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './css/ToDoList.css';
 class ToDoList extends React.Component {
   constructor () {
         super()
@@ -62,7 +62,7 @@ const ToDoItemElements = (props) => {
     return <Elem toDoItem={item[0]}  key={index} id={index} onDelete={props.onDelete} />
   })
   return( 
-    <div>
+    <div className = "toDoBox">
       {todos}
     </div>
   );
@@ -70,9 +70,13 @@ const ToDoItemElements = (props) => {
 
 const Elem = (props) => {
   return(
-    <div>
-      <h1>{props.toDoItem}</h1> 
-      <button onClick={() => {props.onDelete(props.id)}}>Remove</button>
+    <div className = "element">
+      <input 
+          type="checkbox" 
+      />
+        <p>{props.toDoItem}</p>
+      <button onClick={() => {props.onDelete(props.id)}}>Remove</button>    
+
     </div>
   );
 }
