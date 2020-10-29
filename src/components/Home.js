@@ -4,9 +4,10 @@ const calendarBody = {
     position: "fixed",
     borderRadius: "1vh",
     backgroundColor: "#CBFEC0",
-    height: "65vh",
-    width: "97.5vw",
-    margin: "auto",
+    top: "9.75vh",
+    left: "0.25vw",
+    right: "0.25vw",
+    bottom: "35vh",
     boxShadow: "inset 0px 0px 0px 2px green"
   };
   const calendarDiv = {
@@ -14,8 +15,9 @@ const calendarBody = {
     borderRadius: "1vh",
     backgroundColor: "#CBFEC0",
     height: "97.5%",
-    width: "calc(100%/7.5)",
-    margin: "0.475%",
+    marginTop: "0.4%",
+    width: "calc(100%/7.275)",
+    marginLeft: "0.475%",
     float: "left",
     boxShadow: "inset 0px 0px 0px 2px green"
   }
@@ -23,20 +25,21 @@ const calendarBody = {
     position: "fixed",
     borderRadius: "1vh",
     backgroundColor: "#CBFEC0",
-    top: "66.5vh",
-    height: "32.5vh",
-    width: "77.5vw",
+    top: "65.5vh",
+    bottom: "0.5vh",
+    left: "0.25vw",
+    right: "25vw",
     float: "left",
     boxShadow: "inset 0px 0px 0px 2px green"
   }
   const plantDiv = {
     position: "fixed",
-    top: "66.5vh",
-    left: "78.25vw",
+    top: "65.5vh",
+    bottom: "0.5vh",
+    left: "75.25vw",
+    right: "0.25vw",
     borderRadius: "1vh",
     backgroundColor: "#CBFEC0",
-    height: "32.5vh",
-    width: "20vw",
     float: "left",
     boxShadow: "inset 0px 0px 0px 2px green"
   }
