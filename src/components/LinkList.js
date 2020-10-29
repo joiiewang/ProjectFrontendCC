@@ -34,7 +34,7 @@ class LinkList extends React.Component {
   }
   
   
-  class SubmitForm extends React.Component {
+  class SubmitLinkForm extends React.Component {
     state = { name: '', url: ''};
   
     handleSubmit = (e, r) => {
@@ -104,4 +104,4 @@ class LinkList extends React.Component {
     );
   }
 
-  export { LinkList, SubmitForm };
+  export { LinkList, SubmitLinkForm };

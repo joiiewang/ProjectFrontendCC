@@ -1,8 +1,10 @@
 import React from 'react';
+import { NotesList, SubmitNoteForm } from './NotesList'
+
 function Notes() {
   return (
     <div>
-      <h1>Notes</h1>
+      <NotesList/>
     </div>
   );
 };

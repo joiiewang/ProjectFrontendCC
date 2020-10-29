@@ -1,4 +1,7 @@
 import React from 'react'
+import { LinkList } from './LinkList'
+import { NotesList, SubmitNoteForm } from './NotesList'
+import { LinkList, SubmitLinkForm } from './LinkList'
 
 class Course extends React.Component {
     constructor (props) {
@@ -13,7 +16,9 @@ class Course extends React.Component {
     render () {
         return (
             <div>
-                This is the course info
+                This is the course info. Testing Notes/Links Components, feel free to delete - Zac
+                <LinkList/>
+                <NotesList/>
             </div>
         )
     }
