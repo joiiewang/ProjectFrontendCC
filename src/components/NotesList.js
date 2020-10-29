@@ -25,7 +25,7 @@ class NotesList extends React.Component {
           <div>
             <Header numNotes={this.state.notes.length} />
             <TodoList notes={this.state.notes} onDelete={this.handleDelete} />
-            <SubmitForm onFormSubmit={this.handleSubmit} />
+            <SubmitNoteForm onFormSubmit={this.handleSubmit} />
           </div>
         </div>
       );

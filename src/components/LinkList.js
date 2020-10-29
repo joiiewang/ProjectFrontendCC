@@ -26,7 +26,7 @@ class LinkList extends React.Component {
           <div>
             <Header/>
             <LinkElements links={this.state.links} onDelete= {this.handleDelete} />
-            <SubmitForm onFormSubmit={this.handleSubmit} />
+            <SubmitLinkForm onFormSubmit={this.handleSubmit} />
           </div>
       
       );
