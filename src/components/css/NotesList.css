@@ -1,0 +1,14 @@
+.content {
+    background-color: #ddd;
+    padding: 10px;
+  }
+  
+  .footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+  }
+  
+  .flex-box {
+    display:flex;
+    justify-content:space-between;
+  }
