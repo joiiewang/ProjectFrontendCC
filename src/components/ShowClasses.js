@@ -13,7 +13,7 @@ class ShowClasses extends React.Component {
         return (
             <div>
                 <button>
-                <a href = "/IndividualClass">Class 1</a>
+                <a href = "/Course">Class 1</a>
                 </button>
             
             </div>

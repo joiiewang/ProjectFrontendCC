@@ -13,7 +13,6 @@ import Forest from "./components/Forest"
 import AddClass from "./components/AddClass"
 import NewUser from "./components/NewUser"
 import ShowClasses from "./components/ShowClasses"
-import IndividualClass from "./components/IndividualClass"
 import Course from "./components/Course"
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
                 <Route path="/Forest" component={Forest}/>
                 <Route path="/AddClass" component={AddClass}/>
                 <Route path= "/ShowClasses" component={ShowClasses}/>
-                <Route path= "/IndividualClass" component={IndividualClass}/>
                 <Route path = "/Course" component = {Course}/>
 	            <Route component={Error} />
             </Switch>

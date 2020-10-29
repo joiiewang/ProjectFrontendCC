@@ -16,8 +16,7 @@ class Course extends React.Component {
     render () {
         return (
             <div>
-                This is the course info. Testing Notes/Links Components, feel free to delete - Zac
-                {this.props.name}
+                <h1>{this.props.name}</h1>
                 <LinkList/>
                 <NotesList/>
                 <ToDoList/>
