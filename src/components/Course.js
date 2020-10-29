@@ -1,5 +1,4 @@
 import React from 'react'
-import { LinkList } from './LinkList'
 import { NotesList, SubmitNoteForm } from './NotesList'
 import { LinkList, SubmitLinkForm } from './LinkList'
 
