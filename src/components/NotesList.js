@@ -33,7 +33,7 @@ class NotesList extends React.Component {
   }
   
   
-  class SubmitLinkForm extends React.Component {
+  class SubmitNoteForm extends React.Component {
     state = { note: '' };
   
     handleSubmit = (e) => {
