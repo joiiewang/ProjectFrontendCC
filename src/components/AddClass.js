@@ -1,6 +1,6 @@
 import React from "react"
+import Course from "./Course"
 
-var classNames = [];
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
@@ -12,10 +12,6 @@ class AddClass extends React.Component {
 
         this.handleChange = this.handleChange.bind(this)
     }
-
-    addToArray (className) {
-        classNames.push(this.state.className)
-    } 
 
     // included all input types in case we need it
     handleChange (event) {
@@ -35,7 +31,7 @@ class AddClass extends React.Component {
                     onChange = {this.handleChange}
                 />
                 <br/>
-                <button onClick = {this.addToArray}>Submit</button>
+                <button onClick >Submit</button>
             </form>
         )
     }
