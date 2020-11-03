@@ -29,7 +29,7 @@ class Plant extends React.Component {
     render() {
         return(
         <div>
-            <img src={choosePlant(this.state.points)} alt="Happy Plant" height={200} width={200} />
+            <img src={this.choosePlant(this.state.points)} alt="Happy Plant" height={200} width={200} />
         </div>
         );
     }
