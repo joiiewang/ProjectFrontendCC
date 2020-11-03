@@ -1,0 +1,48 @@
+.calendarBody {
+    position: fixed;
+    border-radius: 1vh;
+    background-color: #CBFEC0;
+    top: 10.75vh;
+    left: 1vw;
+    right: 1vw;
+    bottom: 35.5vh;
+    box-shadow: inset 0px 0px 0px 2px green;
+}
+
+.calendarDiv {
+    border: 0px solid green;
+    border-radius: 1vh;
+    background-color: #CBFEC0;
+    height: 97.5%;
+    margin-top: 0.4%;
+    width: calc(100%/7.275);
+    margin-left: 0.475%;
+    float: left;
+    text-align: center;
+    font-size: 100%;
+    box-shadow: inset 0px 0px 0px 2px green;
+}
+
+.taskDiv {
+    position: fixed;
+    border-radius: 1vh;
+    background-color: #CBFEC0;
+    top: 65.5vh;
+    bottom: 1.5vh;
+    left: 1vw;
+    right: 25vw;
+    float: left;
+    box-shadow: inset 0px 0px 0px 2px green;
+}
+
+.plantDiv {
+    position: fixed;
+    top: 65.5vh;
+    bottom: 1.5vh;
+    left: 75.75vw;
+    right: 1vw;
+    border-radius: 1vh;
+    background-color: #CBFEC0;
+    float: left;
+    box-shadow: inset 0px 0px 0px 2px green;
+}
