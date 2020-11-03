@@ -1,11 +1,11 @@
-import React from 'react';
-import { NotesList, SubmitNoteForm } from './NotesList'
+import React from "react";
+import { NotesList, SubmitNoteForm } from "./NotesList";
 
 function Notes() {
   return (
     <div>
-      <NotesList/>
+      <NotesList />
     </div>
   );
-};
+}
 export default Notes;

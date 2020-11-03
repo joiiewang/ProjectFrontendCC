@@ -1,70 +1,80 @@
-import React, {useState} from 'react';
-import {CSSTransition} from 'react-transition-group';
-import classNames from './AddClass'
-import './css/NavBar.css';
+import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
+import classNames from "./AddClass";
+import "./css/NavBar.css";
 
-function theNavbar () {
+function theNavbar() {
   return (
     <Navbar>
-        <li className = "item" >
-          <a className = "item" href = "/Home">Home</a>
-          <a className = "item" href = "/ToDoList">Todo's</a>
-          <a className = "item" href = "/Links">Links</a>
-          <a className = "item" href = "/Notes">Notes</a>
-          <a className = "item" href = "/Forest">Forest</a>
+      <li className="item">
+        <a className="item" href="/Home">
+          Home
+        </a>
+        <a className="item" href="/ToDoList">
+          Todo's
+        </a>
+        <a className="item" href="/Links">
+          Links
+        </a>
+        <a className="item" href="/Notes">
+          Notes
+        </a>
+        <a className="item" href="/Forest">
+          Forest
+        </a>
+      </li>
 
-        </li>
-      
-        <NavItem icon = "Classes">
-            <DropdownMenu></DropdownMenu>
-        </NavItem>
-        <NavItem icon = "More">
-            <DropdownMenuTwo></DropdownMenuTwo>
-        </NavItem>
-      
+      <NavItem icon="Classes">
+        <DropdownMenu></DropdownMenu>
+      </NavItem>
+      <NavItem icon="More">
+        <DropdownMenuTwo></DropdownMenuTwo>
+      </NavItem>
     </Navbar>
-  )
+  );
 }
 
-function Navbar (props) {
+function Navbar(props) {
   return (
-    <nav className = "navbar">
-      <ul className = "navbar-nav">{props.children}</ul>
+    <nav className="navbar">
+      <ul className="navbar-nav">{props.children}</ul>
     </nav>
-  )
+  );
 }
 
-function NavItem (props) {
+function NavItem(props) {
   const [open, setOpen] = useState(false);
-  
+
   return (
     <li className="navbaritems">
-      <a href = "#" className = "navbaritems" onClick = {() => setOpen(!open)}>
+      <a href="#" className="navbaritems" onClick={() => setOpen(!open)}>
         {props.icon}
       </a>
 
       {open && props.children}
     </li>
-  )
+  );
 }
 
-
-function DropdownMenu () {
-  const [activeMenu, setActiveMenu] = useState ('classes');
+function DropdownMenu() {
+  const [activeMenu, setActiveMenu] = useState("classes");
   const [menuHeight, setMenuHeight] = useState(null);
 
   function calcHeight(el) {
     const height = el.offsetHeight;
     setMenuHeight(height);
   }
-  
-  function DropdownItem (props) {
+
+  function DropdownItem(props) {
     return (
-      <a href="#" className = "menu-item" 
-      onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+      <a
+        href="#"
+        className="menu-item"
+        onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
+      >
         {props.children}
-    </a>
-    )
+      </a>
+    );
   }
   /*
   function arrayLoop () {
@@ -79,64 +89,68 @@ function DropdownMenu () {
     )
   }
   */
-  
+
   return (
-    <div className = "dropdown" style={{height: menuHeight}}>
-
-        <CSSTransition
-          in={activeMenu === 'classes'}
-          timeout = {500}
-          classNames = "menu-primary"
-          unmountOnExit>
-            <div className = "menu">
-              <DropdownItem><a href = "/ShowClasses">Show Classes</a></DropdownItem>
-              <DropdownItem><a href = "/AddClass">Add Class</a></DropdownItem>
-            </div>
-
-        </CSSTransition>
-
+    <div className="dropdown" style={{ height: menuHeight }}>
+      <CSSTransition
+        in={activeMenu === "classes"}
+        timeout={500}
+        classNames="menu-primary"
+        unmountOnExit
+      >
+        <div className="menu">
+          <DropdownItem>
+            <a href="/ShowClasses">Show Classes</a>
+          </DropdownItem>
+          <DropdownItem>
+            <a href="/AddClass">Add Class</a>
+          </DropdownItem>
+        </div>
+      </CSSTransition>
     </div>
-  )
+  );
 }
 
-function DropdownMenuTwo () {
-  const [activeMenu, setActiveMenu] = useState ('more');
+function DropdownMenuTwo() {
+  const [activeMenu, setActiveMenu] = useState("more");
   const [menuHeight, setMenuHeight] = useState(null);
 
   function calcHeight(el) {
     const height = el.offsetHeight;
     setMenuHeight(height);
   }
-  
-  function DropdownItem (props) {
+
+  function DropdownItem(props) {
     return (
-      <a href="#" className = "menu-item" 
-      onClick = {() => props.goToMenu && setActiveMenu(props.goToMenu)}>
+      <a
+        href="#"
+        className="menu-item"
+        onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
+      >
         {props.children}
-    </a>
-    )
+      </a>
+    );
   }
-  
+
   return (
-    <div className = "dropdown" style={{height: menuHeight}}>
-
-
-        <CSSTransition
-          in={activeMenu === 'more'}
-          timeout = {500}
-          classNames = "menu-primary"
-          unmountOnExit>
-            <div className = "menu">
-              <DropdownItem><a href = "/InfoPage">Info</a></DropdownItem>
-              <DropdownItem><a href = "/">Log Out</a></DropdownItem>
-            </div>
-
-        </CSSTransition>
+    <div className="dropdown" style={{ height: menuHeight }}>
+      <CSSTransition
+        in={activeMenu === "more"}
+        timeout={500}
+        classNames="menu-primary"
+        unmountOnExit
+      >
+        <div className="menu">
+          <DropdownItem>
+            <a href="/InfoPage">Info</a>
+          </DropdownItem>
+          <DropdownItem>
+            <a href="/">Log Out</a>
+          </DropdownItem>
+        </div>
+      </CSSTransition>
     </div>
-  )
+  );
 }
 
 export default theNavbar;
-
-    
-

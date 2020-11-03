@@ -1,11 +1,11 @@
-import React from 'react';
-import { LinkList, SubmitLinkForm } from './LinkList'
+import React from "react";
+import { LinkList, SubmitLinkForm } from "./LinkList";
 
 function Links() {
   return (
     <div>
-      <LinkList/>
+      <LinkList />
     </div>
   );
-};
+}
 export default Links;
