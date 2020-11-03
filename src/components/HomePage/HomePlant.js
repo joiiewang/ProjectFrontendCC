@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/Plant.css'
+import '../css/HomePlant.css'
 
 // EXAMPLE IMAGES (.SVG to resize well)
 import plant1 from './plantimages/plant1.svg'
@@ -10,7 +10,7 @@ import plant5 from './plantimages/plant5.svg'
 import plant6 from './plantimages/plant6.svg'
 
 
-class Plant extends React.Component {
+class HomePlant extends React.Component {
 
     constructor () {
         super()
@@ -47,4 +47,4 @@ class Plant extends React.Component {
     }
 }
 
-export default Plant;
+export default HomePlant;
