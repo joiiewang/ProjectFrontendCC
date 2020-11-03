@@ -32,13 +32,15 @@ class ToDoList extends React.Component {
 }
 
 class SubmitForm extends React.Component {
-  state = { toDoItem: ''};
+  state = { toDoItem: '', dueDate: ''};
 
   handleSubmit = (e, r) => {
     e.preventDefault();
     if(this.state.toDoItem === '') return;
-    this.props.onFormSubmit([this.state.toDoItem]);
+    if (this.state.dueDate ==='') return;
+    this.props.onFormSubmit([this.state.toDoItem, this.state.dueDate]);
     this.setState({ toDoItem: '' });
+    this.setState({dueDate:''});
     
   }
   render() {
@@ -46,9 +48,15 @@ class SubmitForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input 
           type='text'
-          placeholder='Enter To Do Item'
+          placeholder='To Do Item'
           value={this.state.toDoItem}
           onChange={(e) => this.setState({toDoItem: e.target.value})}
+        />
+        <input 
+          type='text'
+          placeholder='Due Date(yyyymmdd)'
+          value={this.state.dueDate}
+          onChange={(r) => this.setState({dueDate: r.target.value})}
         />
         <button>Add</button>
       </form>
@@ -59,22 +67,30 @@ class SubmitForm extends React.Component {
 
 const ToDoItemElements = (props) => {
   const todos = props.toDoItems.map((item, index) => {
-    return <Elem toDoItem={item[0]}  key={index} id={index} onDelete={props.onDelete} />
+    return <Elem toDoItem={item[0]} dueDate={item[1]} key={index} id={index} onDelete={props.onDelete} />
   })
+  console.log("2019-11-5" < "2018");
+  const sortedToDos = todos.sort(function(a, b){return a.props.dueDate - b.props.dueDate });
   return( 
     <div className = "toDoBox">
-      {todos}
+      {sortedToDos}
     </div>
   );
 }
 
 const Elem = (props) => {
+  const styles = 
+  {
+    fontSize: "5 px"
+  }
   return(
     <div className = "element">
       <input 
           type="checkbox" 
       />
         <p>{props.toDoItem}</p>
+
+        <p style = {styles}>{props.dueDate}</p>
       <button onClick={() => {props.onDelete(props.id)}}>Remove</button>    
 
     </div>
