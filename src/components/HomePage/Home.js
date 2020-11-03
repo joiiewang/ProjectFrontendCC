@@ -1,5 +1,5 @@
 import React from 'react';
-import Plant from '../Plant.js'
+import Plant from './HomePlant.js'
 
 function Home() {
 const calendarBody = {

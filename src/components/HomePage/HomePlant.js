@@ -1,13 +1,13 @@
 import React from 'react'
-import '../css/Plant.css'
+import '../css/HomePlant.css'
 
 // EXAMPLE IMAGES (.SVG to resize well)
-import plant1 from './plantimages/plant1.svg'
-import plant2 from './plantimages/plant2.svg'
-import plant3 from './plantimages/plant3.svg'
-import plant4 from './plantimages/plant4.svg'
-import plant5 from './plantimages/plant5.svg'
-import plant6 from './plantimages/plant6.svg'
+import plant1 from '../plantimages/plant1.svg'
+import plant2 from '../plantimages/plant2.svg'
+import plant3 from '../plantimages/plant3.svg'
+import plant4 from '../plantimages/plant4.svg'
+import plant5 from '../plantimages/plant5.svg'
+import plant6 from '../plantimages/plant6.svg'
 
 
 class Plant extends React.Component {
