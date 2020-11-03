@@ -24,15 +24,17 @@ function Home() {
 
 class DailyDiv extends React.Component {
   render() {
-    const tasks = ["sample task 1", "sample task 2", "sample taks 3"];
-    for (const task in tasks) {
+    const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
+    const tasks = [];
+    for (const task of sampleTasks) {
+      console.log(task);
       tasks.push(<DailyTask name={task} />);
     }
 
     return (
       <div className="calendarDiv">
         <div className="dailyTitle">{this.props.date}</div>
-        <div>{dailyTasks}</div>
+        <div>{tasks}</div>
       </div>
     );
   }
