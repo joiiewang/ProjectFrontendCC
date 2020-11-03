@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/Plant.css'
+import '../css/Plant.css'
 
 // EXAMPLE IMAGES (.SVG to resize well)
 import plant1 from './plantimages/plant1.svg'
