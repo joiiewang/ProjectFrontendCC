@@ -1,4 +1,6 @@
 import React from 'react';
+import Plant from './Plant.js'
+
 function Home() {
 const calendarBody = {
     position: "fixed",
@@ -57,7 +59,7 @@ const calendarBody = {
         <div style={calendarDiv}>Sunday</div>
       </div>
       <div style={taskDiv}>Important Tasks here</div>
-      <div style={plantDiv}>pretty tree :3</div>
+      <div style={plantDiv}><Plant/></div>
     </div>
   );
 };

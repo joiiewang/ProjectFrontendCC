@@ -8,7 +8,7 @@ class LinkList extends React.Component {
           this.state = {
               links: []
           }
-      }
+    }
   
     handleSubmit = (link) => {
       this.setState({links: [...this.state.links, link]});
