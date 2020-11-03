@@ -46,3 +46,14 @@
     float: left;
     box-shadow: inset 0px 0px 0px 2px green;
 }
+
+.task {
+  border-Top: 2px solid green;
+  padding: 2px;
+}
+
+.dailyTitle {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
