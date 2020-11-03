@@ -50,6 +50,7 @@
 .task {
   border-Top: 2px solid green;
   padding: 2px;
+  font-size: 15px;
 }
 
 .dailyTitle {
