@@ -21,7 +21,11 @@ class ShowClasses extends React.Component {
     
     return (
       this.state.classes.map((course) => (
-        <p>{course.name}</p>
+        <button>
+          <a href= "/Course">
+          {course.name}
+          </a>
+          </button>
       ))
     )
     
@@ -31,9 +35,6 @@ class ShowClasses extends React.Component {
     return (
       <div>
         <p>{this.mapClasses()}</p>
-        <button>
-          <a href="/Course">Class 1</a>
-        </button>
       </div>
     );
   }
