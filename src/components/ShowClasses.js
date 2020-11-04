@@ -18,12 +18,16 @@ class ShowClasses extends React.Component {
   }
 
   mapClasses() {
-    console.log(this.state.classes.length + "We are in map classes")
-    return (this.state.classes.length)
+    
+    return (
+      this.state.classes.map((course) => (
+        <p>{course.name}</p>
+      ))
+    )
+    
   }
 
   render() {
-    console.log(this.state.classes)
     return (
       <div>
         <p>{this.mapClasses()}</p>
