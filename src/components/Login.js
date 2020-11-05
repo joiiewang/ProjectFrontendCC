@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 function Login(props) {
   const [state, updateState] = useState({
-    acckey: "",
-    seckey: "",
+    userName: "",
+    password: "",
   });
 
   function handleChange(evt) {
@@ -16,13 +16,11 @@ function Login(props) {
     });
   }
 
-  // We have to do the hooks and stuff I think to connect to backend
-  // ----------------------------- Honestly Have no idea how this works ------------------------
-  // eslint-disable-next-line
+
   const saveCreds = (evt) => {
     //send creds to backend
     evt.preventDefault();
-    alert(`Submitting ${state.acckey} and ${state.seckey}`);
+    alert(`Submitting ${state.userName} and ${state.password}`);
 
     let server = "http://localhost:8118/api";
 
@@ -37,7 +35,7 @@ function Login(props) {
 
     console.log("server = " + server);
     const url = `${server}/keys`;
-    const bd = JSON.stringify({ acckey: state.acckey, seckey: state.seckey });
+    const bd = JSON.stringify({ userName: state.username, password: state.password });
     fetch(url, {
       method: "POST",
       headers: {
@@ -96,8 +94,8 @@ function Login(props) {
           <input
             style={inputStyle}
             type="text"
-            value={state.acckey}
-            name="acckey"
+            value={state.userName}
+            name="userName"
             onChange={handleChange}
           />
         </label>
@@ -107,7 +105,7 @@ function Login(props) {
             style={inputStyle}
             type="text"
             value={state.seckey}
-            name="seckey"
+            name="password"
             onChange={handleChange}
           />
         </label>

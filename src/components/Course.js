@@ -13,6 +13,7 @@ class Course extends React.Component {
       links: [],
     };
   }
+
   render() {
     return (
       <div>
