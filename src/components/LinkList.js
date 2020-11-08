@@ -6,7 +6,7 @@ class LinkList extends React.Component {
   constructor() {
     super();
     this.state = {
-      links: [],
+      links: [] //this.props.links,
     };
   }
 

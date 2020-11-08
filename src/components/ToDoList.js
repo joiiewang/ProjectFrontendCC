@@ -4,7 +4,7 @@ class ToDoList extends React.Component {
   constructor () {
         super()
         this.state = {
-            toDoItems: []
+            toDoItems: [] //this.props.todos
         }
     }
 

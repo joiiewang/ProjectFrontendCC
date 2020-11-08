@@ -14,13 +14,23 @@ class Course extends React.Component {
     };
   }
 
+  setUsername () {
+    this.setState({name : this.props.name})
+  }
+
+  getCourseInfo () {
+    fetch ('https://project-backend-cc.herokuapp.com/api/v1/users/courses/' + this.state.name)
+  }
+
   render() {
+    this.setUsername()
+    this.getCourseInfo()
     return (
       <div>
-        <h1>{this.props.name}</h1>
-        <LinkList />
-        <NotesList />
-        <ToDoList />
+        <h1>{this.state.name}</h1>
+        <LinkList links = {this.state.toDoList}/>
+        <NotesList notes = {this.state.notes}/>
+        <ToDoList todos = {this.state.toDoList}/>
       </div>
     );
   }
