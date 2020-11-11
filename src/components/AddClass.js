@@ -1,15 +1,11 @@
 import React from "react";
-import Course from "./Course";
-import Username from "./Username"
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
   constructor() {
     super();
     this.state = {
-      className: "",
-      userName: "",  //this.props.userName?
-      submitted: false,
+      courseName: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,18 +22,14 @@ class AddClass extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.sendNameToBackend(); 
-    alert('Added course');
-  }
-
-  renderSubmit() {
-    this.render(<Course name={this.state.className} />);
+    alert('Adding course');
   }
 
   sendNameToBackend () {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
     const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
-    const bd = JSON.stringify({ name: this.state.className});
+    const bd = JSON.stringify({ name: this.state.courseName});
 
     fetch(url, {
       method: "POST",
@@ -55,36 +47,19 @@ class AddClass extends React.Component {
     .catch(error => alert(error));
   }
 
-  newClass() {
-    this.sendNameToBackend()
-    return (
-      <Course name={this.state.className}/>
-    )
-  }
-
-  renderForm() {
+  render() {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input
           type="text"
-          value={this.state.className}
-          name="className"
-          placeholder="Class Name"
+          value={this.state.courseName}
+          name="courseName"
+          placeholder="Course Name"
           onChange={this.handleChange}
         />
         <br />
         <button>Submit</button>
       </form>
-    );
-  }
-
-  render() {
-    return this.renderForm();
-    return (
-      <div>
-        {!this.state.submitted && this.renderForm()}
-        {this.state.submitted && this.newClass()}
-      </div>
     );
   }
 }
