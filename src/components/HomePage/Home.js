@@ -21,29 +21,53 @@ class CalGrid extends React.Component {
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
 
     var today = new Date();
-    var offset = (today.getDate()%7) - (today.getDay()+1)%7;
-    var daysInMonth = new Date(today.getFullYear(), today.getMonth()+1, 0).getDate();
+    var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7);
+    var daysInMonth = new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).getDate();
 
     var monthArr = new Array(5);
 
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
       for (let j = 0; j < weekArr.length; j++) {
-	var day = (i*7+j-offset+1);
-	var backgroundColor = {background: '#CBFEC0'}
-	if (day < 1){
-	  var daysInLastMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
-	  day = daysInLastMonth+day;
-	  backgroundColor = {background: '#A6CF9D'};
-	} else if (day > daysInMonth) {
-	  backgroundColor = {background: '#A6CF9D'};
-	}
-        weekArr[j] = <td key={i*7+j} style={backgroundColor}>{day%daysInMonth}</td>;
+        var day = i * 7 + j - offset + 1;
+        var backgroundColor = { background: "#CBFEC0" };
+        if (day < 1) {
+          var daysInLastMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            0
+          ).getDate();
+          day = daysInLastMonth + day;
+          backgroundColor = { background: "#A6CF9D" };
+        } else if (day > daysInMonth) {
+          backgroundColor = { background: "#A6CF9D" };
+        }
+
+        var fill = Math.floor(Math.random() * 10) * 10;
+        const fillStyle = {
+          height: fill + "%",
+          bottom: fill - 100 + "%",
+        };
+
+        weekArr[j] = (
+          <td key={i * 7 + j} style={backgroundColor}>
+            {day % daysInMonth}
+            <div className="taskFill" style={fillStyle} />
+          </td>
+        );
       }
-      monthArr[i] = <tr key={i}>{weekArr}</tr>; 
+      monthArr[i] = <tr key={i}>{weekArr}</tr>;
     }
 
-    return <table className="mainCalender"><tbody>{monthArr}</tbody></table>;
+    return (
+      <table className="mainCalender">
+        <tbody>{monthArr}</tbody>
+      </table>
+    );
   }
 }
 
