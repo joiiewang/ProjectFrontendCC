@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
-
 class NewUser extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       userName: "",
       password: "",
       passwordConfirm: "",
       passwordSame: false,
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
@@ -21,45 +20,41 @@ class NewUser extends React.Component {
       ? this.set({ [name]: checked })
       : this.setState({ [name]: value });
   }
-  
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state.password == this.state.passwordConfirm)
+    console.log(this.state.password == this.state.passwordConfirm);
     if (this.state.password == this.state.passwordConfirm) {
-      this.setState({passwordSame: true})
-    }
-
-    else {
-      alert ("Passwords do not match. Please re-enter.")
+      this.setState({ passwordSame: true });
+    } else {
+      alert("Passwords do not match. Please re-enter.");
     }
   }
 
-
-  componentDidMount () {
-    this.fetchData()
+  componentDidMount() {
+    this.fetchData();
   }
 
-  fetchData () {
+  fetchData() {
     const saveCreds = (evt) => {
       //send creds to backend
       evt.preventDefault();
       alert(`Submitting ${this.state.userName} and ${this.state.password}`);
-  
+
       let server = "http://localhost:8118/api";
-  
+
       if (process.env.REACT_APP_REMOTE) {
         //set this in .env file: REACT_APP_REMOTE=1
         server = "https://project-backend-cc.herokuapp.com/api/v1";
       }
-  
+
       if (process.env.NODE_ENV !== "development") {
         server = "https://project-backend-cc.herokuapp.com/api/v1";
       }
-  
+
       console.log("server = " + server);
       const url = `${server}/users`;
-      const bd = JSON.stringify({ username: this.state.userName});
+      const bd = JSON.stringify({ username: this.state.userName });
       fetch(url, {
         method: "POST",
         headers: {
@@ -82,14 +77,9 @@ class NewUser extends React.Component {
     };
   }
 
-  
-
-  render () {
-
+  render() {
     if (this.state.passwordSame) {
-      return (
-        <Redirect to= {"/Home"}/>
-      )
+      return <Redirect to={"/Home"} />;
     }
 
     const styles = {
@@ -122,51 +112,45 @@ class NewUser extends React.Component {
 
     return (
       <div>
-      <form style={styles}
-      onSubmit = {this.handleSubmit.bind(this)}
-      >
-        <p style={title}>Register</p>
-        <label>
-          Username:
-          <input
-            style={inputStyle}
-            type="text"
-            value={this.state.userName}
-            name="userName"
-            onChange={this.handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            style={inputStyle}
-            type="text"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleChange}
-          />
-        </label>
-        <label>
-          Confirm Password:
-          <input
-            style={inputStyle}
-            type="text"
-            value={this.state.passwordConfirm}
-            name="passwordConfirm"
-            onChange={this.handleChange}
-          />
-        </label>
-        <button
-            type="submit"
-            style={loginStyle}
-          >
+        <form style={styles} onSubmit={this.handleSubmit.bind(this)}>
+          <p style={title}>Register</p>
+          <label>
+            Username:
+            <input
+              style={inputStyle}
+              type="text"
+              value={this.state.userName}
+              name="userName"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              style={inputStyle}
+              type="password"
+              value={this.state.password}
+              name="password"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Confirm Password:
+            <input
+              style={inputStyle}
+              type="password"
+              value={this.state.passwordConfirm}
+              name="passwordConfirm"
+              onChange={this.handleChange}
+            />
+          </label>
+          <button type="submit" style={loginStyle}>
             Let's start planting
-        </button>
-      </form>
-    </div>
-    )
+          </button>
+        </form>
+      </div>
+    );
   }
-
 }
 
 export default NewUser;
