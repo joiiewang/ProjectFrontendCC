@@ -17,6 +17,14 @@ function Login(props) {
   }
 
   const saveCreds = (evt) => {
+
+    evt.preventDefault();
+    sessionStorage.setItem('username', state.userName);
+    sessionStorage.setItem('password', state.password);
+
+
+    return;
+
     //send creds to backend
     evt.preventDefault();
     alert(`Submitting ${state.userName} and ${state.password}`);

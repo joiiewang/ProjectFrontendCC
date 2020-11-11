@@ -13,10 +13,13 @@ class ShowClasses extends React.Component {
   //url = ("http://localhost:8118/api/v1/users/"+ this.userName +"/courses/")
 
   componentDidMount () {
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
     fetch(this.url, {
       method: 'get',
       headers: new Headers({
-      	'Authorization': 'Basic '+btoa(this.userName+":password123"),
+      	'Authorization': 'Basic '+btoa(username+":"+password),
 	'Content-Type': 'application/json'
       })
     }).then(function(response){
