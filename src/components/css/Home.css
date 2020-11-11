@@ -4,9 +4,10 @@
     background-color: #CBFEC0;
     top: 10.75vh;
     left: 1vw;
-    right: 1vw;
-    bottom: 35.5vh;
+    right: 25.25vw;
+    bottom: 1.5vh;
     box-shadow: inset 0px 0px 0px 2px green;
+    text-align: center;
 }
 
 .calendarDiv {
@@ -27,12 +28,13 @@
     position: fixed;
     border-radius: 1vh;
     background-color: #CBFEC0;
-    top: 65.5vh;
-    bottom: 1.5vh;
-    left: 1vw;
-    right: 25vw;
+    top: 10.75vh;
+    bottom: 35.5vh;
+    left: 75.75vw;
+    right: 1vw;
     float: left;
     box-shadow: inset 0px 0px 0px 2px green;
+    text-align: center;
 }
 
 .plantDiv {
@@ -57,4 +59,24 @@
   font-size: 20px;
   font-weight: bold;
   padding: 5px;
+}
+
+.mainCalender {
+  width: 100%;
+  height: 100%;
+}
+
+table, th, td {
+  border: 2px solid green;
+  border-radius: 5px;
+}
+
+.mainCalender td{
+  transition: all .2s ease;
+  text-align: center;
+  transform: scale(1);
+}
+
+.mainCalender td:hover{
+  transform: scale(1.02);
 }
