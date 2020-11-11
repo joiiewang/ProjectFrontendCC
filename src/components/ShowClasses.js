@@ -9,12 +9,24 @@ class ShowClasses extends React.Component {
 
   }
   userName = "bob"
-  usernameString = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ this.userName +"/courses")
+  url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ this.userName +"/courses/")
+  //url = ("http://localhost:8118/api/v1/users/"+ this.userName +"/courses/")
 
   componentDidMount () {
-    fetch(this.usernameString).then(response => response.json()).then(data => this.setState({
+    fetch(this.url, {
+      method: 'get',
+      headers: new Headers({
+      	'Authorization': 'Basic '+btoa(this.userName+":password123"),
+	'Content-Type': 'application/json'
+      })
+    }).then(function(response){
+      if(!response.ok) {
+	throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => this.setState({
       classes: data
-    }))
+    })).catch(error => alert(error));
   }
 
   mapClasses() {
