@@ -34,9 +34,11 @@ function Login(props) {
 
     console.log("server = " + server);
     const url = `${server}`;
-    const bd = JSON.stringify({ userName: state.username, password: state.password });
-    
-    
+    const bd = JSON.stringify({
+      userName: state.username,
+      password: state.password,
+    });
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -104,12 +106,13 @@ function Login(props) {
           Password:
           <input
             style={inputStyle}
-            type="text"
+            type="password"
             value={state.seckey}
             name="password"
             onChange={handleChange}
           />
         </label>
+        <button onClick={saveCreds}>Submit</button>
         <Link to="/Home">
           <input type="submit" style={loginStyle} value="Let's get planting" />
         </Link>
