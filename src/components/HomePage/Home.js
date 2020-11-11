@@ -55,7 +55,7 @@ class CalGrid extends React.Component {
 
         weekArr[j] = (
           <td key={i * 7 + j} style={backgroundColor}>
-            {day % daysInMonth}
+            {day % (daysInMonth + 1)}
             <div className="taskFill" style={fillStyle} />
           </td>
         );
