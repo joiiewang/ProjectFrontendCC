@@ -50,7 +50,7 @@ class CalGrid extends React.Component {
         var fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
           height: fill + "%",
-          bottom: fill - 100 + "%",
+          bottom: "0%",
         };
 
         weekArr[j] = (
