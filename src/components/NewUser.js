@@ -50,16 +50,16 @@ class NewUser extends React.Component {
   
       if (process.env.REACT_APP_REMOTE) {
         //set this in .env file: REACT_APP_REMOTE=1
-        server = "https://project-backend-cc.herokuapp.com/api";
+        server = "https://project-backend-cc.herokuapp.com/api/v1";
       }
   
       if (process.env.NODE_ENV !== "development") {
-        server = "https://project-backend-cc.herokuapp.com/api";
+        server = "https://project-backend-cc.herokuapp.com/api/v1";
       }
   
       console.log("server = " + server);
-      const url = `${server}/keys`;
-      const bd = JSON.stringify({ userName: this.state.userName, password: this.state.password });
+      const url = `${server}/users`;
+      const bd = JSON.stringify({ username: this.state.userName});
       fetch(url, {
         method: "POST",
         headers: {
