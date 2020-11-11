@@ -25,7 +25,8 @@ class AddClass extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ submitted: true });
+    this.sendNameToBackend(); 
+    alert('Added course');
   }
 
   renderSubmit() {
@@ -33,30 +34,25 @@ class AddClass extends React.Component {
   }
 
   sendNameToBackend () {
-    const bd = JSON.stringify({ courseName: this.state.className, userName : this.state.userName});
-    const url = "https://project-backend-cc.herokuapp.com/api/v1/users" 
-    // Need to store username so we can add it to end of this
-    
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
+    const bd = JSON.stringify({ name: this.state.className});
 
     fetch(url, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
+      headers: new Headers({
+      	'Authorization': 'Basic '+btoa(username+":"+password),
         "Content-Type": "application/json",
-      },
+      }),
       body: bd,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("SaveCreds saveCreds: Fetch Response data: ");
-        console.log(data); //don't log an object WITH a string else the conversion won't work and object will not be dumped
-        alert("response: " + data["MESSAGE"]);
-      })
-      .catch((error) =>
-        console.log(
-          "SaveCreds saveCreds: Fetch Failure (is server up?): " + error
-        )
-      );
+    }).then(function(response){
+      if(!response.ok) {
+	throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => console.log(data))
+    .catch(error => alert(error));
   }
 
   newClass() {
@@ -83,6 +79,7 @@ class AddClass extends React.Component {
   }
 
   render() {
+    return this.renderForm();
     return (
       <div>
         {!this.state.submitted && this.renderForm()}
