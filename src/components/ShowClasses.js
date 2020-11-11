@@ -8,15 +8,13 @@ class ShowClasses extends React.Component {
     };
 
   }
-  userName = "bob"
-  url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ this.userName +"/courses/")
-  //url = ("http://localhost:8118/api/v1/users/"+ this.userName +"/courses/")
-
   componentDidMount () {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
-    fetch(this.url, {
+    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
+
+    fetch(url, {
       method: 'get',
       headers: new Headers({
       	'Authorization': 'Basic '+btoa(username+":"+password),
