@@ -1,4 +1,5 @@
 import React from "react";
+import UtilityFunctions, { generalFetch } from "../UtilityFunctions"
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
@@ -31,6 +32,10 @@ class AddClass extends React.Component {
     const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
     const bd = JSON.stringify({ name: this.state.courseName});
 
+
+    generalFetch (username, password, url, bd)
+
+    /*
     fetch(url, {
       method: "POST",
       headers: new Headers({
@@ -45,7 +50,9 @@ class AddClass extends React.Component {
       return response.json();
     }).then(data => console.log(data))
     .catch(error => alert(error));
+  */
   }
+  
 
   render() {
     return (
