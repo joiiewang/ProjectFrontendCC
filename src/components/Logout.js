@@ -1,12 +1,11 @@
 import React from "react"
-import PopUp from "./Popup"
 
 
 export default class Logout extends React.Component {
    
     state = {
-        userName: null, 
-        password: null,
+        userName: "", 
+        password: "",
     }
 
     logOut = () => {
@@ -16,9 +15,9 @@ export default class Logout extends React.Component {
     
 
     render () {
+        {this.logOut()}
         return (
             <div>
-                {this.logOut}
                 <a href="/">Log Out</a>
             </div>
         )
