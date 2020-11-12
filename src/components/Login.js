@@ -22,6 +22,7 @@ function Login(props) {
     sessionStorage.setItem('username', state.userName);
     sessionStorage.setItem('password', state.password);
 
+    window.location.href = '/ShowClasses'; //Note: this reloads the page
 
     return;
 
@@ -120,10 +121,7 @@ function Login(props) {
             onChange={handleChange}
           />
         </label>
-        <button onClick={saveCreds}>Submit</button>
-        <Link to="/Home">
-          <input type="submit" style={loginStyle} value="Let's get planting" />
-        </Link>
+        <button onClick={saveCreds}> Let's get planting </button>
         <Link to="/NewUser">
           <input type="submit" style={loginStyle} value="I'm a new seedling" />
         </Link>
