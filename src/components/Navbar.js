@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import classNames from "./AddClass";
 import "./css/NavBar.css";
+import Logout from "./Logout"
 
 function theNavbar() {
   return (
@@ -145,7 +146,9 @@ function DropdownMenuTwo() {
             <a href="/InfoPage">Info</a>
           </DropdownItem>
           <DropdownItem>
-            <a href="/">Log Out</a>
+            {/* <a href="/">Log Out</a> */}
+            <Logout/>
+            
           </DropdownItem>
         </div>
       </CSSTransition>
