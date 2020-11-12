@@ -8,7 +8,6 @@ class NewUser extends React.Component {
       userName: "",
       password: "",
       passwordConfirm: "",
-      passwordSame: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,37 +23,26 @@ class NewUser extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     console.log(this.state.password == this.state.passwordConfirm);
-    if (this.state.password == this.state.passwordConfirm) {
-      this.setState({ passwordSame: true });
-    } else {
+    if (this.state.password != this.state.passwordConfirm) {
       alert("Passwords do not match. Please re-enter.");
+      return;
     }
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    const saveCreds = (evt) => {
-      //send creds to backend
-      evt.preventDefault();
       alert(`Submitting ${this.state.userName} and ${this.state.password}`);
 
-      let server = "http://localhost:8118/api";
+      let server = "http://localhost:8118";
 
       if (process.env.REACT_APP_REMOTE) {
         //set this in .env file: REACT_APP_REMOTE=1
-        server = "https://project-backend-cc.herokuapp.com/api/v1";
+        server = "https://project-backend-cc.herokuapp.com";
       }
 
       if (process.env.NODE_ENV !== "development") {
-        server = "https://project-backend-cc.herokuapp.com/api/v1";
+        server = "https://project-backend-cc.herokuapp.com";
       }
 
       console.log("server = " + server);
-      const url = `${server}/users`;
-      const bd = JSON.stringify({ username: this.state.userName });
+      const url = `${server}/api/v1/users/`;
+      const bd = JSON.stringify({ username: this.state.userName, password: this.state.password});
       fetch(url, {
         method: "POST",
         headers: {
@@ -74,14 +62,9 @@ class NewUser extends React.Component {
             "SaveCreds saveCreds: Fetch Failure (is server up?): " + error
           )
         );
-    };
   }
 
   render() {
-    if (this.state.passwordSame) {
-      return <Redirect to={"/Home"} />;
-    }
-
     const styles = {
       margin: "auto",
       width: "200px",
