@@ -56,6 +56,8 @@ class NewUser extends React.Component {
           console.log("SaveCreds saveCreds: Fetch Response data: ");
           console.log(data); //don't log an object WITH a string else the conversion won't work and object will not be dumped
           alert("response: " + data["MESSAGE"]);
+          sessionStorage.setItem('username',this.state.userName);
+          sessionStorage.setItem('password',this.state.password);
         })
         .catch((error) =>
           console.log(
