@@ -1,4 +1,5 @@
 import React from "react";
+import "./css/LinkList.css";
 
 class LinkList extends React.Component {
   // We can pass in an array to populate this component
@@ -84,7 +85,7 @@ const LinkElements = (props) => {
       />
     );
   });
-  return <div>{todos}</div>;
+  return <div className="toDoBox">{todos}</div>;
 };
 
 const Elem = (props) => {
@@ -94,7 +95,7 @@ const Elem = (props) => {
     url = "https://" + url;
   }
   return (
-    <div>
+    <div className="element"> 
       <a href={url} target="_blank">
         {" "}
         {props.name}

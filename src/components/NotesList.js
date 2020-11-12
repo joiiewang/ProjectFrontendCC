@@ -44,7 +44,7 @@ class SubmitNoteForm extends React.Component {
 
   render() {
     return (
-      <div className="footer">
+      <div>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -61,7 +61,7 @@ class SubmitNoteForm extends React.Component {
 
 const Header = (props) => {
   return (
-    <div className="content">
+    <div>
       <h1>Notes</h1>
     </div>
   );
@@ -73,12 +73,16 @@ const TodoList = (props) => {
       <Todo content={note} key={index} id={index} onDelete={props.onDelete} />
     );
   });
-  return <div>{notes}</div>;
+  return <div className="toDoBox">{notes}</div>;
 };
 
 const Todo = (props) => {
+  const styles = 
+  {
+    fontSize: "5 px"
+  }
   return (
-    <div className="flex-box">
+    <div className="element">
       <p>{props.content}</p>
       <button
         onClick={() => {
