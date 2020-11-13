@@ -3,14 +3,11 @@ import React from "react"
 
 export default class Logout extends React.Component {
    
-    state = {
-        userName: "", 
-        password: "",
-    }
+
 
     logOut = () => {
-        sessionStorage.setItem('username', this.state.userName);
-        sessionStorage.setItem('password', this.state.password);
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('password');
     }
     
 
