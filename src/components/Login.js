@@ -43,7 +43,6 @@ class Login extends React.Component {
         server = "https://project-backend-cc.herokuapp.com";
       }
 
-      //const url = `${server}/api/v1/users/`;
       const url = (`${server}/api/v1/users/${this.state.userName}/courses/`)
       console.log(this.state.userName)
 
@@ -66,28 +65,9 @@ class Login extends React.Component {
       const timer = setTimeout( () => {
        console.log(currentComponent.state.loggedIn)
        if (currentComponent.state.loggedIn) {
+        sessionStorage.setItem('loggedIn', true);
         window.location.href = '/ShowClasses';
        }}, 1000);
-
-    
-    /*
-    const url = `${server}/api/v1/users/`;
-    fetch(url, {
-      method: 'get',
-      headers: new Headers({
-        'Authorization': 'Basic '+btoa(state.username+":"+ state.password),
-	      'Content-Type': 'application/json'
-      })
-      }).then(function(response){
-        if(!response.ok) {
-	      throw new Error(Error + "Username or password incorrect.")
-      }
-      }).then(this.setState({ loggedIn: true
-    })).catch(error => alert(error + "Username or password incorrect."));
-
-    if (this.state.loggedIn) {
-    }
-    */
 
     return
 
@@ -147,7 +127,7 @@ class Login extends React.Component {
               onChange={this.handleChange}
             />
           </label>
-          <button onClick={this.saveCreds}> Let's get planting </button>
+          <button onClick={this.saveCreds} style={loginStyle}> Let's get planting </button>
           <Link to="/NewUser">
             <input type="submit" style={loginStyle} value="I'm a new seedling" />
           </Link>

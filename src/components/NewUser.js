@@ -8,6 +8,7 @@ class NewUser extends React.Component {
       userName: "",
       password: "",
       passwordConfirm: "",
+      usernameExists: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,13 +59,22 @@ class NewUser extends React.Component {
           alert("response: " + data["MESSAGE"]);
           sessionStorage.setItem('username',this.state.userName);
           sessionStorage.setItem('password',this.state.password);
+          this.setState({usernameExists: false})
         })
-        .catch((error) =>
-          console.log(
-            "SaveCreds saveCreds: Fetch Failure (is server up?): " + error
-          )
+        .catch((error) => {
+          alert("Username already exists. Please choose another username")
+          this.setState({usernameExists: true})
+        }
         );
+
+        console.log(this.state.usernameExists)
+        const timer = setTimeout( () => {
+          if (!this.state.usernameExists) {
+            window.location.href = '/ShowClasses';
+          }
+          }, 1000);
   }
+
 
   render() {
     const styles = {
