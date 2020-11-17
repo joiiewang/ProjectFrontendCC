@@ -17,6 +17,7 @@ function Login(props) {
     });
   }
 
+
   const saveCreds = (evt) => {
 
     evt.preventDefault();
@@ -24,35 +25,47 @@ function Login(props) {
     sessionStorage.setItem('password', state.password);
 
   
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
 
 
-    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ this.state.username)
 
+
+    window.location.href = '/ShowClasses'; //Note: this reloads the page
+    
+    /*
+    const url = `${server}/api/v1/users/`;
     fetch(url, {
       method: 'get',
       headers: new Headers({
-        'Authorization': 'Basic '+btoa(this.state.username+":"+this.state.password),
+        'Authorization': 'Basic '+btoa(state.username+":"+ state.password),
 	      'Content-Type': 'application/json'
       })
       }).then(function(response){
         if(!response.ok) {
-	      throw new Error("HTTP status "+response.status + " Username or password incorrect.")
+	      throw new Error(Error + "Username or password incorrect.")
       }
-      return response.json();
-      }).then(data => this.setState({
-      loggedIn: true
-    })).catch(error => alert(error));
+      }).then(this.setState({ loggedIn: true
+    })).catch(error => alert(error + "Username or password incorrect."));
 
     if (this.state.loggedIn) {
-      window.location.href = '/ShowClasses'; //Note: this reloads the page
     }
+    */
 
-  
-
-
-    return;
+    return
 
   };
+
+
+
 
   const styles = {
     margin: "auto",

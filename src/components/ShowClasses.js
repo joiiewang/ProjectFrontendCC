@@ -12,7 +12,19 @@ class ShowClasses extends React.Component {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
-    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+
+    const url = (`${server}/api/v1/users/${username}/courses/`)
 
     fetch(url, {
       method: 'get',
