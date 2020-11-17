@@ -5,6 +5,7 @@ function Login(props) {
   const [state, updateState] = useState({
     userName: "",
     password: "",
+    loggedIn: false,
   });
 
   function handleChange(evt) {
@@ -22,51 +23,35 @@ function Login(props) {
     sessionStorage.setItem('username', state.userName);
     sessionStorage.setItem('password', state.password);
 
-    window.location.href = '/ShowClasses'; //Note: this reloads the page
+  
+
+
+    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ this.state.username)
+
+    fetch(url, {
+      method: 'get',
+      headers: new Headers({
+        'Authorization': 'Basic '+btoa(this.state.username+":"+this.state.password),
+	      'Content-Type': 'application/json'
+      })
+      }).then(function(response){
+        if(!response.ok) {
+	      throw new Error("HTTP status "+response.status + " Username or password incorrect.")
+      }
+      return response.json();
+      }).then(data => this.setState({
+      loggedIn: true
+    })).catch(error => alert(error));
+
+    if (this.state.loggedIn) {
+      window.location.href = '/ShowClasses'; //Note: this reloads the page
+    }
+
+  
+
 
     return;
 
-    //send creds to backend
-    evt.preventDefault();
-    alert(`Submitting ${state.userName} and ${state.password}`);
-
-    let server = "http://localhost:8118/api";
-
-    if (process.env.REACT_APP_REMOTE) {
-      //set this in .env file: REACT_APP_REMOTE=1
-      server = "https://project-backend-cc.herokuapp.com/api/v1";
-    }
-
-    if (process.env.NODE_ENV !== "development") {
-      server = "https://project-backend-cc.herokuapp.com/api/v1";
-    }
-
-    console.log("server = " + server);
-    const url = `${server}`;
-    const bd = JSON.stringify({
-      userName: state.username,
-      password: state.password,
-    });
-
-    fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: bd,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("SaveCreds saveCreds: Fetch Response data: ");
-        console.log(data); //don't log an object WITH a string else the conversion won't work and object will not be dumped
-        alert("response: " + data["MESSAGE"]);
-      })
-      .catch((error) =>
-        console.log(
-          "SaveCreds saveCreds: Fetch Failure (is server up?): " + error
-        )
-      );
   };
 
   const styles = {
