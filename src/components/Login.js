@@ -54,13 +54,13 @@ class Login extends React.Component {
         })
       }).then(function(response){
         if(!response.ok) {
-        throw new Error("HTTP status "+response.status)
+        throw new Error("Username or password incorrect")
         }
         else {
           currentComponent.setState({loggedIn: true})
           }
         return response.json();
-      }).catch(error => alert(error));
+      }).catch(error => alert("Username or password incorrect"));
 
       const timer = setTimeout( () => {
        console.log(currentComponent.state.loggedIn)
