@@ -28,7 +28,7 @@ class Course extends React.Component {
     return (
       <div>
         <h1>{this.state.name}</h1>
-        <LinkList links = {this.state.toDoList}/>
+        <LinkList links = {this.state.links}/>
         <NotesList notes = {this.state.notes}/>
         <ToDoList todos = {this.state.toDoList}/>
       </div>
