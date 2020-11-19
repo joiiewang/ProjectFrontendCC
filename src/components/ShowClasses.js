@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class ShowClasses extends React.Component {
   constructor() {
@@ -47,11 +48,11 @@ class ShowClasses extends React.Component {
     return (
       this.state.classes.map((course) => (
         <button>
-          <a href= "/Course">
-            {//need to pass className props here
-            }
-          {course.name}
-          </a>
+          <Link to = {{
+            pathname: "/Course", 
+            name: course.name,
+            }}>
+              {course.name}</Link>
           </button>
       ))
     )
@@ -68,3 +69,11 @@ class ShowClasses extends React.Component {
 }
 
 export default ShowClasses;
+
+/*
+<a href= "/Course">
+            {//need to pass className props here
+            }
+          {course.name}
+          </a>
+*/

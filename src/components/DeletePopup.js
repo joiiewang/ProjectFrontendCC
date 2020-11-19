@@ -3,10 +3,10 @@ import React from "react"
 
 export default class Popup extends React.Component {
 
-    constructor() {
-        super() 
+    constructor(props) {
+        super(props) 
         this.state= {
-            courseName : ""
+            courseName : this.props.courseName
         }
     }
 

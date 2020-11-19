@@ -5,10 +5,10 @@ import ToDoList from "./ToDoList";
 import DeletePopup from "./DeletePopup"
 
 class Course extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      name: "",
+      name: this.props.location.name,
       toDoList: [],
       notes: [],
       links: [],
@@ -19,6 +19,8 @@ class Course extends React.Component {
 
 
   render() {
+
+    //console.log("Course: " + this.state.name)
     return (
       <div>
         <div>
