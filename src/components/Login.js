@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 class Login extends React.Component {
-  constructor (props) {
-    super (props) 
+  constructor(props) {
+    super(props);
     this.state = {
       userName: "",
       password: "",
       loggedIn: false,
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.saveCreds = this.saveCreds.bind(this);
@@ -21,60 +21,57 @@ class Login extends React.Component {
       : this.setState({ [name]: value });
   }
 
-
-  saveCreds (evt) {
-
+  saveCreds(evt) {
     let currentComponent = this;
 
     evt.preventDefault();
-    sessionStorage.setItem('username', this.state.userName);
-    sessionStorage.setItem('password', this.state.password);
+    sessionStorage.setItem("username", this.state.userName);
+    sessionStorage.setItem("password", this.state.password);
 
-
-  
     let server = "http://localhost:8118";
 
-      if (process.env.REACT_APP_REMOTE) {
-        //set this in .env file: REACT_APP_REMOTE=1
-        server = "https://project-backend-cc.herokuapp.com";
-      }
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
+    }
 
-      if (process.env.NODE_ENV !== "development") {
-        server = "https://project-backend-cc.herokuapp.com";
-      }
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
 
-      const url = (`${server}/api/v1/users/${this.state.userName}/courses/`)
-      console.log(this.state.userName)
+    const url = `${server}/api/v1/users/${this.state.userName}/courses/`;
+    console.log(this.state.userName);
 
-      fetch(url, {
-        method: 'get',
-        headers: new Headers({
-          'Authorization': 'Basic '+btoa(this.state.userName+":"+this.state.password),
-          'Content-Type': 'application/json'
-        })
-      }).then(function(response){
-        if(!response.ok) {
-        throw new Error("Username or password incorrect")
+    fetch(url, {
+      method: "get",
+      headers: new Headers({
+        Authorization:
+          "Basic " + btoa(this.state.userName + ":" + this.state.password),
+        "Content-Type": "application/json",
+      }),
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Username or password incorrect");
+        } else {
+          currentComponent.setState({ loggedIn: true });
         }
-        else {
-          currentComponent.setState({loggedIn: true})
-          }
         return response.json();
-      }).catch(error => alert("Username or password incorrect"));
+      })
+      .catch((error) => alert("Username or password incorrect"));
 
-      const timer = setTimeout( () => {
-       console.log(currentComponent.state.loggedIn)
-       if (currentComponent.state.loggedIn) {
-        sessionStorage.setItem('loggedIn', true);
-        window.location.href = '/ShowClasses';
-       }}, 1000);
+    const timer = setTimeout(() => {
+      console.log(currentComponent.state.loggedIn);
+      if (currentComponent.state.loggedIn) {
+        sessionStorage.setItem("loggedIn", true);
+        window.location.href = "/ShowClasses";
+      }
+    }, 1000);
 
-    return
+    return;
+  }
 
-  };
-
-
-  render () {
+  render() {
     const styles = {
       margin: "auto",
       width: "200px",
@@ -102,9 +99,17 @@ class Login extends React.Component {
       fontSize: "25px",
       fontWeight: "bold",
     };
+    const disableNav = {
+      position: "fixed",
+      top: "0px",
+      bottom: "0px",
+      left: "0px",
+      right: "0px",
+      backgroundColor: "rgb(0, 255, 0, 0.5)",
+    };
 
     return (
-      <div>
+      <div style={disableNav}>
         <form style={styles}>
           <p style={title}>Sign In</p>
           <label>
@@ -127,14 +132,20 @@ class Login extends React.Component {
               onChange={this.handleChange}
             />
           </label>
-          <button onClick={this.saveCreds} style={loginStyle}> Let's get planting </button>
+          <button onClick={this.saveCreds} style={loginStyle}>
+            {" "}
+            Let's get planting{" "}
+          </button>
           <Link to="/NewUser">
-            <input type="submit" style={loginStyle} value="I'm a new seedling" />
+            <input
+              type="submit"
+              style={loginStyle}
+              value="I'm a new seedling"
+            />
           </Link>
         </form>
       </div>
     );
-
   }
 }
 
