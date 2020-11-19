@@ -44,6 +44,7 @@ class CalGrid extends React.Component {
           day = daysInLastMonth + day;
           backgroundColor = { background: "#A6CF9D" };
         } else if (day > daysInMonth) {
+	  day = day % (daysInMonth + 1) + 1;
           backgroundColor = { background: "#A6CF9D" };
         }
 
@@ -54,8 +55,8 @@ class CalGrid extends React.Component {
         };
 
         weekArr[j] = (
-          <td key={i * 7 + j} style={backgroundColor}>
-            {day % (daysInMonth + 1)}
+          <td key={i * 7 + j} style={backgroundColor} onClick={console.log("halp")}>
+            {day}
             <div className="taskFill" style={fillStyle} />
           </td>
         );
