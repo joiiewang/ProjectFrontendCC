@@ -4,9 +4,26 @@ import classNames from "./AddClass";
 import "./css/NavBar.css";
 import Logout from "./Logout"
 
-function theNavbar() {
-  return (
-    <Navbar>
+export default class theNavbar extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false
+    }
+    this.isLoggedIn = this.isLoggedIn.bind(this)
+  }
+
+  isLoggedIn () {
+    try {
+      const storageLoggedIn = sessionStorage.getItem('loggedIn')
+      this.setState({loggedIn : storageLoggedIn})
+    } catch (e) {console.log("no storage session")
+  }}
+
+ render () {
+    return (
+      <Navbar>
       <li className="item">
         <a className="item" href="/Home">
           Home
@@ -33,7 +50,9 @@ function theNavbar() {
       </NavItem>
     </Navbar>
   );
+  }
 }
+
 
 function Navbar(props) {
   return (
@@ -48,7 +67,10 @@ function NavItem(props) {
 
   return (
     <li className="navbaritems">
-      <a href="#" className="navbaritems" onClick={() => setOpen(!open)}>
+      <a href="#" className="navbaritems" 
+	  onMouseOver={() => setOpen(true)}
+	  //onMouseLeave={()=> setOpen(false)}
+    >
         {props.icon}
       </a>
 
@@ -77,39 +99,26 @@ function DropdownMenu() {
       </a>
     );
   }
-  /*
-  function arrayLoop () {
-    return (
-      <DropdownItem>
-        {classNames.map(name => (
-          <li>
-            {name}
-          </li>
-        ))}
-      </DropdownItem>
-    )
-  }
-  */
 
-  return (
-    <div className="dropdown" style={{ height: menuHeight }}>
-      <CSSTransition
-        in={activeMenu === "classes"}
-        timeout={500}
-        classNames="menu-primary"
-        unmountOnExit
-      >
-        <div className="menu">
-          <DropdownItem>
-            <a href="/ShowClasses">Show Classes</a>
-          </DropdownItem>
-          <DropdownItem>
-            <a href="/AddClass">Add Class</a>
-          </DropdownItem>
-        </div>
-      </CSSTransition>
-    </div>
-  );
+    return (
+      <div className="dropdown" style={{ height: menuHeight }}>
+        <CSSTransition
+          in={activeMenu === "classes"}
+          timeout={500}
+          classNames="menu-primary"
+          unmountOnExit
+        >
+          <div className="menu">
+            <DropdownItem>
+              <a href="/ShowClasses">Show Classes</a>
+            </DropdownItem>
+            <DropdownItem>
+              <a href="/AddClass">Add Class</a>
+            </DropdownItem>
+          </div>
+        </CSSTransition>
+      </div>
+    );
 }
 
 function DropdownMenuTwo() {
@@ -133,27 +142,56 @@ function DropdownMenuTwo() {
     );
   }
 
-  return (
-    <div className="dropdown" style={{ height: menuHeight }}>
-      <CSSTransition
-        in={activeMenu === "more"}
-        timeout={500}
-        classNames="menu-primary"
-        unmountOnExit
-      >
-        <div className="menu">
-          <DropdownItem>
-            <a href="/InfoPage">Info</a>
-          </DropdownItem>
-          <DropdownItem>
-            {/* <a href="/">Log Out</a> */}
-            <Logout/>
-            
-          </DropdownItem>
-        </div>
-      </CSSTransition>
-    </div>
-  );
+    return (
+      <div className="dropdown" style={{ height: menuHeight }}>
+        <CSSTransition
+          in={activeMenu === "more"}
+          timeout={500}
+          classNames="menu-primary"
+          unmountOnExit
+        >
+          <div className="menu">
+            <DropdownItem>
+              <a href="/InfoPage">Info</a>
+            </DropdownItem>
+            <DropdownItem>
+              <Logout/>
+              
+            </DropdownItem>
+          </div>
+        </CSSTransition>
+      </div>
+    );
 }
 
-export default theNavbar;
+
+/*
+  return (
+    <Navbar>
+      <li className="item">
+        <a className="item" href="/Home">
+          Home
+        </a>
+        <a className="item" href="/ToDoList">
+          Todo's
+        </a>
+        <a className="item" href="/Links">
+          Links
+        </a>
+        <a className="item" href="/Notes">
+          Notes
+        </a>
+        <a className="item" href="/Forest">
+          Forest
+        </a>
+      </li>
+
+      <NavItem icon="Classes">
+        <DropdownMenu></DropdownMenu>
+      </NavItem>
+      <NavItem icon="More">
+        <DropdownMenuTwo></DropdownMenuTwo>
+      </NavItem>
+    </Navbar>
+  );
+  */

@@ -8,6 +8,7 @@ export default class Logout extends React.Component {
     logOut = () => {
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('password');
+        sessionStorage.setItem('loggedIn', false);
     }
     
 

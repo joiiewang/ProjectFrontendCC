@@ -1,133 +1,153 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Login(props) {
-  const [state, updateState] = useState({
-    userName: "",
-    password: "",
-  });
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userName: "",
+      password: "",
+      loggedIn: false,
+    };
 
-  function handleChange(evt) {
-    const name = evt.target.name;
-    const value = evt.target.value;
-    updateState({
-      ...state,
-      [name]: value,
-    });
+    this.handleChange = this.handleChange.bind(this);
+    this.saveCreds = this.saveCreds.bind(this);
   }
 
-  const saveCreds = (evt) => {
+  handleChange(event) {
+    const { name, value, type, checked } = event.target;
+    type === "checkbox"
+      ? this.set({ [name]: checked })
+      : this.setState({ [name]: value });
+  }
+
+  saveCreds(evt) {
+    let currentComponent = this;
 
     evt.preventDefault();
-    sessionStorage.setItem('username', state.userName);
-    sessionStorage.setItem('password', state.password);
+    sessionStorage.setItem("username", this.state.userName);
+    sessionStorage.setItem("password", this.state.password);
 
-    window.location.href = '/ShowClasses'; //Note: this reloads the page
-
-    return;
-
-    //send creds to backend
-    evt.preventDefault();
-    alert(`Submitting ${state.userName} and ${state.password}`);
-
-    let server = "http://localhost:8118/api";
+    let server = "http://localhost:8118";
 
     if (process.env.REACT_APP_REMOTE) {
       //set this in .env file: REACT_APP_REMOTE=1
-      server = "https://project-backend-cc.herokuapp.com/api/v1";
+      server = "https://project-backend-cc.herokuapp.com";
     }
 
     if (process.env.NODE_ENV !== "development") {
-      server = "https://project-backend-cc.herokuapp.com/api/v1";
+      server = "https://project-backend-cc.herokuapp.com";
     }
 
-    console.log("server = " + server);
-    const url = `${server}`;
-    const bd = JSON.stringify({
-      userName: state.username,
-      password: state.password,
-    });
+    const url = `${server}/api/v1/users/${this.state.userName}/courses/`;
+    console.log(this.state.userName);
 
     fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
+      method: "get",
+      headers: new Headers({
+        Authorization:
+          "Basic " + btoa(this.state.userName + ":" + this.state.password),
         "Content-Type": "application/json",
-      },
-      body: bd,
+      }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("SaveCreds saveCreds: Fetch Response data: ");
-        console.log(data); //don't log an object WITH a string else the conversion won't work and object will not be dumped
-        alert("response: " + data["MESSAGE"]);
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Username or password incorrect");
+        } else {
+          currentComponent.setState({ loggedIn: true });
+        }
+        return response.json();
       })
-      .catch((error) =>
-        console.log(
-          "SaveCreds saveCreds: Fetch Failure (is server up?): " + error
-        )
-      );
-  };
+      .catch((error) => alert("Username or password incorrect"));
 
-  const styles = {
-    margin: "auto",
-    width: "200px",
-    border: "3px solid green",
-    padding: "10px",
-    borderRadius: "25px",
-    backgroundColor: "#76FF5B",
-  };
-  const inputStyle = {
-    width: "90%",
-    margin: "auto",
-    borderRadius: "7px",
-    padding: "4px",
-    backgroundColor: "#CBFEC0",
-  };
-  const loginStyle = {
-    borderRadius: "7px",
-    padding: "4px",
-    marginLeft: "4%",
-    marginTop: "5px",
-    width: "90%",
-  };
-  const title = {
-    textAlign: "center",
-    fontSize: "25px",
-    fontWeight: "bold",
-  };
+    const timer = setTimeout(() => {
+      console.log(currentComponent.state.loggedIn);
+      if (currentComponent.state.loggedIn) {
+        sessionStorage.setItem("loggedIn", true);
+        window.location.href = "/ShowClasses";
+      }
+    }, 1000);
 
-  return (
-    <div>
-      <form style={styles}>
-        <p style={title}>Sign In</p>
-        <label>
-          Username:
-          <input
-            style={inputStyle}
-            type="text"
-            value={state.userName}
-            name="userName"
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            style={inputStyle}
-            type="password"
-            value={state.seckey}
-            name="password"
-            onChange={handleChange}
-          />
-        </label>
-        <button onClick={saveCreds}> Let's get planting </button>
-        <Link to="/NewUser">
-          <input type="submit" style={loginStyle} value="I'm a new seedling" />
-        </Link>
-      </form>
-    </div>
-  );
+    return;
+  }
+
+  render() {
+    const styles = {
+      width: "200px",
+      border: "3px solid green",
+      padding: "10px",
+      borderRadius: "25px",
+      backgroundColor: "#76FF5B",
+      marginTop: "calc(50vh - 150px)",
+      marginLeft: "calc(50vw - 100px)",
+    };
+    const inputStyle = {
+      width: "90%",
+      margin: "auto",
+      borderRadius: "7px",
+      padding: "4px",
+      backgroundColor: "#CBFEC0",
+    };
+    const loginStyle = {
+      borderRadius: "7px",
+      padding: "4px",
+      marginLeft: "4%",
+      marginTop: "5px",
+      width: "90%",
+    };
+    const title = {
+      textAlign: "center",
+      fontSize: "25px",
+      fontWeight: "bold",
+    };
+    const disableNav = {
+      position: "fixed",
+      top: "0px",
+      bottom: "0px",
+      left: "0px",
+      right: "0px",
+      backgroundColor: "rgb(90, 39, 41, 0.7)",
+    };
+
+    return (
+      <div style={disableNav}>
+        <form style={styles}>
+          <p style={title}>Sign In</p>
+          <label>
+            Username:
+            <input
+              style={inputStyle}
+              type="text"
+              value={this.state.userName}
+              name="userName"
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              style={inputStyle}
+              type="password"
+              value={this.state.password}
+              name="password"
+              onChange={this.handleChange}
+            />
+          </label>
+          <button onClick={this.saveCreds} style={loginStyle}>
+            {" "}
+            Let's get planting{" "}
+          </button>
+          <Link to="/NewUser">
+            <input
+              type="submit"
+              style={loginStyle}
+              value="I'm a new seedling"
+            />
+          </Link>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default Login;

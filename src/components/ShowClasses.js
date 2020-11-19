@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class ShowClasses extends React.Component {
   constructor() {
@@ -12,7 +13,19 @@ class ShowClasses extends React.Component {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
-    const url = ("https://project-backend-cc.herokuapp.com/api/v1/users/"+ username +"/courses/")
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+
+    const url = (`${server}/api/v1/users/${username}/courses/`)
 
     fetch(url, {
       method: 'get',
@@ -35,9 +48,11 @@ class ShowClasses extends React.Component {
     return (
       this.state.classes.map((course) => (
         <button>
-          <a href= "/Course">
-          {course.name}
-          </a>
+          <Link to = {{
+            pathname: "/Course", 
+            name: course.name,
+            }}>
+              {course.name}</Link>
           </button>
       ))
     )
@@ -54,3 +69,11 @@ class ShowClasses extends React.Component {
 }
 
 export default ShowClasses;
+
+/*
+<a href= "/Course">
+            {//need to pass className props here
+            }
+          {course.name}
+          </a>
+*/
