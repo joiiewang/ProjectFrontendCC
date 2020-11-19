@@ -2,7 +2,7 @@ import React from "react";
 import { NotesList, SubmitNoteForm } from "./NotesList";
 import { LinkList, SubmitLinkForm } from "./LinkList";
 import ToDoList from "./ToDoList";
-import Popup from "./Popup"
+import DeletePopup from "./DeletePopup"
 
 class Course extends React.Component {
   constructor() {
@@ -24,15 +24,19 @@ class Course extends React.Component {
         <div>
           <h1>{this.state.name}</h1>
           <LinkList/>
+          <br/>
           <NotesList/>
+          <br/>
           <ToDoList/>
+          <br/>
         </div>
 
         <button onClick= {(event) => this.setState({ isOpen: true})}>
           Delete Class</button>
 
-        <Popup isOpen= {this.state.isOpen} onClose = {(event) => this.setState({isOpen: false})}>
-        </Popup>
+        <DeletePopup isOpen= {this.state.isOpen} onClose = {(event) => this.setState({isOpen: false})} 
+        courseName = {this.state.name}>
+        </DeletePopup>
         
       </div>
     );

@@ -48,6 +48,8 @@ class ShowClasses extends React.Component {
       this.state.classes.map((course) => (
         <button>
           <a href= "/Course">
+            {//need to pass className props here
+            }
           {course.name}
           </a>
           </button>

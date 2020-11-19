@@ -2,11 +2,34 @@ import React from "react"
 
 
 export default class Popup extends React.Component {
+
+    constructor() {
+        super() 
+        this.state= {
+            courseName : ""
+        }
+    }
+
+    deleteClass () {
+        let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      console.log("server = " + server);
+      const url = `${server}/api/v1/users/`;
+    }
     
     render() {
         let dialog = (
             <div style = {dialogStyles}>
-                Are you sure you want to delete this class?
+                Are you sure you want to delete {this.state.courseName}?
                 <button style = {dialogCloseButtonStyles} onClick= {this.props.onClose}>No</button>
             </div>
         )
@@ -21,7 +44,6 @@ export default class Popup extends React.Component {
     }
 }
 
-//{this.props.children}
 
 let dialogStyles = {
     width: '500px',
