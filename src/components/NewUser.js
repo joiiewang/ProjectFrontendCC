@@ -78,12 +78,13 @@ class NewUser extends React.Component {
 
   render() {
     const styles = {
-      margin: "auto",
       width: "200px",
       border: "3px solid green",
       padding: "10px",
       borderRadius: "25px",
       backgroundColor: "#76FF5B",
+      marginTop: "calc(50vh - 150px)",
+      marginLeft: "calc(50vw - 100px)",
     };
     const inputStyle = {
       width: "90%",
@@ -104,9 +105,19 @@ class NewUser extends React.Component {
       fontSize: "25px",
       fontWeight: "bold",
     };
+    const disableNav = {
+      position: "fixed",
+      top: "0px",
+      bottom: "0px",
+      left: "0px",
+      right: "0px",
+      backgroundColor: "rgb(90, 39, 41, 0.7)",
+    };
+
+
 
     return (
-      <div>
+      <div style={disableNav}>
         <form style={styles} onSubmit={this.handleSubmit.bind(this)}>
           <p style={title}>Register</p>
           <label>

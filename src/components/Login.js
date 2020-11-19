@@ -73,12 +73,13 @@ class Login extends React.Component {
 
   render() {
     const styles = {
-      margin: "auto",
       width: "200px",
       border: "3px solid green",
       padding: "10px",
       borderRadius: "25px",
       backgroundColor: "#76FF5B",
+      marginTop: "calc(50vh - 150px)",
+      marginLeft: "calc(50vw - 100px)",
     };
     const inputStyle = {
       width: "90%",
@@ -105,7 +106,7 @@ class Login extends React.Component {
       bottom: "0px",
       left: "0px",
       right: "0px",
-      backgroundColor: "rgb(0, 255, 0, 0.5)",
+      backgroundColor: "rgb(90, 39, 41, 0.7)",
     };
 
     return (
