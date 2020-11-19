@@ -67,7 +67,9 @@ function NavItem(props) {
 
   return (
     <li className="navbaritems">
-      <a href="#" className="navbaritems" onClick={() => setOpen(!open)}>
+      <a href="#" className="navbaritems" 
+	  onMouseOver={() => setOpen(true)}
+	  onMouseLeave={()=> setOpen(false)}>
         {props.icon}
       </a>
 
