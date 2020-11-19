@@ -37,6 +37,7 @@ class SubmitForm extends React.Component {
 
   handleSubmit = (e, r) => {
     e.preventDefault();
+    this.sendToDoToBackend();
     if(this.state.toDoItem === '') return;
     if (this.state.dueDate === '') return;
     this.props.onFormSubmit([this.state.toDoItem, this.state.dueDate]);
@@ -44,6 +45,25 @@ class SubmitForm extends React.Component {
     this.setState({dueDate:''});
     
   }
+
+sendToDoToBackend() {
+  const username = sessionStorage.getItem('username')
+  const password = sessionStorage.getItem('password')
+
+  let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+   
+}
+
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
