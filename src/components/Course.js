@@ -23,12 +23,6 @@ class Course extends React.Component {
     //console.log("Course: " + this.state.name)
     return (
       <div>
-<<<<<<< HEAD
-        <h1>{this.state.name}</h1>
-        <LinkList links = {this.state.links}/>
-        <NotesList notes = {this.state.notes}/>
-        <ToDoList todos = {this.state.toDoList}/>
-=======
         <div>
           <h1>{this.state.name}</h1>
           <LinkList/>
@@ -46,7 +40,6 @@ class Course extends React.Component {
         courseName = {this.state.name}>
         </DeletePopup>
         
->>>>>>> fddaec7ad7265978ab1aa93e97f205515526e492
       </div>
     );
   }
