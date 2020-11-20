@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Plant from "./HomePlant.js";
 import "../css/Home.css";
 
@@ -34,7 +34,7 @@ class CalGrid extends React.Component {
       const weekArr = new Array(7);
       for (let j = 0; j < weekArr.length; j++) {
         var day = i * 7 + j - offset + 1;
-        var backgroundColor = { background: "#CBFEC0" };
+        var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
           var daysInLastMonth = new Date(
             today.getFullYear(),
@@ -42,10 +42,10 @@ class CalGrid extends React.Component {
             0
           ).getDate();
           day = daysInLastMonth + day;
-          backgroundColor = { background: "#A6CF9D" };
+          backgroundColor = { background: "#d2e0c1" };
         } else if (day > daysInMonth) {
 	  day = day % (daysInMonth + 1) + 1;
-          backgroundColor = { background: "#A6CF9D" };
+          backgroundColor = { background: "#ffffff" };
         }
 
         var fill = Math.floor(Math.random() * 10) * 10;
@@ -55,10 +55,7 @@ class CalGrid extends React.Component {
         };
 
         weekArr[j] = (
-          <td key={i * 7 + j} style={backgroundColor} onClick={console.log("halp")}>
-            {day}
-            <div className="taskFill" style={fillStyle} />
-          </td>
+	  <DailyTask key={i*7+j} bg={backgroundColor} day={day} fillStyle={fillStyle}/>
         );
       }
       monthArr[i] = <tr key={i}>{weekArr}</tr>;
@@ -72,27 +69,32 @@ class CalGrid extends React.Component {
   }
 }
 
-class DailyDiv extends React.Component {
-  render() {
-    const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
-    const tasks = [];
-    for (const task of sampleTasks) {
-      console.log(task);
-      tasks.push(<DailyTask name={task} />);
-    }
-
-    return (
-      <div className="calendarDiv">
-        <div className="dailyTitle">{this.props.date}</div>
-        <div>{tasks}</div>
-      </div>
-    );
-  }
-}
 
 class DailyTask extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      enlarge: false
+    }
+  }
   render() {
-    return <div className="task">{this.props.name}</div>;
+    var st;
+    if (this.state.enlarge) {
+      st = {
+	transform
+      };
+    } else {
+      st = this.props.bg
+    }
+    
+    console.log(st);
+
+    return (
+      <td key={this.props.key} style={st} onClick={()=>this.setState({enlarge: !this.state.enlarge})}>
+        {this.props.day}
+	<div className="taskFill" style={this.props.fillStyle} />
+      </td>
+    );
   }
 }
 
