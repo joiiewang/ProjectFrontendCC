@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/ToDoList.css';
+import {generalFetch} from "../UtilityFunctions"
 class ToDoList extends React.Component {
   constructor () {
         super()
@@ -60,8 +61,12 @@ sendToDoToBackend() {
       if (process.env.NODE_ENV !== "development") {
         server = "https://project-backend-cc.herokuapp.com";
       }
+  
+  const url = (`${server}/api/v2/users/${username}/courses`)
+  const bd = JSON.stringify({toDoItem: this.state.toDoItem, dueDate:this.state.dueDate});
 
-   
+  generalFetch(username, password, url, bd)
+
 }
 
   render() {
