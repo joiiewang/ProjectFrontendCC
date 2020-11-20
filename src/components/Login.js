@@ -39,7 +39,7 @@ class Login extends React.Component {
       server = "https://project-backend-cc.herokuapp.com";
     }
 
-    const url = `${server}/api/v1/users/${this.state.userName}/courses/`;
+    const url = `${server}/api/v2/users/${this.state.userName}/courses/`;
     console.log(this.state.userName);
 
     fetch(url, {

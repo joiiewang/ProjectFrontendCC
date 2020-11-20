@@ -9,6 +9,7 @@ class Course extends React.Component {
     super(props);
     this.state = {
       name: this.props.location.name,
+      id: this.props.location.id,
       toDoList: [],
       notes: [],
       links: [],
@@ -20,7 +21,6 @@ class Course extends React.Component {
 
   render() {
 
-    //console.log("Course: " + this.state.name)
     return (
       <div>
         <div>
@@ -37,7 +37,7 @@ class Course extends React.Component {
           Delete Class</button>
 
         <DeletePopup isOpen= {this.state.isOpen} onClose = {(event) => this.setState({isOpen: false})} 
-        courseName = {this.state.name}>
+        courseName = {this.state.name} id = {this.state.id}>
         </DeletePopup>
         
       </div>

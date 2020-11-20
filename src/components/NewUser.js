@@ -42,7 +42,7 @@ class NewUser extends React.Component {
       }
 
       console.log("server = " + server);
-      const url = `${server}/api/v1/users/`;
+      const url = `${server}/api/v2/users/`;
       const bd = JSON.stringify({ username: this.state.userName, password: this.state.password});
       fetch(url, {
         method: "POST",

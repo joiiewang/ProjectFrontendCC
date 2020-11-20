@@ -25,7 +25,7 @@ class ShowClasses extends React.Component {
       }
 
 
-    const url = (`${server}/api/v1/users/${username}/courses/`)
+    const url = (`${server}/api/v2/users/${username}/courses/`)
 
     fetch(url, {
       method: 'get',
@@ -48,9 +48,11 @@ class ShowClasses extends React.Component {
     return (
       this.state.classes.map((course) => (
         <button>
+          {console.log(course)}
           <Link to = {{
             pathname: "/Course", 
             name: course.name,
+            id: course.id
             }}>
               {course.name}</Link>
           </button>
