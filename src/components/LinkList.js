@@ -4,21 +4,121 @@ import "./css/LinkList.css";
 class LinkList extends React.Component {
   // We can pass in an array to populate this component
   // this.state.links is an array of [name, url] arrays
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      courseid: this.props.id ? this.props.id : null,
       links: [] //this.props.links,
     };
   }
 
+  componentDidMount () {
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    let url = (`${server}/api/v2/users/${username}/links/`)
+    if(this.state.courseid !== null) {
+      url = (`${server}/api/v2/users/${username}/links/?course_id=${this.state.courseid}`)
+    }
+
+    fetch(url, {
+      method: 'get',
+      headers: new Headers({
+      	'Authorization': 'Basic '+btoa(username+":"+password),
+	'Content-Type': 'application/json'
+      })
+    }).then(function(response){
+      if(!response.ok) {
+	throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => this.setState({
+      links: data
+    })).catch(error => alert(error));
+  }
+
   handleSubmit = (link) => {
-    this.setState({ links: [...this.state.links, link] });
+    console.log(link)
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+
+    const url = (`${server}/api/v2/users/${username}/links/`)
+
+    let bd = JSON.stringify(link);
+    if(this.state.courseid !== null) {
+      var id = {course_id: this.state.courseid}
+      link = {...id, ...link}
+      bd = JSON.stringify(link)
+    }
+
+    fetch(url, {
+      method: "post",
+      headers: new Headers({
+          'Authorization': 'Basic '+btoa(username+":"+password),
+        "Content-Type": "application/json",
+      }),
+      body: bd,
+    }).then(function(response){
+      if(!response.ok) {
+    throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => this.setState({
+      links: [...this.state.links, data]
+    })).catch(error => alert(error));
   };
 
-  handleDelete = (index) => {
+  handleDelete = (index, id) => {
     const newLinkArr = [...this.state.links];
     newLinkArr.splice(index, 1);
     this.setState({ links: newLinkArr });
+
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    let url = (`${server}/api/v2/users/${username}/links/${id}`)
+
+    fetch(url, {
+      method: 'delete',
+      headers: new Headers({
+        'Authorization': 'Basic '+btoa(username+":"+password),
+        'Content-Type': 'application/json'
+      })
+    }).catch(error => alert(error));
   };
 
   render() {
@@ -26,21 +126,21 @@ class LinkList extends React.Component {
       <div>
         <Header />
         <LinkElements links={this.state.links} onDelete={this.handleDelete} />
-        <SubmitLinkForm onFormSubmit={this.handleSubmit} />
+        <SubmitLinkForm onFormSubmit={this.handleSubmit} courseid={this.props.id}/>
       </div>
     );
   }
 }
 
 class SubmitLinkForm extends React.Component {
-  state = { name: "", url: "" };
+  state = { text: "", url: "" };
 
   handleSubmit = (e, r) => {
     e.preventDefault();
-    if (this.state.name === "") return;
+    if (this.state.text === "") return;
     if (this.state.url === "") return;
-    this.props.onFormSubmit([this.state.name, this.state.url]);
-    this.setState({ name: "" });
+    this.props.onFormSubmit(this.state);
+    this.setState({ text: "" });
     this.setState({ url: "" });
   };
 
@@ -50,8 +150,8 @@ class SubmitLinkForm extends React.Component {
         <input
           type="text"
           placeholder="Enter Name"
-          value={this.state.name}
-          onChange={(e) => this.setState({ name: e.target.value })}
+          value={this.state.text}
+          onChange={(e) => this.setState({ text: e.target.value })}
         />
         <input
           type="text"
@@ -77,10 +177,10 @@ const LinkElements = (props) => {
   const todos = props.links.map((link, index) => {
     return (
       <Elem
-        name={link[0]}
-        url={link[1]}
+        name={link.text}
+        url={link.url}
         key={index}
-        id={index}
+        id={link.id}
         onDelete={props.onDelete}
       />
     );
@@ -102,7 +202,7 @@ const Elem = (props) => {
       </a>
       <button
         onClick={() => {
-          props.onDelete(props.id);
+          props.onDelete(props.key, props.id);
         }}
       >
         Remove
