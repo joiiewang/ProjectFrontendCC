@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import { Link } from "react-router-dom";
 
 
 export default class Popup extends React.Component {
@@ -6,12 +7,16 @@ export default class Popup extends React.Component {
     constructor(props) {
         super(props) 
         this.state= {
-            courseName : this.props.courseName
+            courseName : this.props.courseName,
+            id : this.props.id,
         }
+        this.deleteClass = this.deleteClass.bind(this)
     }
 
     deleteClass () {
         let server = "http://localhost:8118";
+        const username = sessionStorage.getItem('username');
+        const password = sessionStorage.getItem('password')
 
       if (process.env.REACT_APP_REMOTE) {
         //set this in .env file: REACT_APP_REMOTE=1
@@ -23,13 +28,37 @@ export default class Popup extends React.Component {
       }
 
       console.log("server = " + server);
-      const url = `${server}/api/v1/users/`;
+
+      const url = `${server}/api/v2/users/${username}/courses/`;
+
+      fetch(url + this.state.id, {
+          method: 'DELETE',
+          headers: new Headers({
+            Authorization:
+              "Basic " + btoa(username + ":" + password),
+            "Content-Type": "application/json",
+          }),
+      })
+      .then (res => res.text())
+      .then (res => console.log(res))
+      .catch (err => console.log(err))
+
+      const timer = setTimeout(() => {
+        window.location.href = '/ShowClasses'
+      }, 1000);
+
     }
+
+
+
     
     render() {
         let dialog = (
             <div style = {dialogStyles}>
                 Are you sure you want to delete {this.state.courseName}?
+                <button style = {dialogCloseButtonStyles} onClick= {this.deleteClass}>
+                Yes
+                </button>
                 <button style = {dialogCloseButtonStyles} onClick= {this.props.onClose}>No</button>
             </div>
         )
@@ -43,6 +72,12 @@ export default class Popup extends React.Component {
         )
     }
 }
+/*
+<Link to = {{
+                    pathname: "/ShowClasses",
+                    }}>
+                    Yes</Link>
+*/
 
 
 let dialogStyles = {
