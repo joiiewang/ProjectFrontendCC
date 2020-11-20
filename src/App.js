@@ -28,7 +28,7 @@ function App() {
         <Route path="/InfoPage" component={InfoPage} />
         <Route path="/Links" component={Links} />
         <Route path="/Notes" component={Notes} />
-        <Route path="/ToDoList" component={ToDoList} />
+        <Route path="/ToDoListPage" component={ToDoListPage} />
         <Route path="/Forest" component={Forest} />
         <Route path="/AddClass" component={AddClass} />
         <Route path="/ShowClasses" component={ShowClasses} />

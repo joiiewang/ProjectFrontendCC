@@ -28,7 +28,7 @@ export default class theNavbar extends React.Component {
         <a className="item" href="/Home">
           Home
         </a>
-        <a className="item" href="/ToDoList">
+        <a className="item" href="/ToDoListPage">
           Todo's
         </a>
         <a className="item" href="/Links">
