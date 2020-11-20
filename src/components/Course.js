@@ -25,9 +25,9 @@ class Course extends React.Component {
       <div>
         <div>
           <h1>{this.state.name}</h1>
-          <LinkList/>
+          <LinkList id={this.state.id}/>
           <br/>
-          <NotesList/>
+          <NotesList id={this.state.id}/>
           <br/>
           <ToDoList/>
           <br/>
