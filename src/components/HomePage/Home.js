@@ -17,6 +17,16 @@ function Home() {
 }
 
 class CalGrid extends React.Component {
+  state = {
+    detailToggle: 0,
+    detailLoc: [0, 0],
+    detailFill: 0,
+  };
+  updateDetail = (e, toggle, i, j, fill) => {
+    this.setState({detailToggle: toggle});
+    this.setState({detailLoc: [i, j]});
+    this.setState({detailFill: fill})
+  };
   render() {
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
 
@@ -29,6 +39,7 @@ class CalGrid extends React.Component {
     ).getDate();
 
     var monthArr = new Array(5);
+    var fill = 0;
 
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
@@ -48,54 +59,58 @@ class CalGrid extends React.Component {
           backgroundColor = { background: "#ffffff" };
         }
 
-        var fill = Math.floor(Math.random() * 10) * 10;
+        fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
           height: fill + "%",
           bottom: "0%",
         };
 
         weekArr[j] = (
-	  <DailyTask key={i*7+j} bg={backgroundColor} day={day} fillStyle={fillStyle}/>
+	  <td key={i*7+j} style={backgroundColor} 
+		onClick={(e) => this.updateDetail(e, 1, i, j, fill)} 
+		onMouseEnter={(e) => this.updateDetail(e, 0, i, j, fill)}>
+            {day}
+	    <div className="taskFill" style={fillStyle} />
+          </td>
         );
       }
       monthArr[i] = <tr key={i}>{weekArr}</tr>;
     }
 
     return (
-      <table className="mainCalender">
-        <tbody>{monthArr}</tbody>
-      </table>
+      <div style={{height: "100%", width: "100%"}}>
+        <table className="mainCalender">
+          <tbody>{monthArr}</tbody>
+        </table>
+	<Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}> </Detail>
+      </div>
     );
   }
 }
 
 
-class DailyTask extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      enlarge: false
-    }
+function Detail(props) {
+  const fillStyle = {
+    height: props.fill + "%",
+    bottom: "0%",
   }
-  render() {
-    var st;
-    if (this.state.enlarge) {
-      st = {
-	transform
-      };
-    } else {
-      st = this.props.bg
-    }
-    
-    console.log(st);
+  
+  const weekScale = 1/7;
+  const displacement = [(props.detailLoc[0]-2)*100, (props.detailLoc[1]-3)*weekScale*700]
+  const detailTransform = "scale(1)";
+  const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+displacement[0]+"%)";
+  const detailStyle = {
+    opacity: props.detailToggle,
+    zIndex: props.detailToggle ? "10" : "-10",
+    transform: props.detailToggle ? "scale(1)" : hiddenTransform,
+    transition: "opacity .25s, transform .5s",
+  }
 
-    return (
-      <td key={this.props.key} style={st} onClick={()=>this.setState({enlarge: !this.state.enlarge})}>
-        {this.props.day}
-	<div className="taskFill" style={this.props.fillStyle} />
-      </td>
-    );
-  }
+  return (
+    <div className="detail" style={detailStyle} onClick={() => props.detailToggle=0}>
+      <div className="detailFill" style={fillStyle} />
+    </div>
+  );
 }
 
 export default Home;
