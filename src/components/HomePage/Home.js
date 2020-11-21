@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Plant from "./HomePlant.js";
 import "../css/Home.css";
 
@@ -17,6 +17,17 @@ function Home() {
 }
 
 class CalGrid extends React.Component {
+  state = {
+    detailToggle: 0,
+    detailLoc: [0, 0],
+    detailFill: 0,
+  };
+  toggleDetail = (e, toggle, i, j, fill) => {
+    console.log("clicked");
+    this.setState({detailToggle: toggle});
+    this.setState({detailLoc: [i, j]});
+    this.setState({detailFill: fill});
+  };
   render() {
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
 
@@ -29,12 +40,13 @@ class CalGrid extends React.Component {
     ).getDate();
 
     var monthArr = new Array(5);
+    var fill = 0;
 
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
       for (let j = 0; j < weekArr.length; j++) {
         var day = i * 7 + j - offset + 1;
-        var backgroundColor = { background: "#CBFEC0" };
+        var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
           var daysInLastMonth = new Date(
             today.getFullYear(),
@@ -42,21 +54,24 @@ class CalGrid extends React.Component {
             0
           ).getDate();
           day = daysInLastMonth + day;
-          backgroundColor = { background: "#A6CF9D" };
+          backgroundColor = { background: "#d2e0c1" };
         } else if (day > daysInMonth) {
-          backgroundColor = { background: "#A6CF9D" };
+	  day = day % (daysInMonth + 1) + 1;
+          backgroundColor = { background: "#ffffff" };
         }
 
-        var fill = Math.floor(Math.random() * 10) * 10;
+        fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
           height: fill + "%",
           bottom: "0%",
         };
 
         weekArr[j] = (
-          <td key={i * 7 + j} style={backgroundColor}>
-            {day % (daysInMonth + 1)}
-            <div className="taskFill" style={fillStyle} />
+	  <td key={i*7+j} style={backgroundColor} 
+		onClick={(e) => this.toggleDetail(e, 1, i, j, fill)} 
+		onMouseEnter={(e) => this.toggleDetail(e, 0, i, j, fill)}>
+            {day}
+	    <div className="taskFill" style={fillStyle} />
           </td>
         );
       }
@@ -64,35 +79,41 @@ class CalGrid extends React.Component {
     }
 
     return (
-      <table className="mainCalender">
-        <tbody>{monthArr}</tbody>
-      </table>
-    );
-  }
-}
-
-class DailyDiv extends React.Component {
-  render() {
-    const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
-    const tasks = [];
-    for (const task of sampleTasks) {
-      console.log(task);
-      tasks.push(<DailyTask name={task} />);
-    }
-
-    return (
-      <div className="calendarDiv">
-        <div className="dailyTitle">{this.props.date}</div>
-        <div>{tasks}</div>
+      <div style={{height: "100%", width: "100%"}}>
+        <table className="mainCalender">
+          <tbody>{monthArr}</tbody>
+        </table>
+	<div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
+	  <Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}/>
+	</div>
       </div>
     );
   }
 }
 
-class DailyTask extends React.Component {
-  render() {
-    return <div className="task">{this.props.name}</div>;
+
+function Detail(props) {
+  const fillStyle = {
+    height: props.fill + "%",
+    bottom: "0%",
   }
+  
+  const weekScale = 1/7;
+  const displacement = [(props.detailLoc[0]-2)*100, (props.detailLoc[1]-3)*weekScale*700]
+  const detailTransform = "scale(1)";
+  const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+displacement[0]+"%)";
+  const detailStyle = {
+    borderRadius: props.detailToggle ? "1vh" : "5vh",
+    opacity: props.detailToggle,
+    zIndex: props.detailToggle ? "100" : "-2",
+    transform: props.detailToggle ? "scale(1)" : hiddenTransform,
+  }
+
+  return (
+    <div className="detail" style={detailStyle}>
+      <div className="detailFill" style={fillStyle} />
+    </div>
+  );
 }
 
 export default Home;
