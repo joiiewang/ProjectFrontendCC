@@ -22,10 +22,11 @@ class CalGrid extends React.Component {
     detailLoc: [0, 0],
     detailFill: 0,
   };
-  updateDetail = (e, toggle, i, j, fill) => {
+  toggleDetail = (e, toggle, i, j, fill) => {
+    console.log("clicked");
     this.setState({detailToggle: toggle});
     this.setState({detailLoc: [i, j]});
-    this.setState({detailFill: fill})
+    this.setState({detailFill: fill});
   };
   render() {
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
@@ -67,8 +68,8 @@ class CalGrid extends React.Component {
 
         weekArr[j] = (
 	  <td key={i*7+j} style={backgroundColor} 
-		onClick={(e) => this.updateDetail(e, 1, i, j, fill)} 
-		onMouseEnter={(e) => this.updateDetail(e, 0, i, j, fill)}>
+		onClick={(e) => this.toggleDetail(e, 1, i, j, fill)} 
+		onMouseEnter={(e) => this.toggleDetail(e, 0, i, j, fill)}>
             {day}
 	    <div className="taskFill" style={fillStyle} />
           </td>
@@ -82,7 +83,9 @@ class CalGrid extends React.Component {
         <table className="mainCalender">
           <tbody>{monthArr}</tbody>
         </table>
-	<Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}> </Detail>
+	<div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
+	  <Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}/>
+	</div>
       </div>
     );
   }
@@ -100,14 +103,14 @@ function Detail(props) {
   const detailTransform = "scale(1)";
   const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+displacement[0]+"%)";
   const detailStyle = {
+    borderRadius: props.detailToggle ? "1vh" : "5vh",
     opacity: props.detailToggle,
-    zIndex: props.detailToggle ? "10" : "-10",
+    zIndex: props.detailToggle ? "100" : "-2",
     transform: props.detailToggle ? "scale(1)" : hiddenTransform,
-    transition: "opacity .25s, transform .5s",
   }
 
   return (
-    <div className="detail" style={detailStyle} onClick={() => props.detailToggle=0}>
+    <div className="detail" style={detailStyle}>
       <div className="detailFill" style={fillStyle} />
     </div>
   );
