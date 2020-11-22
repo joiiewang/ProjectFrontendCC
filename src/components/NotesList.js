@@ -150,7 +150,7 @@ class SubmitNoteForm extends React.Component {
           <input
             type="text"
             placeholder="Enter Item"
-            value={this.state.note}
+            value={this.state.text}
             onChange={(e) => this.setState({ text: e.target.value })}
           />
           <button>Add</button>
