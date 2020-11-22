@@ -107,7 +107,7 @@ class ToDoList extends React.Component {
       server = "https://project-backend-cc.herokuapp.com";
     }
 
-    let url = (`${server}/api/v2/users/${username}/todos/${id}`)
+    let url = (`${server}/api/v2/users/${username}/todos/${id}/`)
 
     fetch(url, {
       method: 'delete',
