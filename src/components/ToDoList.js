@@ -48,6 +48,7 @@ class ToDoList extends React.Component {
   }
 
   handleSubmit = (toDoItem) => {
+    console.log(toDoItem)
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
@@ -125,7 +126,7 @@ class ToDoList extends React.Component {
         <div>
           <h1>Todos</h1>
           <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} />
-          <SubmitForm onFormSubmit={this.handleSubmit} />
+          <SubmitForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
         </div>
     
     );
@@ -171,7 +172,6 @@ const ToDoItemElements = (props) => {
   const todos = props.todos.map((toDoItem, index) => {
     return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} key={index} id={toDoItem.id} onDelete={props.onDelete} />
   })  
-  console.log("2019-11-5" < "2018");
   const sortedToDos = todos.sort(function(a, b){return a.props.dueDate - b.props.dueDate });
   return( 
     <div className = "toDoBox">
@@ -193,7 +193,7 @@ const Elem = (props) => {
         <p>{props.name}</p>
         <p style = {styles}>{props.dueDate}</p>
 
-      <button onClick={() => {props.onDelete(props.id)}}>Remove</button>    
+      <button onClick={() => {props.onDelete(props.key, props.id)}}>Remove</button>    
 
     </div>
   );
