@@ -10,7 +10,7 @@ class Course extends React.Component {
     this.state = {
       name: this.props.location.name,
       id: this.props.location.id,
-      toDoList: [],
+      todos: [],
       notes: [],
       links: [],
       isOpen: false
@@ -29,7 +29,7 @@ class Course extends React.Component {
           <br/>
           <NotesList id={this.state.id}/>
           <br/>
-          <ToDoList/>
+          <ToDoList id={this.state.id}/>
           <br/>
         </div>
 

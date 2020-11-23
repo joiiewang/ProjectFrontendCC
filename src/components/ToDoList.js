@@ -1,57 +1,58 @@
 import React from 'react';
 import './css/ToDoList.css';
-import {generalFetch} from "../UtilityFunctions"
 class ToDoList extends React.Component {
-  constructor () {
-        super()
-        this.state = {
-            toDoItems: [] //this.props.todos
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
+      courseid: this.props.id ? this.props.id : null,
+      todos: [] //this.props.todos
+    };
+  }
+
+  componentDidMount() {
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
     }
 
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    let url = (`${server}/api/v2/users/${username}/todos/`)
+    if(this.state.courseid !== null) {
+      url = (`${server}/api/v2/users/${username}/todos/?course_id=${this.state.courseid}`)
+    }
+
+    fetch (url, {
+      method: 'get',
+      headers: new Headers({
+        'Authorization': 'Basic '+btoa(username+":"+password),
+        'Content-Type': 'application/json'
+      })
+    }).then(function(response){
+      if(!response.ok){
+        throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    })//.then(data=> console.log(data))
+    .then(data=>this.setState({
+      todos: data 
+    })).catch(error => alert(error));
+
+  }
+
   handleSubmit = (toDoItem) => {
-    this.setState({toDoItems: [...this.state.toDoItems, toDoItem]});
-  }
-  
-  handleDelete = (index) => {
-    const newToDoItemsArr = [...this.state.toDoItems];
-    newToDoItemsArr.splice(index, 1);
-    this.setState({toDoItems: newToDoItemsArr});
-  }
-  //Call api, get JSON with items and change state
+    console.log(toDoItem)
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
 
-  render() {
-    return(
-      
-        <div>
-          <h1>Todos</h1>
-          <ToDoItemElements toDoItems={this.state.toDoItems} onDelete= {this.handleDelete} />
-          <SubmitForm onFormSubmit={this.handleSubmit} />
-        </div>
-    
-    );
-  } 
-}
-
-class SubmitForm extends React.Component {
-  state = { toDoItem: '', dueDate: ''};
-
-  handleSubmit = (e, r) => {
-    e.preventDefault();
-    this.sendToDoToBackend();
-    if(this.state.toDoItem === '') return;
-    if (this.state.dueDate === '') return;
-    this.props.onFormSubmit([this.state.toDoItem, this.state.dueDate]);
-    this.setState({ toDoItem: '' });
-    this.setState({dueDate:''});
-    
-  }
-
-sendToDoToBackend() {
-  const username = sessionStorage.getItem('username')
-  const password = sessionStorage.getItem('password')
-
-  let server = "http://localhost:8118";
+    let server = "http://localhost:8118";
 
       if (process.env.REACT_APP_REMOTE) {
         //set this in .env file: REACT_APP_REMOTE=1
@@ -60,14 +61,90 @@ sendToDoToBackend() {
 
       if (process.env.NODE_ENV !== "development") {
         server = "https://project-backend-cc.herokuapp.com";
+      } 
+
+      const url = (`${server}/api/v2/users/${username}/todos/`)
+
+      let bd = JSON.stringify(toDoItem);
+      if(this.state.courseid !== null) {
+        var id = {course_id: this.state.courseid}
+        toDoItem = {...id, ...toDoItem}
+        bd = JSON.stringify(toDoItem)
       }
+
+      fetch(url, {
+        method: "post",
+        headers: new Headers({
+            'Authorization': 'Basic '+btoa(username+":"+password),
+          "Content-Type": "application/json",
+        }),
+        body: bd,
+      }).then(function(response){
+        if(!response.ok) {
+      throw new Error("HTTP status "+response.status)
+        }
+        return response.json();
+      }).then(data => this.setState({
+        todos: [...this.state.todos, data]
+      })).catch(error => alert(error));
+  };
   
-  const url = (`${server}/api/v2/users/${username}/courses`)
-  const bd = JSON.stringify({toDoItem: this.state.toDoItem, dueDate:this.state.dueDate});
+  handleDelete = (index,id) => {
+    const newToDoItemArr = [...this.state.todos];
+    newToDoItemArr.splice(index, 1);
+    this.setState({todos: newToDoItemArr});
 
-  generalFetch(username, password, url, bd)
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
 
+    let server = "http://localhost:8118";
+
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    let url = (`${server}/api/v2/users/${username}/todos/${id}/`)
+
+    fetch(url, {
+      method: 'delete',
+      headers: new Headers({
+        'Authorization': 'Basic '+btoa(username+":"+password),
+        'Content-Type': 'application/json'
+      })
+    }).catch(error => alert(error));
+  }
+  //Call api, get JSON with items and change state
+
+  render() {
+    return(
+      
+        <div>
+          <h1>Todos</h1>
+          <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} />
+          <SubmitForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
+        </div>
+    
+    );
+  } 
 }
+
+class SubmitForm extends React.Component {
+  state = { text: '', dueDate: ''};
+
+  handleSubmit = (e, r) => {
+    e.preventDefault();
+    if(this.state.text === '') return;
+    if (this.state.dueDate === '') return;
+    this.props.onFormSubmit(this.state);
+    this.setState({ text: '' });
+    this.setState({dueDate:''});
+    
+  }
 
   render() {
     return(
@@ -75,8 +152,8 @@ sendToDoToBackend() {
         <input 
           type='text'
           placeholder='To Do Item'
-          value={this.state.toDoItem}
-          onChange={(e) => this.setState({toDoItem: e.target.value})}
+          value={this.state.text}
+          onChange={(e) => this.setState({text: e.target.value})}
         />
         <input 
           type='text'
@@ -92,10 +169,9 @@ sendToDoToBackend() {
 }
 
 const ToDoItemElements = (props) => {
-  const todos = props.toDoItems.map((item, index) => {
-    return <Elem toDoItem={item[0]} dueDate={item[1]} key={index} id={index} onDelete={props.onDelete} />
+  const todos = props.todos.map((toDoItem, index) => {
+    return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} key={index} id={toDoItem.id} onDelete={props.onDelete} />
   })  
-  console.log("2019-11-5" < "2018");
   const sortedToDos = todos.sort(function(a, b){return a.props.dueDate - b.props.dueDate });
   return( 
     <div className = "toDoBox">
@@ -114,10 +190,10 @@ const Elem = (props) => {
       <input 
           type="checkbox" 
       />
-        <p>{props.toDoItem}</p>
+        <p>{props.name}</p>
         <p style = {styles}>{props.dueDate}</p>
 
-      <button onClick={() => {props.onDelete(props.id)}}>Remove</button>    
+      <button onClick={() => {props.onDelete(props.key, props.id)}}>Remove</button>    
 
     </div>
   );

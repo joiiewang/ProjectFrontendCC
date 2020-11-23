@@ -25,7 +25,7 @@ class LinkList extends React.Component {
 
     if (process.env.NODE_ENV !== "development") {
       server = "https://project-backend-cc.herokuapp.com";
-    }
+    } 
 
     let url = (`${server}/api/v2/users/${username}/links/`)
     if(this.state.courseid !== null) {
