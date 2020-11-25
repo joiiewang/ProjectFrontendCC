@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import * as SVGLoaders from 'svg-loaders-react';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class Login extends React.Component {
       userName: "",
       password: "",
       loggedIn: false,
+      loaded: true
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +23,7 @@ class Login extends React.Component {
       : this.setState({ [name]: value });
   }
 
-  saveCreds(evt) {
+  async saveCreds(evt) {
     let currentComponent = this;
 
     evt.preventDefault();
@@ -42,7 +44,7 @@ class Login extends React.Component {
     const url = `${server}/api/v2/users/${this.state.userName}/courses/`;
     console.log(this.state.userName);
 
-    fetch(url, {
+    await fetch(url, {
       method: "get",
       headers: new Headers({
         Authorization:
@@ -54,7 +56,10 @@ class Login extends React.Component {
         if (!response.ok) {
           throw new Error("Username or password incorrect");
         } else {
-          currentComponent.setState({ loggedIn: true });
+          currentComponent.setState({ 
+            loggedIn: true,
+            loaded: false
+          });
         }
         return response.json();
       })
@@ -63,6 +68,7 @@ class Login extends React.Component {
     const timer = setTimeout(() => {
       console.log(currentComponent.state.loggedIn);
       if (currentComponent.state.loggedIn) {
+        this.setState({loading: false});
         sessionStorage.setItem("loggedIn", true);
         window.location.href = "/ShowClasses";
       }
@@ -72,6 +78,16 @@ class Login extends React.Component {
   }
 
   render() {
+
+    if(!this.state.loaded){
+      const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
+      return (
+        <div style={style}>
+          <SVGLoaders.Circles stroke="#6c319c" fill="#6c319c"/>
+        </div>
+      )
+    }
+
     const styles = {
       width: "200px",
       border: "3px solid green",
