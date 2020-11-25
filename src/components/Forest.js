@@ -1,8 +1,9 @@
 import React from "react";
+import ForestClass from "./ForestClass";
 function Forest() {
   return (
     <div>
-      <h1>Forest Page</h1>
+      <ForestClass/>
     </div>
   );
 }
