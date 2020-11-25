@@ -43,7 +43,7 @@ class ToDoList extends React.Component {
         throw new Error("HTTP status "+response.status)
       }
       return response.json();
-    })//.then(data=> console.log(data))
+    })
     .then(data=>this.setState({
       todos: data,
       loaded: true 
@@ -92,6 +92,39 @@ class ToDoList extends React.Component {
         todos: [...this.state.todos, data]
       })).catch(error => alert(error));
   };
+
+  handleChange = (id) => {
+
+    const x = (toDoItem) => toDoItem.id === id;
+
+    const newToDoItemArr = [...this.state.todos];
+    newToDoItemArr[newToDoItemArr.findIndex(x)].completed =  !newToDoItemArr[newToDoItemArr.findIndex(x)].completed;
+    this.setState({todos: newToDoItemArr});
+    
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+    if (process.env.REACT_APP_REMOTE) {
+      //set this in .env file: REACT_APP_REMOTE=1
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    if (process.env.NODE_ENV !== "development") {
+      server = "https://project-backend-cc.herokuapp.com";
+    }
+
+    let url = (`${server}/api/v2/users/${username}/todos/${id}/`)
+
+    fetch(url, {
+      method: 'post',
+      headers: new Headers({
+        'Authorization': 'Basic '+btoa(username+":"+password),
+        'Content-Type': 'application/json'
+      })
+    }).catch(error => alert(error));
+  }
   
   handleDelete = (index,id) => {
     const newToDoItemArr = [...this.state.todos];
@@ -137,7 +170,7 @@ class ToDoList extends React.Component {
       
         <div>
           <h1>Todos</h1>
-          <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} />
+          <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} handleChange = {this.handleChange} />
           <SubmitForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
         </div>
     
@@ -157,6 +190,8 @@ class SubmitForm extends React.Component {
     this.setState({dueDate:''});
     
   }
+
+  
 
   render() {
     return(
@@ -182,12 +217,13 @@ class SubmitForm extends React.Component {
 
 const ToDoItemElements = (props) => {
   const todos = props.todos.map((toDoItem, index) => {
-    return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} key={index} id={toDoItem.id} onDelete={props.onDelete} />
+    return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} completed={toDoItem.completed} key={index} id={toDoItem.id} onDelete={props.onDelete} handleChange={props.handleChange} />
   })  
   const sortedToDos = todos.sort(function(a, b){return a.props.dueDate - b.props.dueDate });
+  const finalsortedToDos = sortedToDos.sort(function(a, b){return (a.props.completed === b.props.completed)? 0 : a.props.completed? 1 : -1;})
   return( 
     <div className = "toDoBox">
-      {sortedToDos}
+      {finalsortedToDos}
     </div>
   );
 }
@@ -197,16 +233,26 @@ const Elem = (props) => {
   {
     fontSize: "5 px"
   }
+  const completedStyle =
+  {
+    fontSize: "italic",
+    color: "#cdcdcd",
+    textDecoration: "line-through"
+  }
   return(
     <div className = "element">
       <input 
           type="checkbox" 
+          checked= {props.completed}
+          onChange={() => props.handleChange(props.id)}
       />
-        <p>{props.name}</p>
-        <p style = {styles}>{props.dueDate}</p>
+        <p style={props.completed ? completedStyle: null}>
+          {props.name}
+          {props.dueDate}
+          </p>
 
-      <button onClick={() => {props.onDelete(props.key, props.id)}}>Remove</button>    
-
+       <button onClick={() => {props.onDelete(props.key, props.id)}}>Remove</button>    
+ 
     </div>
   );
 }
