@@ -72,10 +72,4 @@ class ShowClasses extends React.Component {
 
 export default ShowClasses;
 
-/*
-<a href= "/Course">
-            {//need to pass className props here
-            }
-          {course.name}
-          </a>
-*/
+
