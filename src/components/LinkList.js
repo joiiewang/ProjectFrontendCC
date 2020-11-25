@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/LinkList.css";
+import * as SVGLoaders from 'svg-loaders-react';
 
 class LinkList extends React.Component {
   // We can pass in an array to populate this component
@@ -8,11 +9,12 @@ class LinkList extends React.Component {
     super(props);
     this.state = {
       courseid: this.props.id ? this.props.id : null,
-      links: [] //this.props.links,
+      links: [], //this.props.links,
+      loaded: false
     };
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
@@ -32,7 +34,7 @@ class LinkList extends React.Component {
       url = (`${server}/api/v2/users/${username}/links/?course_id=${this.state.courseid}`)
     }
 
-    fetch(url, {
+    await fetch(url, {
       method: 'get',
       headers: new Headers({
       	'Authorization': 'Basic '+btoa(username+":"+password),
@@ -44,7 +46,8 @@ class LinkList extends React.Component {
       }
       return response.json();
     }).then(data => this.setState({
-      links: data
+      links: data,
+      loaded: true
     })).catch(error => alert(error));
   }
 
@@ -122,6 +125,14 @@ class LinkList extends React.Component {
   };
 
   render() {
+    if(!this.state.loaded){
+      const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
+      return (
+        <div style={style}>
+          <SVGLoaders.Circles stroke="#6c319c" fill="#6c319c"/>
+        </div>
+      )
+    }
     return (
       <div>
         <Header />

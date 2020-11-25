@@ -1,15 +1,18 @@
 import React from 'react';
 import './css/ToDoList.css';
+import * as SVGLoaders from 'svg-loaders-react';
+
 class ToDoList extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       courseid: this.props.id ? this.props.id : null,
-      todos: [] //this.props.todos
+      todos: [], //this.props.todos
+      loaded: false
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
@@ -29,7 +32,7 @@ class ToDoList extends React.Component {
       url = (`${server}/api/v2/users/${username}/todos/?course_id=${this.state.courseid}`)
     }
 
-    fetch (url, {
+    await fetch (url, {
       method: 'get',
       headers: new Headers({
         'Authorization': 'Basic '+btoa(username+":"+password),
@@ -42,7 +45,8 @@ class ToDoList extends React.Component {
       return response.json();
     })//.then(data=> console.log(data))
     .then(data=>this.setState({
-      todos: data 
+      todos: data,
+      loaded: true 
     })).catch(error => alert(error));
 
   }
@@ -121,6 +125,14 @@ class ToDoList extends React.Component {
   //Call api, get JSON with items and change state
 
   render() {
+    const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
+    if(!this.state.loaded){
+      return (
+        <div style={style}>
+          <SVGLoaders.Circles stroke="#6c319c" fill="#6c319c"/>
+        </div>
+      )
+    }
     return(
       
         <div>
