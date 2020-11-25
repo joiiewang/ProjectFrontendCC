@@ -11,7 +11,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-transition-group": "^4.4.1",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "svg-loaders-react": "^2.2.1"
   },
   "scripts": {
     "dev": "react-scripts start",

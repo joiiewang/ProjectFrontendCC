@@ -1,6 +1,7 @@
 import React from "react";
 import { generalFetch } from "../UtilityFunctions"
 import "./css/NotesList.css";
+import * as SVGLoaders from 'svg-loaders-react';
 
 class NotesList extends React.Component {
   constructor(props) {
@@ -8,10 +9,11 @@ class NotesList extends React.Component {
     this.state = {
       courseid: this.props.id ? this.props.id : null,
       notes: [],
+      loaded: false
     };
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
@@ -31,7 +33,7 @@ class NotesList extends React.Component {
       url = (`${server}/api/v2/users/${username}/notes/?course_id=${this.state.courseid}`)
     }
     
-    fetch(url, {
+    await fetch(url, {
       method: 'get',
       headers: new Headers({
       	'Authorization': 'Basic '+btoa(username+":"+password),
@@ -43,7 +45,8 @@ class NotesList extends React.Component {
       }
       return response.json();
     }).then(data => this.setState({
-      notes: data
+      notes: data,
+      loaded: true
     })).catch(error => alert(error));
   }
 
@@ -121,15 +124,23 @@ class NotesList extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <div>
-          <Header/>
-          <TodoList notes={this.state.notes} onDelete={this.handleDelete} />
-          <SubmitNoteForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
+    const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
+    if(!this.state.loaded){
+      return (
+        <div style={style}>
+          <SVGLoaders.Circles stroke="#6c319c" fill="#6c319c"/>
         </div>
-      </div>
-    );
+      )
+    }
+      return (
+        <div>
+          <div>
+            <Header/>
+            <TodoList notes={this.state.notes} onDelete={this.handleDelete} />
+            <SubmitNoteForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
+          </div>
+        </div>
+      );
   }
 }
 
