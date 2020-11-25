@@ -9,7 +9,7 @@ class LinkList extends React.Component {
     super(props);
     this.state = {
       courseid: this.props.id ? this.props.id : null,
-      links: [], //this.props.links,
+      links: [], 
       loaded: false
     };
   }

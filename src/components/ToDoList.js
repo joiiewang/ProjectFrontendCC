@@ -7,7 +7,7 @@ class ToDoList extends React.Component {
     super(props)
     this.state = {
       courseid: this.props.id ? this.props.id : null,
-      todos: [], //this.props.todos
+      todos: [], 
       loaded: false
     };
   }
@@ -203,8 +203,8 @@ class SubmitForm extends React.Component {
           onChange={(e) => this.setState({text: e.target.value})}
         />
         <input 
-          type='text'
-          placeholder='Due Date(yyyymmdd)'
+          type='date'
+          placeholder='Due Date'
           value={this.state.dueDate}
           onChange={(r) => this.setState({dueDate: r.target.value})}
         />
@@ -214,6 +214,14 @@ class SubmitForm extends React.Component {
   }
 
 }
+/*
+<input 
+type='text'
+placeholder='Due Date(yyyymmdd)'
+value={this.state.dueDate}
+onChange={(r) => this.setState({dueDate: r.target.value})}
+/>
+*/
 
 const ToDoItemElements = (props) => {
   const todos = props.todos.map((toDoItem, index) => {
@@ -247,7 +255,7 @@ const Elem = (props) => {
           onChange={() => props.handleChange(props.id)}
       />
         <p style={props.completed ? completedStyle: null}>
-          {props.name}
+          {props.name + " "}
           {props.dueDate}
           </p>
 
