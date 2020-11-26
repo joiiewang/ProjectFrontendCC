@@ -5,7 +5,8 @@ class ForestClass extends React.Component {
     constructor() {
       super();
       this.state = {
-        trees: null
+        trees: null,
+        loaded: false
       };
     }
     
@@ -39,11 +40,12 @@ class ForestClass extends React.Component {
         return response.json();
       }).then(data => this.setState({
         trees: data.trees,
+        loaded: true
       })).catch(error => alert(error));
     }
 
     render() {
-        if(!this.state.trees){
+        if(!this.state.loaded){
           const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
           return (
             <div style={style}>
