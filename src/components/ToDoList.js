@@ -234,7 +234,7 @@ const ToDoItemElements = (props) => {
   const todos = props.todos.map((toDoItem, index) => {
     return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} completed={toDoItem.completed} key={index} id={toDoItem.id} onDelete={props.onDelete} handleChange={props.handleChange} />
   })  
-  const sortedToDos = todos.sort(function(a, b){return a.props.dueDate - b.props.dueDate });
+  const sortedToDos = todos.sort(function (a, b){return ('' + a.props.dueDate).localeCompare(b.props.dueDate) });  
   const finalsortedToDos = sortedToDos.sort(function(a, b){return (a.props.completed === b.props.completed)? 0 : a.props.completed? 1 : -1;})
   return( 
     <div className = "toDoBox">
