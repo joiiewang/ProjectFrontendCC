@@ -37,7 +37,7 @@ class ShowClasses extends React.Component {
       method: 'get',
       headers: new Headers({
       	'Authorization': 'Basic '+btoa(username+":"+password),
-	'Content-Type': 'application/json'
+	    'Content-Type': 'application/json'
       })
     }).then(function(response){
       if(!response.ok) {
