@@ -126,10 +126,17 @@ class ToDoList extends React.Component {
     }).catch(error => alert(error));
   }
   
-  handleDelete = (index,id) => {
+  handleDelete = (index, id) => {
+
+    const x = (toDoItem) => toDoItem.id === id;
+
     const newToDoItemArr = [...this.state.todos];
-    newToDoItemArr.splice(index, 1);
+    newToDoItemArr.splice(newToDoItemArr.findIndex(x), 1);
     this.setState({todos: newToDoItemArr});
+
+    /* const newToDoItemArr = [...this.state.todos];
+    newToDoItemArr.splice(index, 1);
+    this.setState({todos: newToDoItemArr}); */
 
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
