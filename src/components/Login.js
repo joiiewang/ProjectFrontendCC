@@ -68,7 +68,7 @@ class Login extends React.Component {
     const timer = setTimeout(() => {
       console.log(currentComponent.state.loggedIn);
       if (currentComponent.state.loggedIn) {
-        this.setState({loading: false});
+        //this.setState({loading: false});
         sessionStorage.setItem("loggedIn", true);
         window.location.href = "/ShowClasses";
       }

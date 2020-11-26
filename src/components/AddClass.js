@@ -1,12 +1,12 @@
 import React from "react";
-import { generalFetch } from "../UtilityFunctions"
+import * as SVGLoaders from 'svg-loaders-react';
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
   constructor() {
     super();
     this.state = {
-      courseName: "",
+      courseName: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,10 +23,16 @@ class AddClass extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.sendNameToBackend(); 
-    alert('Adding course');
+    //alert('Adding course');
+    
+    const timer = setTimeout(() => {
+      window.location.href = "/ShowClasses";
+      }, 100);
+    
   }
 
-  sendNameToBackend () {
+   sendNameToBackend () {
+
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
 
@@ -43,16 +49,31 @@ class AddClass extends React.Component {
 
 
     const url = (`${server}/api/v1/users/${username}/courses/`)
-
     const bd = JSON.stringify({ name: this.state.courseName});
 
-
-    generalFetch (username, password, url, bd)
+    fetch(url, {
+      method: "POST",
+      headers: new Headers({
+          'Authorization': 'Basic '+btoa(username+":"+password),
+        "Content-Type": "application/json",
+      }),
+      body: bd,
+    }).then(function(response){
+      if(!response.ok) {
+    throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => console.log(data))
+    .catch(error => console.log(error));
 
   }
+
+  
   
 
   render() {
+
+
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input
