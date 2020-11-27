@@ -2,6 +2,74 @@ import React, {useState} from "react";
 import Plant from "./HomePlant.js";
 import "../css/Home.css";
 
+class Home extends React.Component {
+  constructor() {
+    super ();
+    this.state = {
+      toDos: []
+    }
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  componentDidMount () {
+    let currentComponent = this;
+
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        //set this in .env file: REACT_APP_REMOTE=1
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+
+    const url = (`${server}/api/v2/users/${username}/todos/`)
+
+    fetch(url, {
+      method: 'get',
+      headers: new Headers({
+      	'Authorization': 'Basic '+btoa(username+":"+password),
+	    'Content-Type': 'application/json'
+      })
+    }).then(function(response){
+      if(!response.ok) {
+	throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => this.setState({
+      toDos: data
+    })).catch(error => alert(error));
+  }
+
+  // mapDates
+  // Here's where to implement function to display dates
+  // Like MapClasses in ShowClasses
+
+  render () {
+
+    console.log(this.state.toDos)
+
+    return (
+      <div className="App">
+        <div className="calendarBody">
+          <CalGrid />
+        </div>
+        <div className="taskDiv">Important Tasks here</div>
+        <div className="plantDiv">
+          <Plant />
+        </div>
+      </div>
+    );
+  }
+
+}
+/*
 function Home() {
   return (
     <div className="App">
@@ -15,6 +83,7 @@ function Home() {
     </div>
   );
 }
+*/
 
 class CalGrid extends React.Component {
   state = {
