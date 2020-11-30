@@ -8,9 +8,50 @@ class Home extends React.Component {
     this.state = {
       toDos: [],
     }
-    this.componentDidMount = this.componentDidMount.bind(this);
+    //this.componentDidMount = this.componentDidMount.bind(this);
   }
 
+  
+
+
+  render () {
+    return (
+      <div className="App">
+        <div className="calendarBody">
+          <CalGrid />
+        </div>
+        <div className="taskDiv">Important Tasks here</div>
+        <div className="plantDiv">
+          <Plant />
+        </div>
+      </div>
+    );
+  }
+
+}
+
+class CalGrid extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      detailToggle: 0,
+      detailLoc: [0, 0],
+      detailFill: 0,
+      month: "",
+      toDos: [],
+    }
+    this.toggleDetail = this.toggleDetail.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+  }
+
+  toggleDetail = (e, toggle, i, j, fill) => {
+    console.log("clicked");
+    this.setState({detailToggle: toggle});
+    this.setState({detailLoc: [i, j]});
+    this.setState({detailFill: fill});
+  };
+
+  // fetch that gets ToDos
   componentDidMount () {
     let currentComponent = this;
 
@@ -47,51 +88,17 @@ class Home extends React.Component {
     })).catch(error => alert(error));
   }
 
-
-  render () {
-    console.log("home" + this.state.toDos)
-    return (
-      <div className="App">
-        <div className="calendarBody">
-          <CalGrid toDos = {this.state.toDos}>
-            {console.log("home" + this.state.toDos)}
-          </CalGrid>
-        </div>
-        <div className="taskDiv">Important Tasks here</div>
-        <div className="plantDiv">
-          <Plant />
-        </div>
-      </div>
-    );
+  mapTasks() {
+    this.state.toDos.map ((toDo) =>
+      console.log(toDo)
+    )
   }
-
-}
-
-class CalGrid extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      detailToggle: 0,
-      detailLoc: [0, 0],
-      detailFill: 0,
-      month: "",
-      toDos: this.props.toDos,
-    }
-    this.toggleDetail = this.toggleDetail.bind(this)
-  }
-
-  toggleDetail = (e, toggle, i, j, fill) => {
-    console.log("clicked");
-    this.setState({detailToggle: toggle});
-    this.setState({detailLoc: [i, j]});
-    this.setState({detailFill: fill});
-  };
-
 
 
   render() {
+
+    this.mapTasks()
     
-    console.log("Props" + this.props.toDos)
     console.log("CalGrid" + this.state.toDos)
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
