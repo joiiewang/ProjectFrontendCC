@@ -75,9 +75,9 @@ class Home extends React.Component {
 
 class CalGrid extends React.Component {
   state = {
-    detailToggle: 0,
-    detailLoc: [0, 0],
-    detailFill: 0,
+    detailToggle: 0,  // Variable used to toggle the detail tab
+    detailLoc: [0, 0],  // Variable used to store which date is opened (for animation purpose)
+    detailFill: 0,  // Variable used to determine fill mount for the detail (shoulbe probably chanced for a list of tasks)
     month: ""
     
   };
@@ -94,7 +94,7 @@ class CalGrid extends React.Component {
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
-    const weekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const weekNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
     const d = new Date();
     this.state.month = monthNames[d.getMonth()]
@@ -104,7 +104,7 @@ class CalGrid extends React.Component {
 
 
     var today = new Date();
-    var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7);
+    var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7); // used to determine where the 1st day of the month is
     var daysInMonth = new Date(
       today.getFullYear(),
       today.getMonth() + 1,
@@ -114,12 +114,16 @@ class CalGrid extends React.Component {
     console.log(today)
 
     
-    var monthArr = new Array(5);
+    var monthArr = new Array(6);  // Array used to store trs of days for rendering
     var fill = 0;
-
+    
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
       for (let j = 0; j < weekArr.length; j++) {
+	if (i==0) {
+	  weekArr[j] = (<th key={i*7+j} className="weekDayDiv"> {weekNames[j]} </th>);
+	  continue;
+	}
         var day = i * 7 + j - offset + 1;
         var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
@@ -132,7 +136,7 @@ class CalGrid extends React.Component {
           backgroundColor = { background: "#d2e0c1" };
         } else if (day > daysInMonth) {
 	  day = day % (daysInMonth + 1) + 1;
-          backgroundColor = { background: "#ffffff" };
+          backgroundColor = { background: "#d2e0c1" };
         }
 
         fill = Math.floor(Math.random() * 10) * 10;
@@ -157,10 +161,7 @@ class CalGrid extends React.Component {
 
     return (
       <div style={{height: "100%", width: "100%"}}>
-        <h1>
-          {this.state.month}
-        </h1>
-        <p>{weekNames}</p>
+	  <h className="monthHeader">{this.state.month}</h>
           <table className="mainCalender">
             
             <tbody>{monthArr}</tbody>
@@ -182,9 +183,9 @@ function Detail(props) {
   }
   
   const weekScale = 1/7;
-  const displacement = [(props.detailLoc[0]-2)*100, (props.detailLoc[1]-3)*weekScale*700]
+  const displacement = [(props.detailLoc[0]-3)*93+10, (props.detailLoc[1]-3)*weekScale*700]
   const detailTransform = "scale(1)";
-  const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+displacement[0]+"%)";
+  const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+(displacement[0])+"%)";
   const detailStyle = {
     borderRadius: props.detailToggle ? "1vh" : "5vh",
     opacity: props.detailToggle,
