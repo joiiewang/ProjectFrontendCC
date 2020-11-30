@@ -3,6 +3,7 @@ import { NotesList, SubmitNoteForm } from "./NotesList";
 import { LinkList, SubmitLinkForm } from "./LinkList";
 import ToDoList from "./ToDoList";
 import DeletePopup from "./DeletePopup"
+import "../components/css/ShowClasses.css";
 
 class Course extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Course extends React.Component {
           <br/>
         </div>
 
-        <button onClick= {(event) => this.setState({ isOpen: true})}>
+        <button className= "deleteCourseButton" onClick= {(event) => this.setState({ isOpen: true})}>
           Delete Class</button>
 
         <DeletePopup isOpen= {this.state.isOpen} onClose = {(event) => this.setState({isOpen: false})} 
@@ -46,27 +47,3 @@ class Course extends React.Component {
 }
 
 export default Course;
-
-/*
-        <LinkList links = {this.state.toDoList}/>
-        <NotesList notes = {this.state.notes}/>
-        <ToDoList todos = {this.state.toDoList}/>
-
-        <div className = "btn" onClick = {this.togglePop}>
-          <button>
-            Delete Class
-         </button>
-        </div>
-        {this.state.deleteClassSeen ? <Popup toggle = {this.togglePop}/> : null}
-*/
-
- /*
-  setUsername () {
-    this.setState({name : this.props.name})
-  }
-  
-
-  getCourseInfo () {
-    fetch ('https://project-backend-cc.herokuapp.com/api/v1/users/courses/' + this.state.name)
-  }
-  */
