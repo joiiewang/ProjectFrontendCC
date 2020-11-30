@@ -94,6 +94,8 @@ class CalGrid extends React.Component {
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
+    const weekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
     const d = new Date();
     this.state.month = monthNames[d.getMonth()]
     console.log(this.state.month)
@@ -149,6 +151,8 @@ class CalGrid extends React.Component {
         );
       }
       monthArr[i] = <tr key={i}>{weekArr}</tr>;
+
+      
     }
 
     return (
@@ -156,8 +160,9 @@ class CalGrid extends React.Component {
         <h1>
           {this.state.month}
         </h1>
-          
+        <p>{weekNames}</p>
           <table className="mainCalender">
+            
             <tbody>{monthArr}</tbody>
           </table>
           <div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
