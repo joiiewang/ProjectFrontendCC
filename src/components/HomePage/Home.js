@@ -47,21 +47,15 @@ class Home extends React.Component {
     })).catch(error => alert(error));
   }
 
-  
-
-
-  // mapDates
-  // Here's where to implement function to display dates
-  // Like MapClasses in ShowClasses
 
   render () {
-
-    console.log(this.state.toDos)
-
+    console.log("home" + this.state.toDos)
     return (
       <div className="App">
         <div className="calendarBody">
-          <CalGrid />
+          <CalGrid toDos = {this.state.toDos}>
+            {console.log("home" + this.state.toDos)}
+          </CalGrid>
         </div>
         <div className="taskDiv">Important Tasks here</div>
         <div className="plantDiv">
@@ -74,13 +68,19 @@ class Home extends React.Component {
 }
 
 class CalGrid extends React.Component {
-  state = {
-    detailToggle: 0,
-    detailLoc: [0, 0],
-    detailFill: 0,
-    month: ""
-    
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      detailToggle: 0,
+      detailLoc: [0, 0],
+      detailFill: 0,
+      month: "",
+      toDos: this.props.toDos,
+    }
+    this.toggleDetail = this.toggleDetail.bind(this)
+   
+  }
+ 
   toggleDetail = (e, toggle, i, j, fill) => {
     console.log("clicked");
     this.setState({detailToggle: toggle});
@@ -91,6 +91,10 @@ class CalGrid extends React.Component {
 
 
   render() {
+    
+    console.log("Props" + this.props.toDos)
+    console.log("CalGrid" + this.state.toDos)
+
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
@@ -98,7 +102,6 @@ class CalGrid extends React.Component {
 
     const d = new Date();
     this.state.month = monthNames[d.getMonth()]
-    console.log(this.state.month)
     
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
 
@@ -110,8 +113,6 @@ class CalGrid extends React.Component {
       today.getMonth() + 1,
       0
     ).getDate();
-
-    console.log(today)
 
     
     var monthArr = new Array(5);
@@ -135,7 +136,7 @@ class CalGrid extends React.Component {
           backgroundColor = { background: "#ffffff" };
         }
 
-        fill = Math.floor(Math.random() * 10) * 10;
+        //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
           height: fill + "%",
           bottom: "0%",

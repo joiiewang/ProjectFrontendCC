@@ -72,12 +72,6 @@ export default class Popup extends React.Component {
         )
     }
 }
-/*
-<Link to = {{
-                    pathname: "/ShowClasses",
-                    }}>
-                    Yes</Link>
-*/
 
 
 let dialogStyles = {
