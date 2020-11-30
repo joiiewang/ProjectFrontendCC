@@ -79,7 +79,8 @@
 }
 
 .mainCalender {
-  width: 100%;
+  margin-left: 5%;
+  width: 95%;
   height: 100%;
 }
 
@@ -92,14 +93,16 @@
   right: 25.25vw;
   bottom: 1.5vh;
   box-shadow: inset 0px 0px 0px 2px green;
-  transition: opacity 1s ease,transform 1s, z-index 1s ease-in;
+  transition: opacity 1s ease,transform 1s, z-index 1s ease-in, border-radius 1s;
 }
 
-table,
-th,
 td {
   border: 2px solid green;
   border-radius: 5px;
+}
+
+.weekDayDiv {
+  height: 4%;
 }
 
 .mainCalender td {
@@ -111,4 +114,13 @@ td {
 
 .mainCalender td:hover {
   transform: scale(1.02);
+}
+
+.monthHeader {
+  position: fixed;
+  left: 0%;
+  top: 50%;
+  font-size: 3vw;
+  transform: rotate(270deg) translate(0%, -120%);
+  z-index: 4;
 }
