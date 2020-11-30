@@ -117,6 +117,12 @@ class CalGrid extends React.Component {
     //console.log("TasksArray " + this.state.tasksArray)
   }
 
+  NewLine(props) {
+    let text = props.text
+    const newText = text.split("\n").map(str => <p>{str}</p>);
+    return newText
+  }
+
 
    Detail() {
 
@@ -124,18 +130,13 @@ class CalGrid extends React.Component {
     let todayTasksString = "You have no tasks today"
     if (this.state.tasksArray[tasksArrayNumber] != null) {
       let todayTasks = this.state.tasksArray[tasksArrayNumber].split("~!~")
-      todayTasksString = todayTasks.map ((task) => (
-        task + "\n"
+      todayTasksString = ""
+      todayTasks.map ((task) => (
+        todayTasksString += task + "\n"
       ))
     }  
     console.log("todays tasks " + todayTasksString)
     
-    //console.log("Task Array Number " + tasksArrayNumber)
-    //console.log ("Tasks array items" + this.state.tasksArray[tasksArrayNumber])
-
-    //{console.log(this.state.detailLoc[0] + " " + this.state.detailLoc[1])}
-    //let tasks = this.state.tasksArray[]
-
   
     const fillStyle = {
       height: this.state.detailFill + "%",
@@ -155,11 +156,20 @@ class CalGrid extends React.Component {
   
     return (
       <div className="detail" style={detailStyle}>
-        <div className="detailFill" style={fillStyle} />
-        {todayTasksString}
+        <h1>
+          Today's Tasks:
+          </h1>
+          <this.NewLine text = {todayTasksString}/>
+        <div className="detailFill" style={fillStyle}>
+        </div>
       </div>
     );
   }
+  /*
+  <p>
+          {todayTasksString}
+          </p>
+  */
 
   createCal () {
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -253,7 +263,6 @@ class CalGrid extends React.Component {
             <tbody>{this.state.monthArray}</tbody>
           </table>
           <div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
-              {console.log(this.state.detailLoc[0] + " " + this.state.detailLoc[1])}
               {this.Detail()}
             </div>
         
