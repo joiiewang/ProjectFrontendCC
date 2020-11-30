@@ -39,6 +39,7 @@ class CalGrid extends React.Component {
       detailFill: 0,
       month: "",
       toDos: [],
+      monthArray: [],
     }
     this.toggleDetail = this.toggleDetail.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
@@ -89,8 +90,18 @@ class CalGrid extends React.Component {
   }
 
   mapTasks() {
-    this.state.toDos.map ((toDo) =>
-      console.log(toDo)
+    this.state.toDos.map ((toDo) => {
+      var dateArray = toDo.dueDate.split("-")
+       console.log(dateArray)
+      var currentDate = new Date();
+      var currentMonth = currentDate.getMonth + 1
+      //console.log(toDo)
+      if (toDo.completed == false) {
+        if (dateArray[1] == currentMonth) {
+          
+        
+        
+      }}}
     )
   }
 
@@ -98,8 +109,6 @@ class CalGrid extends React.Component {
   render() {
 
     this.mapTasks()
-    
-    console.log("CalGrid" + this.state.toDos)
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
@@ -131,7 +140,7 @@ class CalGrid extends React.Component {
 	  weekArr[j] = (<th key={i*7+j} className="weekDayDiv"> {weekNames[j]} </th>);
 	  continue;
 	}
-        var day = i * 7 + j - offset + 1;
+        var day = i * 7 + j - offset + 1 -7;
         var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
           var daysInLastMonth = new Date(
@@ -163,6 +172,7 @@ class CalGrid extends React.Component {
       }
       monthArr[i] = <tr key={i}>{weekArr}</tr>;
 
+      this.state.monthArray = monthArr
       
     }
 
