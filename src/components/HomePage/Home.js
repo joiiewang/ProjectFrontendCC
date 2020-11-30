@@ -40,9 +40,11 @@ class CalGrid extends React.Component {
       month: "",
       toDos: [],
       monthArray: [],
+      tasksArray: [],
     }
     this.toggleDetail = this.toggleDetail.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
+    this.mapTasks = this.mapTasks.bind(this)
   }
 
   toggleDetail = (e, toggle, i, j, fill) => {
@@ -90,19 +92,25 @@ class CalGrid extends React.Component {
   }
 
   mapTasks() {
+    var mapTaskArray = new Array (31)
     this.state.toDos.map ((toDo) => {
       var dateArray = toDo.dueDate.split("-")
-       console.log(dateArray)
+       //console.log(dateArray)
       var currentDate = new Date();
-      var currentMonth = currentDate.getMonth + 1
+      var currentMonth = currentDate.getMonth() + 1
+      
       //console.log(toDo)
       if (toDo.completed == false) {
-        if (dateArray[1] == currentMonth) {
-          
-        
-        
+        var dateMonth = Number (dateArray[1])
+        if (dateMonth == currentMonth) {
+          var dayInt = Number (dateArray[2]) -1
+          mapTaskArray [dayInt] = toDo.text
       }}}
     )
+    //this.setState({
+      //tasksArray: mapTaskArray
+    //})
+    //console.log(this.state.tasksArray)
   }
 
 
@@ -194,6 +202,7 @@ class CalGrid extends React.Component {
 
 
 function Detail(props) {
+  
   const fillStyle = {
     height: props.fill + "%",
     bottom: "0%",
