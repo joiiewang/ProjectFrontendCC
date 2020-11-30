@@ -6,7 +6,7 @@ class Home extends React.Component {
   constructor() {
     super ();
     this.state = {
-      toDos: []
+      toDos: [],
     }
     this.componentDidMount = this.componentDidMount.bind(this);
   }
@@ -47,6 +47,8 @@ class Home extends React.Component {
     })).catch(error => alert(error));
   }
 
+  
+
 
   // mapDates
   // Here's where to implement function to display dates
@@ -76,6 +78,8 @@ class CalGrid extends React.Component {
     detailToggle: 0,
     detailLoc: [0, 0],
     detailFill: 0,
+    month: ""
+    
   };
   toggleDetail = (e, toggle, i, j, fill) => {
     console.log("clicked");
@@ -83,8 +87,19 @@ class CalGrid extends React.Component {
     this.setState({detailLoc: [i, j]});
     this.setState({detailFill: fill});
   };
+
+
+
   render() {
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"]
+
+    const d = new Date();
+    this.state.month = monthNames[d.getMonth()]
+    console.log(this.state.month)
+    
     const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
+
 
     var today = new Date();
     var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7);
@@ -94,6 +109,9 @@ class CalGrid extends React.Component {
       0
     ).getDate();
 
+    console.log(today)
+
+    
     var monthArr = new Array(5);
     var fill = 0;
 
@@ -135,12 +153,17 @@ class CalGrid extends React.Component {
 
     return (
       <div style={{height: "100%", width: "100%"}}>
-        <table className="mainCalender">
-          <tbody>{monthArr}</tbody>
-        </table>
-	<div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
-	  <Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}/>
-	</div>
+        <h1>
+          {this.state.month}
+        </h1>
+          
+          <table className="mainCalender">
+            <tbody>{monthArr}</tbody>
+          </table>
+          <div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
+              <Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}/>
+            </div>
+        
       </div>
     );
   }
@@ -173,18 +196,3 @@ function Detail(props) {
 
 export default Home;
 
-/*
-function Home() {
-  return (
-    <div className="App">
-      <div className="calendarBody">
-        <CalGrid />
-      </div>
-      <div className="taskDiv">Important Tasks here</div>
-      <div className="plantDiv">
-        <Plant />
-      </div>
-    </div>
-  );
-}
-*/
