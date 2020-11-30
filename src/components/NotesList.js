@@ -159,6 +159,7 @@ class SubmitNoteForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input
+            className = "moveRight"
             type="text"
             placeholder="Enter Item"
             value={this.state.text}
@@ -174,7 +175,7 @@ class SubmitNoteForm extends React.Component {
 const Header = (props) => {
   return (
     <div>
-      <h1>Notes</h1>
+      <h1 className = "moveRight" >Notes</h1>
     </div>
   );
 };

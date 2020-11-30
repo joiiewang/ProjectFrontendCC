@@ -83,10 +83,11 @@ let dialogStyles = {
     bottom: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: '999',
-    backgroundColor: ' #FFF0F5',
+    backgroundColor: ' #ffff',
     padding: '10px 20px 40px',
     borderRadius: '8px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: '2px solid black',
 }
 

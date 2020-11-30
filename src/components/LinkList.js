@@ -158,7 +158,8 @@ class SubmitLinkForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
+        <input 
+          className = "moveRight"
           type="text"
           placeholder="Enter Name"
           value={this.state.text}
@@ -179,7 +180,7 @@ class SubmitLinkForm extends React.Component {
 const Header = () => {
   return (
     <div>
-      <h1>Links</h1>
+      <h1 className = "moveRight" >Links</h1>
     </div>
   );
 };
