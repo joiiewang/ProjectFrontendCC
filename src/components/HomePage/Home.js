@@ -8,7 +8,6 @@ class Home extends React.Component {
     this.state = {
       toDos: [],
     }
-    //this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   
@@ -45,6 +44,7 @@ class CalGrid extends React.Component {
     this.toggleDetail = this.toggleDetail.bind(this)
     this.componentDidMount = this.componentDidMount.bind(this)
     this.mapTasks = this.mapTasks.bind(this)
+    this.createCal = this.createCal.bind(this)
   }
 
   toggleDetail = (e, toggle, i, j, fill) => {
@@ -95,29 +95,73 @@ class CalGrid extends React.Component {
     var mapTaskArray = new Array (31)
     this.state.toDos.map ((toDo) => {
       var dateArray = toDo.dueDate.split("-")
-       //console.log(dateArray)
+       //console.log("Date array" + dateArray)
       var currentDate = new Date();
       var currentMonth = currentDate.getMonth() + 1
       
-      //console.log(toDo)
+      //console.log("toDo" + toDo)
       if (toDo.completed == false) {
         var dateMonth = Number (dateArray[1])
         if (dateMonth == currentMonth) {
           var dayInt = Number (dateArray[2]) -1
-          mapTaskArray [dayInt] = toDo.text
+          if (mapTaskArray [dayInt]) {
+            mapTaskArray [dayInt] += "~!~" + toDo.text
+          }
+          else {
+            mapTaskArray [dayInt] = toDo.text
+          }
+          //console.log ("toDotext" + toDo.text)
       }}}
     )
-    //this.setState({
-      //tasksArray: mapTaskArray
-    //})
-    //console.log(this.state.tasksArray)
+    this.state.tasksArray = mapTaskArray
+    //console.log("TasksArray " + this.state.tasksArray)
   }
 
 
-  render() {
+   Detail() {
 
-    this.mapTasks()
+    let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1]
+    let todayTasksString = "You have no tasks today"
+    if (this.state.tasksArray[tasksArrayNumber] != null) {
+      let todayTasks = this.state.tasksArray[tasksArrayNumber].split("~!~")
+      todayTasksString = todayTasks.map ((task) => (
+        task + "\n"
+      ))
+    }  
+    console.log("todays tasks " + todayTasksString)
+    
+    //console.log("Task Array Number " + tasksArrayNumber)
+    //console.log ("Tasks array items" + this.state.tasksArray[tasksArrayNumber])
 
+    //{console.log(this.state.detailLoc[0] + " " + this.state.detailLoc[1])}
+    //let tasks = this.state.tasksArray[]
+
+  
+    const fillStyle = {
+      height: this.state.detailFill + "%",
+      bottom: "0%",
+    }
+    
+    const weekScale = 1/7;
+    const displacement = [(this.state.detailLoc[0]-3)*93+10, (this.state.detailLoc[1]-3)*weekScale*700]
+    const detailTransform = "scale(1)";
+    const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+(displacement[0])+"%)";
+    const detailStyle = {
+      borderRadius: this.state.detailToggle ? "1vh" : "5vh",
+      opacity: this.state.detailToggle,
+      zIndex: this.state.detailToggle ? "100" : "-2",
+      transform: this.state.detailToggle ? "scale(1)" : hiddenTransform,
+    }
+  
+    return (
+      <div className="detail" style={detailStyle}>
+        <div className="detailFill" style={fillStyle} />
+        {todayTasksString}
+      </div>
+    );
+  }
+
+  createCal () {
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"]
 
@@ -126,7 +170,6 @@ class CalGrid extends React.Component {
     const d = new Date();
     this.state.month = monthNames[d.getMonth()]
     
-    const sampleTasks = ["sample task 1", "sample task 2", "sample taks 3"];
 
 
     var today = new Date();
@@ -163,6 +206,15 @@ class CalGrid extends React.Component {
           backgroundColor = { background: "#d2e0c1" };
         }
 
+
+        fill = this.state.tasksArray[day-1]
+        if (fill != null) {
+          fill = fill.split("~!~").length * 10
+        }
+        else {
+          fill = 0
+        }
+
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
           height: fill + "%",
@@ -183,16 +235,26 @@ class CalGrid extends React.Component {
       this.state.monthArray = monthArr
       
     }
+  }
+
+
+
+  render() {
+
+    this.mapTasks()
+    this.createCal()
+    
 
     return (
       <div style={{height: "100%", width: "100%"}}>
 	  <h className="monthHeader">{this.state.month}</h>
           <table className="mainCalender">
             
-            <tbody>{monthArr}</tbody>
+            <tbody>{this.state.monthArray}</tbody>
           </table>
           <div onClick={(e) => this.toggleDetail(e, 0, this.state.detailLoc[0], this.state.detailLoc[1], 0)}>
-              <Detail fill={this.state.detailFill} detailToggle={this.state.detailToggle} detailLoc={this.state.detailLoc}/>
+              {console.log(this.state.detailLoc[0] + " " + this.state.detailLoc[1])}
+              {this.Detail()}
             </div>
         
       </div>
@@ -200,31 +262,6 @@ class CalGrid extends React.Component {
   }
 }
 
-
-function Detail(props) {
-  
-  const fillStyle = {
-    height: props.fill + "%",
-    bottom: "0%",
-  }
-  
-  const weekScale = 1/7;
-  const displacement = [(props.detailLoc[0]-3)*93+10, (props.detailLoc[1]-3)*weekScale*700]
-  const detailTransform = "scale(1)";
-  const hiddenTransform = "scale("+weekScale+", 0.2) translate("+displacement[1]+"%,"+(displacement[0])+"%)";
-  const detailStyle = {
-    borderRadius: props.detailToggle ? "1vh" : "5vh",
-    opacity: props.detailToggle,
-    zIndex: props.detailToggle ? "100" : "-2",
-    transform: props.detailToggle ? "scale(1)" : hiddenTransform,
-  }
-
-  return (
-    <div className="detail" style={detailStyle}>
-      <div className="detailFill" style={fillStyle} />
-    </div>
-  );
-}
 
 export default Home;
 
