@@ -47,6 +47,7 @@ class Home extends React.Component {
     })).catch(error => alert(error));
   }
 
+
   // mapDates
   // Here's where to implement function to display dates
   // Like MapClasses in ShowClasses
@@ -69,21 +70,6 @@ class Home extends React.Component {
   }
 
 }
-/*
-function Home() {
-  return (
-    <div className="App">
-      <div className="calendarBody">
-        <CalGrid />
-      </div>
-      <div className="taskDiv">Important Tasks here</div>
-      <div className="plantDiv">
-        <Plant />
-      </div>
-    </div>
-  );
-}
-*/
 
 class CalGrid extends React.Component {
   state = {
@@ -186,3 +172,19 @@ function Detail(props) {
 }
 
 export default Home;
+
+/*
+function Home() {
+  return (
+    <div className="App">
+      <div className="calendarBody">
+        <CalGrid />
+      </div>
+      <div className="taskDiv">Important Tasks here</div>
+      <div className="plantDiv">
+        <Plant />
+      </div>
+    </div>
+  );
+}
+*/

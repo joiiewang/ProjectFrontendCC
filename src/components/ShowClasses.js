@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as SVGLoaders from 'svg-loaders-react';
+//import "./components/css/ShowClasses.css";
 
 class ShowClasses extends React.Component {
   constructor() {
@@ -59,7 +60,7 @@ class ShowClasses extends React.Component {
     
     return (
       this.state.classes.map((course) => (
-        <button>
+        <button className = "classButton">
           {console.log(course)}
           <Link to = {{
             pathname: "/Course", 
@@ -83,11 +84,20 @@ class ShowClasses extends React.Component {
       )
     }
 
-    return (
-      <div>
-        <p>{this.mapClasses()}</p>
-      </div>
-    );
+    if (this.state.classes.length == 0) {
+      return (
+        <p>
+          You do not have any classes yet! Add a class to see them here.
+        </p>
+      )
+    }
+    else {
+      return (
+        <div>
+          <p>{this.mapClasses()}</p>
+        </div>
+      );
+      }
   }
 }
 
