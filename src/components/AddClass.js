@@ -1,5 +1,5 @@
 import React from "react";
-import * as SVGLoaders from 'svg-loaders-react';
+import './css/AddClass.css';
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
@@ -79,6 +79,7 @@ class AddClass extends React.Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input
+          className = "input"
           type="text"
           value={this.state.courseName}
           name="courseName"
@@ -86,7 +87,7 @@ class AddClass extends React.Component {
           onChange={this.handleChange}
         />
         <br />
-        <button>Submit</button>
+        <button className = "addButton">Submit</button>
       </form>
     );
   }
