@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as SVGLoaders from 'svg-loaders-react';
-import LoginBackground from "./plantimages/LoginBackground.png";
+import LoginBackground from "./plantimages/LoginBackground.svg";
 
 class Login extends React.Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class Login extends React.Component {
       padding: "10px",
       borderRadius: "25px",
       backgroundColor: "#76FF5B",
-      marginTop: "calc(50vh - 150px)",
+      marginTop: "calc(60vh - 150px)",
       marginLeft: "calc(50vw - 100px)",
     };
     const inputStyle = {
@@ -123,7 +123,7 @@ class Login extends React.Component {
       left: "0px",
       right: "0px",
       backgroundImage: "url("+LoginBackground+")",
-      backgroundSize: "100% 100%",
+      backgroundSize: "cover",
     };
 
     return (
