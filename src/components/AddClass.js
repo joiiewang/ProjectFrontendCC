@@ -20,17 +20,24 @@ class AddClass extends React.Component {
       : this.setState({ [name]: value });
   }
 
+  checkNull () {
+
+    if(!this.state.courseName.trim()){
+      alert("Please enter the name of your course")
+      return false;
+   }
+    else {
+      return true;
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.sendNameToBackend(); 
-    window.location.href = "/ShowClasses";
-    
-    /*
-    const timer = setTimeout(() => {
+    var notNull = this.checkNull()
+    if (notNull) {
+      this.sendNameToBackend(); 
       window.location.href = "/ShowClasses";
-      }, 1000);
-      */
-    
+    }
   }
 
    async sendNameToBackend () {
