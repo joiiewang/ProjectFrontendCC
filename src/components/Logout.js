@@ -2,21 +2,12 @@ import React from "react"
 
 
 export default class Logout extends React.Component {
-
-
     handleClick = (e) => {
         e.preventDefault();
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('password');
         sessionStorage.setItem('loggedIn', false);
       };
-
-     logOut = () => {
-        sessionStorage.removeItem('username');
-        sessionStorage.removeItem('password');
-        sessionStorage.setItem('loggedIn', false);
-    }
-    
 
     render () {
         return (
