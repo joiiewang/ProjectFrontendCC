@@ -1,0 +1,75 @@
+
+.classText {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.classButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cbfec0;
+    color: #fff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    padding: 0.25em 0.75em;;
+    min-width: 20ch;
+    min-height: 55px;
+    text-align: center;
+    margin-left:25px;
+    margin-right:10px;
+    margin-top:10px;
+  }
+
+  .classButton a:hover,
+.classButton a:hover::after {
+    color: #D3D3D3;
+}
+
+.courseHeader {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.deleteButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cbfec0;
+    color: black;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    padding: 0.25em 0.75em;;
+    width: 80px;
+    height: 30px;
+    text-align: center;
+    margin-left: 40%;
+    margin-right:10px;
+    margin-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.deleteCourseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cbfec0;
+    color: black;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0);
+    border-radius: 8px;
+    padding: 0.25em 0.75em;;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin-left:90%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
+}

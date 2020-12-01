@@ -176,7 +176,7 @@ class ToDoList extends React.Component {
     return(
       
         <div>
-          <h1>Todos</h1>
+          <h1 className= "moveRight">ToDos</h1>
           <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} handleChange = {this.handleChange} />
           <SubmitForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
         </div>
@@ -203,7 +203,8 @@ class SubmitForm extends React.Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <input 
+        <input
+          className = "moveRight" 
           type='text'
           placeholder='To Do Item'
           value={this.state.text}
@@ -221,14 +222,6 @@ class SubmitForm extends React.Component {
   }
 
 }
-/*
-<input 
-type='text'
-placeholder='Due Date(yyyymmdd)'
-value={this.state.dueDate}
-onChange={(r) => this.setState({dueDate: r.target.value})}
-/>
-*/
 
 const ToDoItemElements = (props) => {
   const todos = props.todos.map((toDoItem, index) => {

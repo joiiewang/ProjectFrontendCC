@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../components/css/ShowClasses.css";
 
 
 export default class Popup extends React.Component {
@@ -56,10 +56,9 @@ export default class Popup extends React.Component {
         let dialog = (
             <div style = {dialogStyles}>
                 Are you sure you want to delete {this.state.courseName}?
-                <button style = {dialogCloseButtonStyles} onClick= {this.deleteClass}>
-                Yes
-                </button>
-                <button style = {dialogCloseButtonStyles} onClick= {this.props.onClose}>No</button>
+                <button className= "deleteButton" onClick= {this.deleteClass}>
+                Yes </button>
+                <button className= "deleteButton" onClick= {this.props.onClose}>No</button>
             </div>
         )
         if (! this.props.isOpen) {
@@ -74,6 +73,7 @@ export default class Popup extends React.Component {
 }
 
 
+
 let dialogStyles = {
     width: '500px',
     maxWidth: '100%',
@@ -83,21 +83,11 @@ let dialogStyles = {
     bottom: '50%',
     transform: 'translate(-50%, -50%)',
     zIndex: '999',
-    backgroundColor: '#eee',
+    backgroundColor: ' #ffff',
     padding: '10px 20px 40px',
     borderRadius: '8px',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    border: '2px solid black',
 }
 
-let dialogCloseButtonStyles = {
-    marginBottom: '15px',
-    padding: '3px 8px',
-    cursor: 'pointer',
-    borderRadius: '50%',
-    border: 'none',
-    width: '30px',
-    height: '30px',
-    fontweight: 'bold',
-    alignSelf: 'flex-end'
-}

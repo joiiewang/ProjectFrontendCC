@@ -56,7 +56,8 @@ class NewUser extends React.Component {
         .then((data) => {
           console.log("SaveCreds saveCreds: Fetch Response data: ");
           console.log(data); //don't log an object WITH a string else the conversion won't work and object will not be dumped
-          alert("response: " + data["MESSAGE"]);
+          //alert("response: " + data["MESSAGE"]);
+          alert ("Welcome to Planner Planta")
           sessionStorage.setItem('username',this.state.userName);
           sessionStorage.setItem('password',this.state.password);
           this.setState({usernameExists: false})
@@ -161,12 +162,3 @@ class NewUser extends React.Component {
 
 export default NewUser;
 
-/*
-<Link to="/Home">
-          <input
-            type="submit"
-            style={loginStyle}
-            value="Let's start planning"
-          />
-        </Link>
-*/
