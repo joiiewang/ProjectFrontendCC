@@ -57,7 +57,7 @@ class AddClass extends React.Component {
       }
 
 
-    const url = (`${server}/api/v1/users/${username}/courses/`)
+    const url = (`${server}/api/v2/users/${username}/courses/`)
     const bd = JSON.stringify({ name: this.state.courseName});
 
     await fetch(url, {
