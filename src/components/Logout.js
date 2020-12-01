@@ -2,6 +2,7 @@ import React from "react"
 
 
 export default class Logout extends React.Component {
+    
     handleClick = (e) => {
         e.preventDefault();
         sessionStorage.removeItem('username');
