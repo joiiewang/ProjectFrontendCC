@@ -2,10 +2,16 @@ import React from "react"
 
 
 export default class Logout extends React.Component {
-   
 
 
-    logOut = () => {
+    handleClick = (e) => {
+        e.preventDefault();
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('password');
+        sessionStorage.setItem('loggedIn', false);
+      };
+
+     logOut = () => {
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('password');
         sessionStorage.setItem('loggedIn', false);
@@ -13,10 +19,9 @@ export default class Logout extends React.Component {
     
 
     render () {
-        {this.logOut()}
         return (
             <div>
-                <a href="/">Log Out</a>
+                <a href="/" onClick={() => this.handleClick()}>Log Out</a>
             </div>
         )
     }
