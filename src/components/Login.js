@@ -69,7 +69,7 @@ class Login extends React.Component {
       console.log(currentComponent.state.loggedIn);
       if (currentComponent.state.loggedIn) {
         sessionStorage.setItem("loggedIn", true);
-        window.location.href = "/ShowClasses";
+        window.location.href = "/Home";
       }
     }, 1000);
 
