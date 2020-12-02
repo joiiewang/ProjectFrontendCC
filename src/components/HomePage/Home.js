@@ -281,12 +281,13 @@ class CalGrid extends React.Component {
         } else if (day > daysInMonth) {
 	  day = day % (daysInMonth + 1) + 1;
           backgroundColor = { background: "#d2e0c1" };
-        } else {
+        }
+
           fill = this.state.tasksArray[day-1]
           if (fill != null) {
             fill = fill.split("~!~").length * 10
           }
-	}
+	
 
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
