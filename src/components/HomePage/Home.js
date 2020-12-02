@@ -259,7 +259,7 @@ class CalGrid extends React.Component {
 
     
     var monthArr = new Array(6);  // Array used to store trs of days for rendering
-    var fill = 0;
+    let fill = 0;
     
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
