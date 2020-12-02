@@ -293,7 +293,7 @@ class CalGrid extends React.Component {
 
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
-          height: fill + "%",
+	  height: ((fill>10)? 10 : fill) + "%",
           bottom: "0%",
         };
 
