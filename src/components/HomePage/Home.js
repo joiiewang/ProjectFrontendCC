@@ -128,7 +128,6 @@ class CalGrid extends React.Component {
     this.setState({detailToggle: toggle});
     this.setState({detailLoc: [i, j]});
     this.setState({detailFill: fill});
-    console.log("i: "+i+", j: "+j+", fill: "+fill)
   };
 
   // fetch that gets ToDos
@@ -201,7 +200,7 @@ class CalGrid extends React.Component {
 
     let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1]
     let todayTasksString = "You have no tasks today"
-    if (this.state.tasksArray[tasksArrayNumber] != null) {
+    if (!this.state.tasksArray[tasksArrayNumber]) {
       let todayTasks = this.state.tasksArray[tasksArrayNumber].split("~!~")
       todayTasksString = ""
       todayTasks.map ((task) => (
