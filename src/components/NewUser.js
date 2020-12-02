@@ -71,7 +71,7 @@ class NewUser extends React.Component {
         console.log(this.state.usernameExists)
         const timer = setTimeout( () => {
           if (!this.state.usernameExists) {
-            window.location.href = '/ShowClasses';
+            window.location.href = '/Home';
           }
           }, 1000);
   }

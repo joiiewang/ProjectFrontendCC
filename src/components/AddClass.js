@@ -1,5 +1,5 @@
 import React from "react";
-import * as SVGLoaders from 'svg-loaders-react';
+import './css/AddClass.css';
 
 // Need to make a pop-up window and pass to backend
 class AddClass extends React.Component {
@@ -20,18 +20,27 @@ class AddClass extends React.Component {
       : this.setState({ [name]: value });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.sendNameToBackend(); 
-    //alert('Adding course');
-    
-    const timer = setTimeout(() => {
-      window.location.href = "/ShowClasses";
-      }, 100);
-    
+  checkNull () {
+
+    if(!this.state.courseName.trim()){
+      alert("Please enter the name of your course")
+      return false;
+   }
+    else {
+      return true;
+    }
   }
 
-   sendNameToBackend () {
+  handleSubmit(event) {
+    event.preventDefault();
+    var notNull = this.checkNull()
+    if (notNull) {
+      this.sendNameToBackend(); 
+      window.location.href = "/ShowClasses";
+    }
+  }
+
+   async sendNameToBackend () {
 
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
@@ -48,10 +57,10 @@ class AddClass extends React.Component {
       }
 
 
-    const url = (`${server}/api/v1/users/${username}/courses/`)
+    const url = (`${server}/api/v2/users/${username}/courses/`)
     const bd = JSON.stringify({ name: this.state.courseName});
 
-    fetch(url, {
+    await fetch(url, {
       method: "POST",
       headers: new Headers({
           'Authorization': 'Basic '+btoa(username+":"+password),
@@ -77,6 +86,7 @@ class AddClass extends React.Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <input
+          className = "input"
           type="text"
           value={this.state.courseName}
           name="courseName"
@@ -84,7 +94,7 @@ class AddClass extends React.Component {
           onChange={this.handleChange}
         />
         <br />
-        <button>Submit</button>
+        <button className = "addButton">Submit</button>
       </form>
     );
   }

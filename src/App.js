@@ -8,7 +8,6 @@ import Navbar from "./components/Navbar";
 import InfoPage from "./components/InfoPage";
 import Links from "./components/Links";
 import Notes from "./components/Notes";
-import ToDoList from "./components/ToDoList";
 import Forest from "./components/Forest";
 import AddClass from "./components/AddClass";
 import NewUser from "./components/NewUser";

@@ -7,27 +7,104 @@ class Home extends React.Component {
     super ();
     this.state = {
       toDos: [],
+      weekTasks: [],
     }
+
+    this.getWeekTasks = this.getWeekTasks.bind(this)
+    this.NewLine = this.NewLine.bind(this)
   }
 
-  
+  componentDidMount () {
+    let currentComponent = this;
 
+    const username = sessionStorage.getItem('username')
+    const password = sessionStorage.getItem('password')
+
+    let server = "http://localhost:8118";
+
+      if (process.env.REACT_APP_REMOTE) {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+      if (process.env.NODE_ENV !== "development") {
+        server = "https://project-backend-cc.herokuapp.com";
+      }
+
+    const url = (`${server}/api/v2/users/${username}/todos/`)
+
+    fetch(url, {
+      method: 'get',
+      headers: new Headers({
+      	'Authorization': 'Basic '+btoa(username+":"+password),
+	    'Content-Type': 'application/json'
+      })
+    }).then(function(response){
+      if(!response.ok) {
+	throw new Error("HTTP status "+response.status)
+      }
+      return response.json();
+    }).then(data => this.setState({
+      toDos: data
+    })).catch(error => alert(error));
+  }
+
+  getWeekTasks() {
+
+    var weekArray = []
+    this.state.toDos.map ((toDo) => {
+      var dateArray = toDo.dueDate.split("-")
+      var currentDate = new Date();
+      var currentMonth = currentDate.getMonth() + 1
+      var currentDay = currentDate.getDate()
+
+      var dateMonth = Number (dateArray[1])
+      var dateDay = Number (dateArray[2])
+
+      if (toDo.completed == false) {
+        if (dateMonth == currentMonth) {
+          if (dateDay == currentDay) {
+            weekArray.push(toDo.text)
+          }
+        }
+      }
+
+    })
+    this.state.weekTasks = weekArray
+  }
+
+  NewLine() {
+    return (
+
+    this.state.weekTasks.map((item) => (
+      <div>
+        {item}
+      </div>
+    ))
+    )
+  }
 
   render () {
+    this.getWeekTasks();
+    console.log("WeekTasks " + this.state.weekTasks)
     return (
       <div className="App">
         <div className="calendarBody">
           <CalGrid />
         </div>
-        <div className="taskDiv">Important Tasks here</div>
+        <div className="taskDiv">
+          <br/>
+          Today's Tasks: 
+          <p> ---------------- </p>
+          <this.NewLine/>
+        </div>
         <div className="plantDiv">
           <Plant />
         </div>
       </div>
     );
   }
-
 }
+
 
 class CalGrid extends React.Component {
   constructor() {
@@ -48,7 +125,6 @@ class CalGrid extends React.Component {
   }
 
   toggleDetail = (e, toggle, i, j, fill) => {
-    console.log("clicked");
     this.setState({detailToggle: toggle});
     this.setState({detailLoc: [i, j]});
     this.setState({detailFill: fill});
@@ -95,26 +171,22 @@ class CalGrid extends React.Component {
     var mapTaskArray = new Array (31)
     this.state.toDos.map ((toDo) => {
       var dateArray = toDo.dueDate.split("-")
-       //console.log("Date array" + dateArray)
       var currentDate = new Date();
       var currentMonth = currentDate.getMonth() + 1
       
-      //console.log("toDo" + toDo)
       if (toDo.completed == false) {
         var dateMonth = Number (dateArray[1])
         if (dateMonth == currentMonth) {
           var dayInt = Number (dateArray[2]) -1
-          if (mapTaskArray [dayInt]) {
+            if (mapTaskArray [dayInt]) {
             mapTaskArray [dayInt] += "~!~" + toDo.text
           }
           else {
             mapTaskArray [dayInt] = toDo.text
           }
-          //console.log ("toDotext" + toDo.text)
       }}}
     )
     this.state.tasksArray = mapTaskArray
-    //console.log("TasksArray " + this.state.tasksArray)
   }
 
   NewLine(props) {
@@ -135,7 +207,6 @@ class CalGrid extends React.Component {
         todayTasksString += task + "\n"
       ))
     }  
-    console.log("todays tasks " + todayTasksString)
     
   
     const fillStyle = {
@@ -165,11 +236,7 @@ class CalGrid extends React.Component {
       </div>
     );
   }
-  /*
-  <p>
-          {todayTasksString}
-          </p>
-  */
+ 
 
   createCal () {
     const monthNames = ["January", "February", "March", "April", "May", "June",
