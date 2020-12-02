@@ -1,10 +1,11 @@
 import React from "react";
 import ForestClass from "./ForestClass";
-import "./css/Forest.css";
+import Fireflies from "./Fireflies";
 import * as SVGLoaders from 'svg-loaders-react';
 import ForestBackground from "./plantimages/ForestBackground.svg";
 
-function Forest() {
+function Forest (){
+
 
   const background = {
     position: "fixed",
@@ -17,10 +18,13 @@ function Forest() {
     backgroundSize: "cover",
   };
 
+
+
   return (
-    <div /* style={background} */>
-      
+    
+    <div style={background} >
       <ForestClass/>
+      <Fireflies/>
     </div>
   );
 }
