@@ -197,8 +197,9 @@ class CalGrid extends React.Component {
 
 
    Detail() {
-
-    let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1]
+    var today = new Date();
+    var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7); 
+    let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1] + offset
     let todayTasksString = "You have no tasks today"
     console.log(this.state.tasksArray)
     if (this.state.tasksArray && this.state.tasksArray[tasksArrayNumber]) {
