@@ -197,10 +197,12 @@ class CalGrid extends React.Component {
 
 
    Detail() {
-
-    let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1]
+    var today = new Date();
+    var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7); 
+    let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1] + offset
     let todayTasksString = "You have no tasks today"
-    if (this.state.tasksArray[tasksArrayNumber] != null) {
+    console.log(this.state.tasksArray)
+    if (this.state.tasksArray && this.state.tasksArray[tasksArrayNumber]) {
       let todayTasks = this.state.tasksArray[tasksArrayNumber].split("~!~")
       todayTasksString = ""
       todayTasks.map ((task) => (
@@ -259,7 +261,7 @@ class CalGrid extends React.Component {
 
     
     var monthArr = new Array(6);  // Array used to store trs of days for rendering
-    var fill = 0;
+    let fill = 0;
     
     for (let i = 0; i < monthArr.length; i++) {
       const weekArr = new Array(7);
@@ -268,7 +270,7 @@ class CalGrid extends React.Component {
 	  weekArr[j] = (<th key={i*7+j} className="weekDayDiv"> {weekNames[j]} </th>);
 	  continue;
 	}
-        var day = i * 7 + j - offset + 1 -7;
+        var day = i * 7 + j + offset + 1 -7;
         var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
           var daysInLastMonth = new Date(
@@ -281,20 +283,18 @@ class CalGrid extends React.Component {
         } else if (day > daysInMonth) {
 	  day = day % (daysInMonth + 1) + 1;
           backgroundColor = { background: "#d2e0c1" };
-        }
-
-
-        fill = this.state.tasksArray[day-1]
-        if (fill != null) {
-          fill = fill.split("~!~").length * 10
-        }
-        else {
-          fill = 0
-        }
+        } else {
+          fill = this.state.tasksArray[day-1]
+          if (fill != null) {
+            fill = fill.split("~!~").length * 10
+          }
+	  console.log("setup: " + fill)
+	}
+	
 
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
-          height: fill + "%",
+	  height: ((fill>10)? 10 : fill) + "%",
           bottom: "0%",
         };
 
