@@ -1,5 +1,10 @@
-import React from "react";
 import * as SVGLoaders from 'svg-loaders-react';
+import plant6 from "./plantimages/plant6.svg";
+import "./css/HomePlant.css";
+import React, { useRef } from 'react';
+
+
+
 
 class ForestClass extends React.Component {
     constructor() {
@@ -44,6 +49,7 @@ class ForestClass extends React.Component {
       })).catch(error => alert(error));
     }
 
+
     render() {
         if(!this.state.loaded){
           const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
@@ -53,10 +59,29 @@ class ForestClass extends React.Component {
             </div>
           )
         }
+
+        var i;
+        var trees=[];
+        for(i=0;i<this.state.trees;i++){
+          trees.push(plant6);
+        }
+
+        const image = {
+          //position: "absolute",
+          maxWidth: "10%",
+          maxHeight: "10%",
+        }
+
+        /* var Images=[];
+        for(i=0;i<this.state.trees;i++){
+          Images.push(image);
+        }
+        console.log(Images) */
         return (
           <div>
             <h1>Currently this user has {this.state.trees} tree(s).</h1>
             <h2>Someone please make this pretty page :) - Zac</h2>
+            {trees.map((index)=>(<img src={index} style={image}/>))}
           </div>
         );
       }

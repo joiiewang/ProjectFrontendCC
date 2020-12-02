@@ -83,8 +83,9 @@ class HomePlant extends React.Component {
           </div>
       )
     }
+    const style2 = { position: "relative", top: "50%", left: "70%", transform: "translate(-50%, -50%)" };
     return (
-      <div>
+      <div style = {style2}>
         <img src={this.choosePlant(this.state.points)} alt="Happy Plant" />
       </div>
     );
