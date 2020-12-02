@@ -268,7 +268,7 @@ class CalGrid extends React.Component {
 	  weekArr[j] = (<th key={i*7+j} className="weekDayDiv"> {weekNames[j]} </th>);
 	  continue;
 	}
-        var day = i * 7 + j - offset + 1 -7;
+        var day = i * 7 + j + offset + 1 -7;
         var backgroundColor = { background: "#eaffdb" };
         if (day < 1) {
           var daysInLastMonth = new Date(
@@ -281,16 +281,12 @@ class CalGrid extends React.Component {
         } else if (day > daysInMonth) {
 	  day = day % (daysInMonth + 1) + 1;
           backgroundColor = { background: "#d2e0c1" };
-        }
-
-
-        fill = this.state.tasksArray[day-1]
-        if (fill != null) {
-          fill = fill.split("~!~").length * 10
-        }
-        else {
-          fill = 0
-        }
+        } else {
+          fill = this.state.tasksArray[day-1]
+          if (fill != null) {
+            fill = fill.split("~!~").length * 10
+          }
+	}
 
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
