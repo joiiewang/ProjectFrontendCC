@@ -44,7 +44,7 @@ class InfoPage extends React.Component {
           When your tree is fully grown it will appear in your forest and you will begin progress towards a new tree!</p>
         </div>
         <div className="treeBody">
-        <img src={tree} alt="Happy Plant" />
+        <img src={tree} className="infoTreeImg" alt="Happy Plant" />
         </div>
         
       </div>
