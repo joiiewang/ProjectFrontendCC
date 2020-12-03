@@ -287,8 +287,9 @@ class CalGrid extends React.Component {
           fill = this.state.tasksArray[day-1]
           if (fill != null) {
             fill = fill.split("~!~").length * 10
+            console.log ("fill " + fill)
           }
-	  console.log("setup: " + fill)
+	  
 	}
 	
 
@@ -297,6 +298,7 @@ class CalGrid extends React.Component {
 	  height: ((fill>10)? 10 : fill) + "%",
           bottom: "0%",
         };
+        console.log("setup: " + fill)
 
         weekArr[j] = (
 	  <td key={i*7+j} style={backgroundColor} 
