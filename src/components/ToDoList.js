@@ -47,7 +47,7 @@ class ToDoList extends React.Component {
     .then(data=>this.setState({
       todos: data,
       loaded: true 
-    })).catch(error => alert(error));
+    })).catch(error => console.log(error));
 
   }
 
@@ -90,7 +90,7 @@ class ToDoList extends React.Component {
         return response.json();
       }).then(data => this.setState({
         todos: [...this.state.todos, data]
-      })).catch(error => alert(error));
+      })).catch(error => console.log(error));
   };
 
   handleChange = (id) => {
@@ -123,7 +123,7 @@ class ToDoList extends React.Component {
         'Authorization': 'Basic '+btoa(username+":"+password),
         'Content-Type': 'application/json'
       })
-    }).catch(error => alert(error));
+    }).catch(error => console.log(error));
   }
   
   handleDelete = (index, id) => {
@@ -134,9 +134,6 @@ class ToDoList extends React.Component {
     newToDoItemArr.splice(newToDoItemArr.findIndex(x), 1);
     this.setState({todos: newToDoItemArr});
 
-    /* const newToDoItemArr = [...this.state.todos];
-    newToDoItemArr.splice(index, 1);
-    this.setState({todos: newToDoItemArr}); */
 
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
@@ -204,19 +201,21 @@ class SubmitForm extends React.Component {
     return(
       <form onSubmit={this.handleSubmit}>
         <input
-          className = "moveRight" 
+          className = "toDoInput"
           type='text'
           placeholder='To Do Item'
           value={this.state.text}
           onChange={(e) => this.setState({text: e.target.value})}
         />
         <input 
+          className = "dateInput"
           type='date'
           placeholder='Due Date'
           value={this.state.dueDate}
           onChange={(r) => this.setState({dueDate: r.target.value})}
         />
-        <button>Add</button>
+        <button className = "toDoAddButton"
+        >Add</button>
       </form>
     );
   }
@@ -259,7 +258,12 @@ const Elem = (props) => {
           {props.dueDate}
           </p>
 
-       <button onClick={() => {props.onDelete(props.key, props.id)}}>Remove</button>    
+       <button 
+       className = "removeButton"
+       onClick={() => {props.onDelete(props.key, props.id)}}>
+         <div className= "removeText">
+          Remove
+           </div></button>    
  
     </div>
   );

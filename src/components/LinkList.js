@@ -159,19 +159,21 @@ class SubmitLinkForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input 
-          className = "moveRight"
+          className = "linksInput"
           type="text"
           placeholder="Enter Name"
           value={this.state.text}
           onChange={(e) => this.setState({ text: e.target.value })}
         />
         <input
+          className = "urlInput"
           type="text"
           placeholder="Enter URL"
           value={this.state.url}
           onChange={(r) => this.setState({ url: r.target.value })}
         />
-        <button>Add</button>
+        <button className = "urlAddButton"
+        >Add</button>
       </form>
     );
   }
@@ -213,6 +215,7 @@ const Elem = (props) => {
         {props.name}
       </a>
       <button
+        className = "removeButton"
         onClick={() => {
           props.onDelete(props.key, props.id);
         }}
