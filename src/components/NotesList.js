@@ -159,13 +159,14 @@ class SubmitNoteForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input
-            className = "moveRight"
+            className = "notesInput"
             type="text"
             placeholder="Enter Item"
             value={this.state.text}
             onChange={(e) => this.setState({ text: e.target.value })}
           />
-          <button>Add</button>
+          <button className = "notesAddButton"
+          >Add</button>
         </form>
       </div>
     );
@@ -194,6 +195,7 @@ const Todo = (props) => {
     <div className="element">
       <p>{props.content}</p>
       <button
+        className = "removeButton"
         onClick={() => {
           props.onDelete(props.key, props.id);
         }}

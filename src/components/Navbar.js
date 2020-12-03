@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import classNames from "./AddClass";
 import "./css/NavBar.css";
 import Logout from "./Logout"
 
@@ -165,34 +164,3 @@ function DropdownMenuTwo() {
     );
 }
 
-
-/*
-  return (
-    <Navbar>
-      <li className="item">
-        <a className="item" href="/Home">
-          Home
-        </a>
-        <a className="item" href="/ToDoList">
-          Todo's
-        </a>
-        <a className="item" href="/Links">
-          Links
-        </a>
-        <a className="item" href="/Notes">
-          Notes
-        </a>
-        <a className="item" href="/Forest">
-          Forest
-        </a>
-      </li>
-
-      <NavItem icon="Classes">
-        <DropdownMenu></DropdownMenu>
-      </NavItem>
-      <NavItem icon="More">
-        <DropdownMenuTwo></DropdownMenuTwo>
-      </NavItem>
-    </Navbar>
-  );
-  */
