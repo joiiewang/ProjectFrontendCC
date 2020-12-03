@@ -152,7 +152,9 @@ class SubmitNoteForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.text === "") return;
+    if (!this.state.text || this.state.text.length === 0 || /^\s*$/.test(this.state.text)) {
+      return;
+    }
     this.props.onFormSubmit(this.state);
     this.setState({ text: "" });
   };

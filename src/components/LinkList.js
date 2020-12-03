@@ -151,8 +151,12 @@ class SubmitLinkForm extends React.Component {
 
   handleSubmit = (e, r) => {
     e.preventDefault();
-    if (this.state.text === "") return;
-    if (this.state.url === "") return;
+    if (!this.state.text || this.state.text.length === 0 || /^\s*$/.test(this.state.text)) {
+      return;
+    }
+    if (!this.state.url || this.state.url.length === 0 || /^\s*$/.test(this.state.url)) {
+      return;
+    }
     this.props.onFormSubmit(this.state);
     this.setState({ text: "" });
     this.setState({ url: "" });

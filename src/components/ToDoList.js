@@ -187,7 +187,9 @@ class SubmitForm extends React.Component {
 
   handleSubmit = (e, r) => {
     e.preventDefault();
-    if(this.state.text === '') return;
+    if (!this.state.text || this.state.text.length === 0 || /^\s*$/.test(this.state.text)) {
+      return;
+    }
     if (this.state.dueDate === '') return;
     this.props.onFormSubmit(this.state);
     this.setState({ text: '' });
