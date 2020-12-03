@@ -8,7 +8,8 @@ class ToDoList extends React.Component {
     this.state = {
       courseid: this.props.id ? this.props.id : null,
       todos: [], 
-      loaded: false
+      loaded: false,
+      showUncompleted: false,
     };
   }
 
@@ -161,7 +162,27 @@ class ToDoList extends React.Component {
   }
   //Call api, get JSON with items and change state
 
+  showMoreButton () {
+    if (this.state.showUncompleted) {
+      return (
+        <div>
+          Show less
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+        Show Completed
+        </div>
+      )
+      
+    }
+  }
+
+
   render() {
+
     const style = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" };
     if(!this.state.loaded){
       return (
@@ -174,7 +195,21 @@ class ToDoList extends React.Component {
       
         <div>
           <h1 className= "moveRight">ToDos</h1>
-          <ToDoItemElements todos={this.state.todos} onDelete= {this.handleDelete} handleChange = {this.handleChange} />
+          <button 
+          className = "showMoreButton" 
+          onClick = {(event) => this.setState(prevState => ({
+            showUncompleted: !prevState.showUncompleted
+          }))}>
+
+            {this.showMoreButton()}
+            
+
+            </button>
+          <ToDoItemElements 
+          showUncompleted= {this.state.showUncompleted} 
+          todos={this.state.todos} 
+          onDelete= {this.handleDelete} 
+          handleChange = {this.handleChange} />
           <SubmitForm onFormSubmit={this.handleSubmit} courseid={this.props.id} />
         </div>
     
@@ -229,19 +264,47 @@ class SubmitForm extends React.Component {
 }
 
 const ToDoItemElements = (props) => {
+  console.log("showUncompleted: " + props.showUncompleted)
+  let showUncompleted = props.showUncompleted
   const todos = props.todos.map((toDoItem, index) => {
-    return <Elem name={toDoItem.text} dueDate={toDoItem.dueDate} completed={toDoItem.completed} key={index} id={toDoItem.id} onDelete={props.onDelete} handleChange={props.handleChange} />
+    return <Elem 
+    name={toDoItem.text} 
+    dueDate={toDoItem.dueDate} 
+    completed={toDoItem.completed} 
+    key={index} id={toDoItem.id} 
+    onDelete={props.onDelete} 
+    handleChange={props.handleChange} />
   })  
   const sortedToDos = todos.sort(function (a, b){return ('' + a.props.dueDate).localeCompare(b.props.dueDate) });  
   const finalsortedToDos = sortedToDos.sort(function(a, b){return (a.props.completed === b.props.completed)? 0 : a.props.completed? 1 : -1;})
-  return( 
-    <div className = "toDoBox">
-      {finalsortedToDos}
-    </div>
-  );
+
+  
+  const onlyUncheckedToDos = finalsortedToDos.filter(toDo => 
+    //console.log ("ToDo: " + toDo.props.completed)
+    toDo.props.completed == false
+  )
+
+  if (showUncompleted) {
+    return( 
+      <div className = "toDoBox">
+        {finalsortedToDos}
+      </div>
+    );
+  }
+  else {
+    return( 
+      <div className = "toDoBox">
+        {onlyUncheckedToDos}
+      </div>
+    );
+  }
+
 }
 
+
 const Elem = (props) => {
+  
+
   const styles = 
   {
     fontSize: "5 px"
@@ -252,25 +315,33 @@ const Elem = (props) => {
     color: "#cdcdcd",
     textDecoration: "line-through"
   }
-  return(
-    <div className = "element">
-      <input 
-          type="checkbox" 
-          checked= {props.completed}
-          onChange={() => props.handleChange(props.id)}
-      />
-        <p style={props.completed ? completedStyle: null}>
-          {props.name + " "}
-          {props.dueDate}
-          </p>
 
-       <button 
-       className = "removeButton"
-       onClick={() => {props.onDelete(props.key, props.id)}}>
-         <div className= "removeText">
-          Remove
-           </div></button>    
- 
+  let showAll = (
+      <div className = "element">
+        <input 
+            type="checkbox" 
+            checked= {props.completed}
+            onChange={() => props.handleChange(props.id)}
+        />
+          <p style={props.completed ? completedStyle: null}>
+            {props.name + " "}
+            {props.dueDate}
+            </p>
+  
+         <button 
+         className = "removeButton"
+         onClick={() => {props.onDelete(props.key, props.id)}}>
+           <div className= "removeText">
+            Remove
+             </div></button>    
+   
+      </div>
+  )
+
+
+  return(
+    <div>
+    {showAll}
     </div>
   );
 }
