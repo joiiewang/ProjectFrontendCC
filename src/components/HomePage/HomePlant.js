@@ -50,7 +50,7 @@ class HomePlant extends React.Component {
       }
       return response.json();
     }).then(data => this.setState({
-      points: data.points,
+      points: (data.points%12),
       loaded: true
     })).catch(error => alert(error));
   }

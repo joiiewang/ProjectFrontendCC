@@ -1,3 +1,36 @@
 .moveRight{
     margin-left: 30%;
 }
+
+
+.background {
+    position: fixed;
+    background-color: #e4a55166;
+    top: 60px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+.infoBody {
+    position: fixed;
+    border-radius: 1vh;
+    background-color: #cbfec0;
+    top: 22vh;
+    left: 10vw;
+    right: 45vw;
+    bottom: 15vh;
+    box-shadow: inset 0px 0px 0px 2px green;
+    text-align: center;
+    font-size: 0.9vw;
+    overflow: hidden;
+
+  }
+
+  .treeBody {
+    position: fixed;
+    top: 22vh;
+    left: 55vw;
+    right: 10vw;
+    bottom: 15vh;
+    text-align: center;
+  }

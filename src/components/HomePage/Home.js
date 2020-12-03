@@ -40,12 +40,12 @@ class Home extends React.Component {
       })
     }).then(function(response){
       if(!response.ok) {
-	throw new Error("HTTP status "+response.status)
+  throw new Error("HTTP status "+response.status)
       }
       return response.json();
     }).then(data => this.setState({
       toDos: data
-    })).catch(error => alert(error));
+    })).catch(error => console.log(error));
   }
 
   getWeekTasks() {
@@ -85,7 +85,6 @@ class Home extends React.Component {
 
   render () {
     this.getWeekTasks();
-    console.log("WeekTasks " + this.state.weekTasks)
     return (
       <div className="App">
         <div className="calendarBody">
@@ -164,7 +163,7 @@ class CalGrid extends React.Component {
       return response.json();
     }).then(data => this.setState({
       toDos: data
-    })).catch(error => alert(error));
+    })).catch(error => console.log(error));
   }
 
   mapTasks() {
@@ -201,7 +200,6 @@ class CalGrid extends React.Component {
     var offset = (today.getDate() % 7) - ((today.getDay() + 1) % 7); 
     let tasksArrayNumber = this.state.detailLoc[0]*7 -7 + this.state.detailLoc[1] + offset
     let todayTasksString = "You have no tasks today"
-    console.log(this.state.tasksArray)
     if (this.state.tasksArray && this.state.tasksArray[tasksArrayNumber]) {
       let todayTasks = this.state.tasksArray[tasksArrayNumber].split("~!~")
       todayTasksString = ""
@@ -292,10 +290,9 @@ class CalGrid extends React.Component {
 	  
 	}
 	
-
         //fill = Math.floor(Math.random() * 10) * 10;
         const fillStyle = {
-	  height: ((fill>10)? 10 : fill) + "%",
+	  height: ((fill>100)? 100 : fill) + "%",
           bottom: "0%",
         };
         console.log("setup: " + fill)

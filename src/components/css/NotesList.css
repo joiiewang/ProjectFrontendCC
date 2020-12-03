@@ -17,6 +17,63 @@
   padding: 10px 0 10px;   
 }
 
+.remChars{
+  margin-left: 30%;
+  color: #000; /* Fallback for older browsers */
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 8pt;
+  font-family: Arial, sans-serif;
+  margin-bottom: 10ch;
+}
+
 .moveRight{
   margin-left: 30%;
+}
+
+.notesInput{
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left:30%;
+  margin-top: 2ch;
+  margin-right: 2ch;
+}
+
+.removeButton {
+  display: inline-flex;
+  height: 4ch;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+  color: white;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  padding: 0.25em 0.75em;
+  text-align: center;
+}
+
+.removeButton:hover, 
+.removeButton:hover::after {
+  background-color: red;
+}
+
+.notesAddButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #cbfec0(199, 220, 165);
+  color: black;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  padding: 0.25em 0.75em;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.notesAddButton:hover, 
+.notesAddButton:hover::after {
+  background-color: #6c319c;
+  color: white;
 }

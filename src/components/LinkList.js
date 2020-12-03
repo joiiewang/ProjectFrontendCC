@@ -95,8 +95,11 @@ class LinkList extends React.Component {
   };
 
   handleDelete = (index, id) => {
+
+    const x = (link) => link.id === id;
+
     const newLinkArr = [...this.state.links];
-    newLinkArr.splice(index, 1);
+    newLinkArr.splice(newLinkArr.findIndex(x), 1);
     this.setState({ links: newLinkArr });
 
     const username = sessionStorage.getItem('username')
@@ -148,8 +151,12 @@ class SubmitLinkForm extends React.Component {
 
   handleSubmit = (e, r) => {
     e.preventDefault();
-    if (this.state.text === "") return;
-    if (this.state.url === "") return;
+    if (!this.state.text || this.state.text.length === 0 || /^\s*$/.test(this.state.text)) {
+      return;
+    }
+    if (!this.state.url || this.state.url.length === 0 || /^\s*$/.test(this.state.url)) {
+      return;
+    }
     this.props.onFormSubmit(this.state);
     this.setState({ text: "" });
     this.setState({ url: "" });
@@ -157,22 +164,28 @@ class SubmitLinkForm extends React.Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <input 
-          className = "moveRight"
+          className = "linksInput"
           type="text"
           placeholder="Enter Name"
+          maxlength="64"
           value={this.state.text}
           onChange={(e) => this.setState({ text: e.target.value })}
         />
         <input
+          className = "urlInput"
           type="text"
           placeholder="Enter URL"
           value={this.state.url}
           onChange={(r) => this.setState({ url: r.target.value })}
         />
-        <button>Add</button>
+        <button className = "urlAddButton"
+        >Add</button>
       </form>
+      <p className = "linkRemChars">{64 - this.state.text.length} characters remaining...</p>
+      </div>
     );
   }
 }
@@ -203,7 +216,7 @@ const LinkElements = (props) => {
 const Elem = (props) => {
   var url;
   url = props.url;
-  if (!props.url.includes("https://")) {
+  if (!props.url.includes("https://") && !props.url.includes("http://")) {
     url = "https://" + url;
   }
   return (
@@ -213,6 +226,7 @@ const Elem = (props) => {
         {props.name}
       </a>
       <button
+        className = "removeButton"
         onClick={() => {
           props.onDelete(props.key, props.id);
         }}

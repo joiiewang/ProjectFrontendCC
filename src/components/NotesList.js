@@ -93,8 +93,11 @@ class NotesList extends React.Component {
   };
 
   handleDelete = (index, id) => {
+
+    const x = (note) => note.id === id;
+
     const newArr = [...this.state.notes];
-    newArr.splice(index, 1);
+    newArr.splice(newArr.findIndex(x), 1);
     this.setState({ notes: newArr });
 
     const username = sessionStorage.getItem('username')
@@ -149,7 +152,9 @@ class SubmitNoteForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.text === "") return;
+    if (!this.state.text || this.state.text.length === 0 || /^\s*$/.test(this.state.text)) {
+      return;
+    }
     this.props.onFormSubmit(this.state);
     this.setState({ text: "" });
   };
@@ -159,14 +164,17 @@ class SubmitNoteForm extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <input
-            className = "moveRight"
+            className = "notesInput"
             type="text"
             placeholder="Enter Item"
+            maxlength="128"
             value={this.state.text}
             onChange={(e) => this.setState({ text: e.target.value })}
           />
-          <button>Add</button>
+          <button className = "notesAddButton"
+          >Add</button>
         </form>
+      <p className = "remChars">{128 - this.state.text.length} characters remaining...</p>
       </div>
     );
   }
@@ -194,6 +202,7 @@ const Todo = (props) => {
     <div className="element">
       <p>{props.content}</p>
       <button
+        className = "removeButton"
         onClick={() => {
           props.onDelete(props.key, props.id);
         }}
