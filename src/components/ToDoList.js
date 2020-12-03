@@ -162,6 +162,23 @@ class ToDoList extends React.Component {
   }
   //Call api, get JSON with items and change state
 
+  showMoreButton () {
+    if (this.state.showUncompleted) {
+      return (
+        <div>
+          Show less
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+        Show Completed
+        </div>
+      )
+      
+    }
+  }
 
 
   render() {
@@ -182,7 +199,12 @@ class ToDoList extends React.Component {
           className = "showMoreButton" 
           onClick = {(event) => this.setState(prevState => ({
             showUncompleted: !prevState.showUncompleted
-          }))}>Show all</button>
+          }))}>
+
+            {this.showMoreButton()}
+            
+
+            </button>
           <ToDoItemElements 
           showUncompleted= {this.state.showUncompleted} 
           todos={this.state.todos} 
@@ -256,38 +278,33 @@ const ToDoItemElements = (props) => {
   const sortedToDos = todos.sort(function (a, b){return ('' + a.props.dueDate).localeCompare(b.props.dueDate) });  
   const finalsortedToDos = sortedToDos.sort(function(a, b){return (a.props.completed === b.props.completed)? 0 : a.props.completed? 1 : -1;})
 
-  console.log("final sorted " + finalsortedToDos)
-  const onlyCheckedToDos = finalsortedToDos.map((toDoItem, index) => {
-    console.log ("Only checked" + toDoItem)
-    if (!toDoItem.completed) {
-      return <Elem 
-        name={toDoItem.text} 
-        dueDate={toDoItem.dueDate} 
-        completed={toDoItem.completed} 
-        key={index} id={toDoItem.id} 
-        onDelete={props.onDelete} 
-        handleChange={props.handleChange} />
-    }
-  })
+  
+  const onlyUncheckedToDos = finalsortedToDos.filter(toDo => 
+    //console.log ("ToDo: " + toDo.props.completed)
+    toDo.props.completed == false
+  )
 
   if (showUncompleted) {
-    return( 
-      <div className = "toDoBox">
-        {onlyCheckedToDos}
-      </div>
-    );
-  }
-  else {
     return( 
       <div className = "toDoBox">
         {finalsortedToDos}
       </div>
     );
   }
+  else {
+    return( 
+      <div className = "toDoBox">
+        {onlyUncheckedToDos}
+      </div>
+    );
+  }
 
 }
 
+
 const Elem = (props) => {
+  
+
   const styles = 
   {
     fontSize: "5 px"
