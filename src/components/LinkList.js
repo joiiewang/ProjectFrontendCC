@@ -180,7 +180,7 @@ class SubmitLinkForm extends React.Component {
         <button className = "urlAddButton"
         >Add</button>
       </form>
-      <p className = "remChars">{64 - this.state.text.length} characters remaining...</p>
+      <p className = "linkRemChars">{64 - this.state.text.length} characters remaining...</p>
       </div>
     );
   }
