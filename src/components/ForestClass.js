@@ -39,7 +39,7 @@ class ForestClass extends React.Component {
         }
         return response.json();
       }).then(data => this.setState({
-        trees: data.trees,
+        trees: Math.floor(data.points/12),
         loaded: true
       })).catch(error => alert(error));
     }
