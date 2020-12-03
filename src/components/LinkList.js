@@ -95,8 +95,11 @@ class LinkList extends React.Component {
   };
 
   handleDelete = (index, id) => {
+
+    const x = (link) => link.id === id;
+
     const newLinkArr = [...this.state.links];
-    newLinkArr.splice(index, 1);
+    newLinkArr.splice(newLinkArr.findIndex(x), 1);
     this.setState({ links: newLinkArr });
 
     const username = sessionStorage.getItem('username')
@@ -157,11 +160,13 @@ class SubmitLinkForm extends React.Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.handleSubmit}>
         <input 
           className = "linksInput"
           type="text"
           placeholder="Enter Name"
+          maxlength="64"
           value={this.state.text}
           onChange={(e) => this.setState({ text: e.target.value })}
         />
@@ -175,6 +180,8 @@ class SubmitLinkForm extends React.Component {
         <button className = "urlAddButton"
         >Add</button>
       </form>
+      <p className = "remChars">{64 - this.state.text.length} characters remaining...</p>
+      </div>
     );
   }
 }
@@ -205,7 +212,7 @@ const LinkElements = (props) => {
 const Elem = (props) => {
   var url;
   url = props.url;
-  if (!props.url.includes("https://")) {
+  if (!props.url.includes("https://") && !props.url.includes("http://")) {
     url = "https://" + url;
   }
   return (

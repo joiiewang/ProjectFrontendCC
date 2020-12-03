@@ -93,8 +93,11 @@ class NotesList extends React.Component {
   };
 
   handleDelete = (index, id) => {
+
+    const x = (note) => note.id === id;
+
     const newArr = [...this.state.notes];
-    newArr.splice(index, 1);
+    newArr.splice(newArr.findIndex(x), 1);
     this.setState({ notes: newArr });
 
     const username = sessionStorage.getItem('username')
@@ -162,12 +165,14 @@ class SubmitNoteForm extends React.Component {
             className = "notesInput"
             type="text"
             placeholder="Enter Item"
+            maxlength="128"
             value={this.state.text}
             onChange={(e) => this.setState({ text: e.target.value })}
           />
           <button className = "notesAddButton"
           >Add</button>
         </form>
+      <p className = "remChars">{128 - this.state.text.length} characters remaining...</p>
       </div>
     );
   }
