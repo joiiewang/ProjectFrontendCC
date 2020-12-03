@@ -134,9 +134,6 @@ class ToDoList extends React.Component {
     newToDoItemArr.splice(newToDoItemArr.findIndex(x), 1);
     this.setState({todos: newToDoItemArr});
 
-    /* const newToDoItemArr = [...this.state.todos];
-    newToDoItemArr.splice(index, 1);
-    this.setState({todos: newToDoItemArr}); */
 
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')
