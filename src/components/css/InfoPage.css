@@ -2,6 +2,15 @@
     margin-left: 30%;
 }
 
+
+.background {
+    position: fixed;
+    background-color: #e4a55166;
+    top: 60px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
 .infoBody {
     position: fixed;
     border-radius: 1vh;
@@ -12,6 +21,9 @@
     bottom: 15vh;
     box-shadow: inset 0px 0px 0px 2px green;
     text-align: center;
+    font-size: 0.9vw;
+    overflow: hidden;
+
   }
 
   .treeBody {

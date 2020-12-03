@@ -202,11 +202,13 @@ class SubmitForm extends React.Component {
 
   render() {
     return(
+      <div>
       <form onSubmit={this.handleSubmit}>
         <input
           className = "moveRight" 
           type='text'
           placeholder='To Do Item'
+          maxlength="100"
           value={this.state.text}
           onChange={(e) => this.setState({text: e.target.value})}
         />
@@ -218,6 +220,8 @@ class SubmitForm extends React.Component {
         />
         <button>Add</button>
       </form>
+      <p className = "remChars">{100 - this.state.text.length} characters remaining...</p>
+      </div>
     );
   }
 

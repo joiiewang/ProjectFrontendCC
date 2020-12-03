@@ -16,6 +16,7 @@ class InfoPage extends React.Component {
 
     return (
       <div>
+        <div className="background"></div>
         <div className="infoBody">
           <br></br>
         <h1> Welcome to Planner Planter!</h1>
