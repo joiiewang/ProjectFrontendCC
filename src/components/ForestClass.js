@@ -1,6 +1,7 @@
 import * as SVGLoaders from 'svg-loaders-react';
 import plant6 from "./plantimages/plant6.svg";
 import "./css/HomePlant.css";
+import "./css/ForestClass.scss";
 import React, { useRef } from 'react';
 
 
@@ -67,9 +68,10 @@ class ForestClass extends React.Component {
         }
 
         const image = {
-          //position: "absolute",
+          position: "relative",
           maxWidth: "10%",
           maxHeight: "10%",
+          padding: "300px 0px 0px 0px",
         }
 
         /* var Images=[];
@@ -78,10 +80,8 @@ class ForestClass extends React.Component {
         }
         console.log(Images) */
         return (
-          <div>
-            <h1>Currently this user has {this.state.trees} tree(s).</h1>
-            <h2></h2>
-            {trees.map((index)=>(<img src={index} style={image}/>))}
+          <div >
+            {trees.map((index)=>(<img src={index} className="image"/>))}
           </div>
         );
       }

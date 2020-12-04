@@ -1,6 +1,7 @@
 import React from "react";
 import './css/InfoPage.css';
 import tree from './plantimages/plant5.svg'
+import './css/text.css';
 
 class InfoPage extends React.Component {
   
@@ -18,6 +19,7 @@ class InfoPage extends React.Component {
       <div>
         <div className="background"></div>
         <div className="infoBody">
+          
           <br></br>
         <h1> Welcome to Planner Planter!</h1>
         <br></br>
