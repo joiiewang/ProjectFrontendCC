@@ -78,6 +78,7 @@ class NewUser extends React.Component {
 
 
   render() {
+
     const styles = {
       width: "200px",
       border: "3px solid green",
