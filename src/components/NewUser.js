@@ -112,9 +112,9 @@ class NewUser extends React.Component {
       bottom: "0px",
       left: "0px",
       right: "0px",
-      backgroundColor: "rgb(90, 39, 41, 0.7)",
+      backgroundImage: "url("+LoginBackground+")",
+      backgroundSize: "cover",
     };
-
 
 
     return (
