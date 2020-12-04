@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import LoginBackground from "./plantimages/LoginBackground.svg";
 
 class NewUser extends React.Component {
   constructor() {
@@ -24,6 +23,10 @@ class NewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if(/\s/.test(this.state.userName)){
+      alert("Username Cannot contain whitespace. Please re-enter.");
+      return;
+    }
     console.log(this.state.password == this.state.passwordConfirm);
     if (this.state.password != this.state.passwordConfirm) {
       alert("Passwords do not match. Please re-enter.");
@@ -72,7 +75,7 @@ class NewUser extends React.Component {
         console.log(this.state.usernameExists)
         const timer = setTimeout( () => {
           if (!this.state.usernameExists) {
-            window.location.href = '/Home';
+            window.location.href = '/ShowClasses';
           }
           }, 1000);
   }
@@ -85,7 +88,7 @@ class NewUser extends React.Component {
       padding: "10px",
       borderRadius: "25px",
       backgroundColor: "#76FF5B",
-      marginTop: "calc(60vh - 150px)",
+      marginTop: "calc(50vh - 150px)",
       marginLeft: "calc(50vw - 100px)",
     };
     const inputStyle = {
@@ -113,9 +116,9 @@ class NewUser extends React.Component {
       bottom: "0px",
       left: "0px",
       right: "0px",
-      backgroundImage: "url("+LoginBackground+")",
-      backgroundSize: "cover",
+      backgroundColor: "rgb(90, 39, 41, 0.7)",
     };
+
 
 
     return (
