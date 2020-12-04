@@ -1,7 +1,6 @@
 import React from "react";
 import './css/InfoPage.css';
 import tree from './plantimages/plant5.svg'
-import './css/text.css';
 
 class InfoPage extends React.Component {
   
