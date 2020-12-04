@@ -84,7 +84,7 @@ class NewUser extends React.Component {
       padding: "10px",
       borderRadius: "25px",
       backgroundColor: "#76FF5B",
-      marginTop: "calc(50vh - 150px)",
+      marginTop: "calc(60vh - 150px)",
       marginLeft: "calc(50vw - 100px)",
     };
     const inputStyle = {
