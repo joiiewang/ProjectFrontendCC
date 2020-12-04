@@ -80,7 +80,7 @@ class ForestClass extends React.Component {
         return (
           <div>
             <h1>Currently this user has {this.state.trees} tree(s).</h1>
-            <h2>Someone please make this pretty page :) - Zac</h2>
+            <h2></h2>
             {trees.map((index)=>(<img src={index} style={image}/>))}
           </div>
         );

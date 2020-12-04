@@ -23,6 +23,10 @@ class NewUser extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if(/\s/.test(this.state.userName)){
+      alert("Username Cannot contain whitespace. Please re-enter.");
+      return;
+    }
     console.log(this.state.password == this.state.passwordConfirm);
     if (this.state.password != this.state.passwordConfirm) {
       alert("Passwords do not match. Please re-enter.");
@@ -71,7 +75,7 @@ class NewUser extends React.Component {
         console.log(this.state.usernameExists)
         const timer = setTimeout( () => {
           if (!this.state.usernameExists) {
-            window.location.href = '/Home';
+            window.location.href = '/ShowClasses';
           }
           }, 1000);
   }
