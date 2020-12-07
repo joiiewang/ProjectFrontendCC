@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Plant from "./HomePlant.js";
 import "../css/Home.css";
 
@@ -15,7 +15,6 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    let currentComponent = this;
 
     const username = sessionStorage.getItem('username')
     const password = sessionStorage.getItem('password')

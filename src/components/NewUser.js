@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React from "react";
 
 class NewUser extends React.Component {
   constructor() {
@@ -27,8 +26,8 @@ class NewUser extends React.Component {
       alert("Username Cannot contain whitespace. Please re-enter.");
       return;
     }
-    console.log(this.state.password == this.state.passwordConfirm);
-    if (this.state.password != this.state.passwordConfirm) {
+    console.log(this.state.password === this.state.passwordConfirm);
+    if (this.state.password !== this.state.passwordConfirm) {
       alert("Passwords do not match. Please re-enter.");
       return;
     }

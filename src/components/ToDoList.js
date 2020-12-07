@@ -281,7 +281,7 @@ const ToDoItemElements = (props) => {
   
   const onlyUncheckedToDos = finalsortedToDos.filter(toDo => 
     //console.log ("ToDo: " + toDo.props.completed)
-    toDo.props.completed == false
+    toDo.props.completed === false
   )
 
   if (showUncompleted) {
@@ -304,11 +304,6 @@ const ToDoItemElements = (props) => {
 
 const Elem = (props) => {
   
-
-  const styles = 
-  {
-    fontSize: "5 px"
-  }
   const completedStyle =
   {
     fontSize: "italic",

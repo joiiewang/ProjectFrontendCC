@@ -85,7 +85,7 @@ class ShowClasses extends React.Component {
       )
     }
 
-    if (this.state.classes.length == 0) {
+    if (this.state.classes.length === 0) {
       return (
         <p className = "courseHeader">
           You do not have any classes yet! Add a class to see them here.

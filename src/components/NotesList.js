@@ -1,5 +1,4 @@
 import React from "react";
-import { generalFetch } from "../UtilityFunctions"
 import "./css/NotesList.css";
 import * as SVGLoaders from 'svg-loaders-react';
 
