@@ -7,7 +7,9 @@ This is the front end for Planner Planter, a web app to help you organize course
 
 ### Project overview
 
-TODO Insert 1-2 paragraph description here. Maybe use intro of presentation.
+Students taking many courses need to organize infrormation for each one. There are todo list apps, calendar apps, and notes apps that can help with this, but this splits the information across multiple apps.
+
+Planner Planter attempts to address this issue by letting you put all the information in one platform. For a motivation boost, it also shows a virtual tree that grows as you complete tasks.
 
 ## Installation
 ### Prerequisites
@@ -17,7 +19,6 @@ This project was developed on a CentOS 8 Docker instance.
 yum -y install openssh-server sudo python3 zlib-devel bzip2 bzip2-devel readline readline-devel openssl-devel sqlite-devel which gcc libffi-devel passwd vim nano glibc-locale-source glibc-langpack-en npm
 
 yum -y groupinstall "Development Tools"
-
 
 ### Installation steps
 
