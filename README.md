@@ -14,13 +14,22 @@ TODO Insert 1-2 paragraph description here.
 
 This project was developed on a CentOS 8 Docker instance.
 
+
+yum -y install openssh-server sudo python3 zlib-devel bzip2 bzip2-devel readline readline-devel openssl-devel sqlite-devel which gcc libffi-devel passwd vim nano glibc-locale-source glibc-langpack-en npm
+
+yum -y groupinstall "Development Tools"
+
+
 ### Installation steps
 
 Clone this repository and run the following steps in the command line:
 
 npm install
+
 npm run build
+
 export PORT=8112
+
 npm run dev
 
 ## Functionality and known issues
