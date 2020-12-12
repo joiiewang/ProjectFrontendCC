@@ -52,7 +52,7 @@ npm run dev
 
 Users can create an account by submitting a username and password on the registration page. Once logged in, a user can add courses they are enrolled in. For each course, the user may add links, notes, and todos associated with that course. The user can also add links, notes, and todos not associated with any course. The user can view all links, notes, or todos from all courses on one page by clicking on its tab. Todo items are sorted by date. When an item is completed, the user may check it off to hide it. Completed items can be shown by clicking the Show Completed button. There is also a calendar tab that lets you conveniently see the tasks for each day and how much progress is made. A tree shown on the bottom right corner of the page grows as tasks are completed. When a tree is done growing, it is moved to a Forest tab.
 
-TODO known issues
+A known issue is when the user switches between tabs too quickly, the frontend fails to fetch the required information from the backend and reports an error. However, the page still loads correctly.
 
 ## License
 
