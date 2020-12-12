@@ -14,7 +14,7 @@ Planner Planter attempts to address this issue by letting you put all the inform
 ## Installation
 ### Prerequisites
 
-This project was developed on a CentOS 8 Docker instance.
+This project was developed on a CentOS 8 Docker instance. The following commands were used to install prerequisites:
 
 yum -y install openssh-server sudo python3 zlib-devel bzip2 bzip2-devel readline readline-devel openssl-devel sqlite-devel which gcc libffi-devel passwd vim nano glibc-locale-source glibc-langpack-en npm
 
