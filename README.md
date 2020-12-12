@@ -3,17 +3,16 @@
 ## Project summary
 ### One-sentence description
 
-Planner Planter is a web app to help organize coursework, with trees growing as you complete tasks for an additional motivation boost.
+This is the front end for Planner Planter, a web app to help you organize coursework, growing virtual trees as you complete tasks for an additional motivation boost.
 
 ### Project overview
 
-TODO Insert 1-2 paragraph description here.
+TODO Insert 1-2 paragraph description here. Maybe use intro of presentation.
 
 ## Installation
 ### Prerequisites
 
 This project was developed on a CentOS 8 Docker instance.
-
 
 yum -y install openssh-server sudo python3 zlib-devel bzip2 bzip2-devel readline readline-devel openssl-devel sqlite-devel which gcc libffi-devel passwd vim nano glibc-locale-source glibc-langpack-en npm
 
@@ -34,7 +33,9 @@ npm run dev
 
 ## Functionality and known issues
 
-TODO
+Users can create an account by submitting a username and password on the registration page. Once logged in, a user can add courses they are enrolled in. For each course, the user may add links, notes, and todos associated with that course. The user can also add links, notes, and todos not associated with any course. The user can view all links, notes, or todos from all courses on one page by clicking on its tab. Todo items are sorted by date. When an item is completed, the user may check it off to hide it. Completed items can be shown by clicking the Show Completed button. There is also a calendar tab that lets you conveniently see the tasks for each day and how much progress is made. A tree shown on the bottom right corner of the page grows as tasks are completed. When a tree is done growing, it is moved to a Forest tab.
+
+TODO known issues
 
 ## License
 
