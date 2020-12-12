@@ -20,6 +20,22 @@ yum -y install openssh-server sudo python3 zlib-devel bzip2 bzip2-devel readline
 
 yum -y groupinstall "Development Tools"
 
+mkdir -p -m 775 /usr/local/bin
+
+export PATH=${PATH}:/usr/local/bin
+
+export LANG=en_US.UTF-8
+
+export LANGUAGE=en_US.UTF-8
+
+alternatives --set python /usr/bin/python3
+
+update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
+python -m pip install --upgrade pip
+
+python -m pip install virtualenv
+
 ### Installation steps
 
 Clone this repository and run the following steps in the command line:
